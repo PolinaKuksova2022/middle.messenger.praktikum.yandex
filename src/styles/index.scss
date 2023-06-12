@@ -1,0 +1,70 @@
+@import "resets";
+// @import "vars";
+@import "fonts";
+@import "./abstracts/mixins";
+@import "./abstracts/variables";
+@import "./components/button";
+@import "./components/inputGroup";
+@import "./components/groupData";
+@import "./components/modal";
+@import "./pages/profilePage";
+
+html {
+  max-width: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  max-width: 100%;
+  min-width: 320px;
+  width: 100%;
+  overflow-x: hidden;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+}
+
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 1280px;
+  min-height: 100vh;
+  position: relative;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 30px 30px 30px;
+  width: 340px;
+  height: 450px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+  border-radius: 12px;
+  
+  &_big {
+    height: fit-content;
+  } 
+
+  &__title {
+    margin-bottom: 40px;
+    @include font-face(20px, 500, 20px);
+    color: $text-color;
+
+    &_big{
+      margin-bottom: 20px;
+      @include font-face(40px, 500, 40px);
+      text-align: center;
+    }
+  }
+}
