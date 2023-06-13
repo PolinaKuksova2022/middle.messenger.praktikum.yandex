@@ -1,11 +1,11 @@
 import express from 'express';
 import { dirname } from 'path';
-import { fileURLtoPath } from 'url';
+import { fileURLToPath } from 'url';
 
 const app = express();
 const PORT = 3000;
 
-const __dirname = dirname(fileURLtoPath(import.meta.url))
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 app.use(express.static('./dist'));
 
