@@ -1,18 +1,18 @@
-.group-data{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    @extend %bottom-border;
-    @include font-face(13px, 500, 13px);
+.group-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  @extend %bottom-border;
+  @include font-face(13px, 500, 13px);
 
-    &__title{
-        color: $text-color;
-    }
+  &__title {
+    color: $text-color;
+  }
 
-    &__value{
-        color: $second-color;
-    }
+  &__value {
+    color: $second-color;
+  }
 }

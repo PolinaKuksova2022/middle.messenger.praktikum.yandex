@@ -2,7 +2,7 @@ export const template = `
   <div class="profile-container">
     <section class="profile-container__mane-info">
       <section onclick={{onclick}} class="avatar">
-        <img class="avatar__img"  src='' alt=''/>
+        <img name="avatar" class="avatar__img"  src="" alt=""/>
         <span class="avatar__text">Поменять аватар</span>
       </section>
       <h1 class="name">{{name}}</h1>
@@ -18,4 +18,4 @@ export const template = `
       {{/each}}
     </section>
   </div>
-`
+`;

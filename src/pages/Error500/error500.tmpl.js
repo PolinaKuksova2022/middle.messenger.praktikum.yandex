@@ -4,4 +4,4 @@ export const template = `
     <h2 class="container__title">Мы уже фиксим</h2>
     {{{ button }}}
   </div>
-`
+`;

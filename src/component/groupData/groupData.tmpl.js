@@ -1,6 +1,6 @@
 import Handlebars from "handlebars";
 
-export const groupData = ({title, name, value}) =>
+export const groupData = ({ title, name, value }) =>
   Handlebars.compile(
     `
         <section class="group-data">
