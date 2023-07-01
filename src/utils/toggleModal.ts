@@ -1,4 +1,4 @@
-import { Modal } from "../component/modal";
+import { Modal } from "../component/modal/modal";
 
 let show = false;
 const app = document.getElementById("app");

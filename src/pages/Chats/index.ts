@@ -5,15 +5,13 @@ interface ChatsProps {
 }
 export class Chats extends Block<ChatsProps> {
   constructor(props: ChatsProps) {
-    super("div", props);
+    super(props, "div");
   }
 
   init() {
     this.children.button = new Button({
       text: "click me",
-      events: {
-        click: () => alert("1"),
-      },
+      path: ''
     });
 
     this.children.button.element?.classList.add(

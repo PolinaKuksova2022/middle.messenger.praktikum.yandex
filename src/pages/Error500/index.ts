@@ -7,15 +7,16 @@ interface Error500Props {
 }
 export class Error500 extends Block<Error500Props> {
   constructor(props: Error500Props) {
-    super("div", props);
+    super(props, "div");
   }
 
   init() {
     this.children.button = new Button({
       text: "Назад к чатам",
-      events: {
-        click: () => window.location.href="/chat",
-      },
+      path: "/chat"
+      // events: {
+      //   click: () => window.location.href="/chat",
+      // },
     });
 
     this.children.button.element?.classList.add(

@@ -1,19 +1,20 @@
 import Block from "../../utils/Block";
 
 interface ButtonProps {
-  text: string;
-  events: {
-    click: () => void;
+  text: string,
+  path?: string,
+  events?: {
+    click: (e: Event) => void;
   }
 }
 
 export class Button extends Block<ButtonProps> {
   constructor(props: ButtonProps) {
-    super('button', props)
+    super(props, 'button')
   }
 
   render() {
-    return this.compile(`{{text}}`, this.props)
+    return this.compile(`<a href={{path}}>{{text}}</a>`, this.props)
   }
 
 }

@@ -7,15 +7,16 @@ interface Error404Props {
 }
 export class Error404 extends Block<Error404Props> {
   constructor(props: Error404Props) {
-    super("div", props);
+    super(props, "div");
   }
 
   init() {
     this.children.button = new Button({
       text: "Назад к чатам",
-      events: {
-        click: () => window.location.href="/chat",
-      },
+      path: "/chat"
+      // events: {
+      //   click: () => window.location.href="/chat",
+      // },
     });
 
     this.children.button.element?.classList.add(

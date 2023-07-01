@@ -7,45 +7,51 @@ interface MainProps {
 }
 export class Main extends Block<MainProps> {
   constructor(props: MainProps) {
-    super("div", props);
+    super(props, "div");
   }
 
   init() {
     this.children.button_1 = new Button({
       text: "Авторизация",
-      events: {
-        click: () => window.location.href="/auth",
-      },
+      path: "/auth"
+      // events: {
+      //   click: () => window.location.href="/auth",
+      // },
     });
     this.children.button_2 = new Button({
       text: "Регистрация",
-      events: {
-        click: () => window.location.href="/registration",
-      },
+      path: "/registration"
+      // events: {
+      //   click: () => window.location.href="/registration",
+      // },
     });
     this.children.button_3 = new Button({
       text: "Профиль",
-      events: {
-        click: () => window.location.href="/profile",
-      },
+      path: "/profile",
+      // events: {
+      //   click: () => window.location.href="/profile",
+      // },
     });
     this.children.button_4 = new Button({
       text: "Лента переписки",
-      events: {
-        click: () => window.location.href="/chat",
-      },
+      path: "/chat"
+      // events: {
+      //   click: () => window.location.href="/chat",
+      // },
     });
     this.children.button_5 = new Button({
       text: "Error404",
-      events: {
-        click: () => window.location.href="*",
-      },
+      path: "*"
+      // events: {
+      //   click: () => window.location.href="*",
+      // },
     });
     this.children.button_6 = new Button({
       text: "Error500",
-      events: {
-        click: () => window.location.href="/internal-server-error",
-      },
+      path: "/internal-server-error"
+      // events: {
+      //   click: () => window.location.href="/internal-server-error",
+      // },
     });
 
     this.children.button_1.element?.classList.add("button");
