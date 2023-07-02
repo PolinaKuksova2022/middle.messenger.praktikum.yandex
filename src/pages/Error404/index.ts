@@ -1,4 +1,4 @@
-import Block from "../../utils/Block";
+import Block from "../../utils/core/Block";
 import { Button } from "../../component/button/button";
 import { template } from "./error404.tmpl";
 

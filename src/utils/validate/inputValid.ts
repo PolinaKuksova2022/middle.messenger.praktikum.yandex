@@ -22,7 +22,15 @@ export function inputOut(event: Event) {
   const value = target.value;
   const error = document.createElement('div');
   error.className = 'error-message';
-  if (value !== '' && target) {
+
+  if (value.length == 0) {
+    error.className = 'error-empty';
+    error.innerHTML = 'Поле не может быть пустым';
+    target.after(error);
+    target.classList.add('input-incorrect');
+  }
+
+  if (value.length !== 0 && target) {
     switch (target.name) {
       case 'login':
         if (!regLogin.test(value)) {
@@ -94,7 +102,7 @@ export function inputOut(event: Event) {
         }
         break;
       default:
-        alert('Загляни в constants.ts');
+        console.log(`message input: ${value}`);
     }
   }
 }
@@ -102,8 +110,14 @@ export function inputOut(event: Event) {
 export function inputIn(event: Event) {
   const target = event.target as HTMLTextAreaElement;
   const error = document.getElementsByClassName('error-message');
+  const empty = document.getElementsByClassName('error-empty');
   if (target.classList.contains('input-incorrect')) {
     target.classList.remove('input-incorrect');
-    error[0].remove();
+    if(error[0]) {
+      error[0].remove();
+    }
+    if(empty[0]) {
+      empty[0].remove();
+    }
   }
 }

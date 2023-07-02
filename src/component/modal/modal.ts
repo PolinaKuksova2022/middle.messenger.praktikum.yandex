@@ -1,4 +1,4 @@
-import Block from "../../utils/Block";
+import Block from "../../utils/core/Block";
 import { Button } from "../button/button";
 import { formTemplate } from "../commonTmpl/form.tmpl";
 

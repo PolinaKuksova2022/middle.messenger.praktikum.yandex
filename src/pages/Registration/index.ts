@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../utils/core/Block';
 import { formTemplate } from '../../component/commonTmpl/form.tmpl';
 import { InputGroup } from '../../component/form/inputGroup';
 import { Button } from '../../component/button/button';
@@ -35,6 +35,7 @@ export class Registration extends Block<RegistrationProps> {
     this.children.group_1 = new InputGroup({
       name: 'email',
       label: 'Почта',
+      inputClass: 'input',
       id: 'mail',
       type: 'text',
       events: {
@@ -46,6 +47,7 @@ export class Registration extends Block<RegistrationProps> {
     this.children.group_2 = new InputGroup({
       name: 'login',
       label: 'Логин',
+      inputClass: 'input',
       id: 'login',
       type: 'text',
       events: {
@@ -57,6 +59,7 @@ export class Registration extends Block<RegistrationProps> {
     this.children.group_3 = new InputGroup({
       name: 'first_name',
       label: 'Имя',
+      inputClass: 'input',
       id: 'username',
       type: 'text',
       events: {
@@ -68,6 +71,7 @@ export class Registration extends Block<RegistrationProps> {
     this.children.group_4 = new InputGroup({
       name: 'second_name',
       label: 'Фамилия',
+      inputClass: 'input',
       id: 'usersurname',
       type: 'text',
       events: {
@@ -79,6 +83,7 @@ export class Registration extends Block<RegistrationProps> {
     this.children.group_5 = new InputGroup({
       name: 'phone',
       label: 'Телефон',
+      inputClass: 'input',
       id: 'phone',
       type: 'tel',
       events: {
@@ -90,6 +95,7 @@ export class Registration extends Block<RegistrationProps> {
     this.children.group_6 = new InputGroup({
       name: 'password',
       label: 'Пароль',
+      inputClass: 'input',
       id: 'password',
       type: 'password',
       events: {
@@ -102,6 +108,7 @@ export class Registration extends Block<RegistrationProps> {
     this.children.group_7 = new InputGroup({
       name: 'password',
       label: 'Повторите пароль',
+      inputClass: 'input',
       id: 'password-2',
       type: 'password',
       events: {

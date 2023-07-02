@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../utils/core/Block';
 import { formTemplate } from '../../component/commonTmpl/form.tmpl';
 import { InputGroup } from '../../component/form/inputGroup';
 import { Button } from '../../component/button/button';
@@ -32,6 +32,7 @@ export class Auth extends Block<AuthProps> {
     this.children.group_1 = new InputGroup({
       name: 'login',
       label: 'Логин',
+      inputClass: 'input',
       id: 'login',
       type: 'text',
       events: {
@@ -44,6 +45,7 @@ export class Auth extends Block<AuthProps> {
     this.children.group_2 = new InputGroup({
       name: 'password',
       label: 'Пароль',
+      inputClass: 'input',
       id: 'password',
       type: 'password',
       events: {

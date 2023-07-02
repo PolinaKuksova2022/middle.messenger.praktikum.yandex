@@ -1,0 +1,75 @@
+.message {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px 0 10px;
+
+  &__header {
+    display: flex;
+    position: relative;
+    margin-bottom: 48px;
+    padding-bottom: 10px;
+    height: 55px;
+    border-bottom: 1px solid $background-color;
+  }
+
+  &__author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  &__field {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+  }
+  &__data {
+    text-align: center;
+    @include font-face(12px, 500, 12px);
+    color: $second-color;
+  }
+
+  &__item {
+    margin-top: 10px;
+    padding: 11px;
+    max-width: 46%;
+    width: fit-content;
+    border-radius: 5px;
+    text-align: justify;
+    @include font-face(12px, 500, 15px);
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+
+    &-from {
+      background: $background-color;
+    }
+
+    &-to {
+      align-self: flex-end;
+      background: #e4edfd;
+    }
+  }
+
+  &__time {
+    margin-top: 5px;
+    text-align: right;
+    @include font-face(9px, 500, 9px);
+    color: $second-color;
+  }
+
+  &__footer {
+    display: flex;
+    flex: 0 0 auto;
+    position: relative;
+    margin: 10px 0;
+    padding: 15px;
+    border-top: 1px solid $background-color;
+  }
+
+  &__input {
+    position: relative;
+    margin: 0 10px;
+    width: 80%;
+    label {
+      display: none;
+    }
+  }
+}

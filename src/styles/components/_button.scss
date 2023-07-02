@@ -34,6 +34,10 @@
   position: relative;
   text-align: left;
 
+  > a {
+    justify-content: start;
+  }
+
   &::after {
     content: '';
     position: absolute;
@@ -47,10 +51,36 @@
 
 .excretion-btn {
   text-align: left;
-  color: $excretion-color;
+  > a {
+    justify-content: start;
+    color: $excretion-color;
+  }
+}
+
+.chats-btn {
+  background: none;
+  > a {
+    justify-content: end;
+    color: $second-color;
+  }
 }
 
 .disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.round-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 20px;
+}
+
+.attach-btn{
+  width: 28px;
+  height: 28px;
+  font-size: 20px;
+  background: none;
+
 }

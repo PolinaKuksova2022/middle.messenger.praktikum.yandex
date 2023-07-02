@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../utils/core/Block';
 import { template } from './profile.tmpl';
 import { GroupData } from '../../component/groupData/groupData';
 import { Button } from '../../component/button/button';
@@ -30,7 +30,7 @@ export class Profile extends Block<ProfileProps> {
     });
     this.children.button_3 = new Button({
       text: 'Выйти',
-      path: '/chat',
+      path: '/auth',
       // events: {
       //   click: () => (window.location.href = "/chat"),
       // },

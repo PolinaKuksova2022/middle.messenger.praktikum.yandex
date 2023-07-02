@@ -1,5 +1,5 @@
 import { template } from "./main.tmpl";
-import Block from "../../utils/Block";
+import Block from "../../utils/core/Block";
 import { Button } from "../../component/button/button";
 
 interface MainProps {

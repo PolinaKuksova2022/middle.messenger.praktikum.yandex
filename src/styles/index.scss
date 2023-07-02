@@ -1,12 +1,16 @@
-@import "resets";
-@import "fonts";
-@import "./abstracts/mixins";
-@import "./abstracts/variables";
-@import "./components/button";
-@import "./components/inputGroup";
-@import "./components/groupData";
-@import "./components/modal";
-@import "./pages/profilePage";
+@import 'resets';
+@import 'fonts';
+@import './abstracts/mixins';
+@import './abstracts/variables';
+@import './components/button';
+@import './components/inputGroup';
+@import './components/groupData';
+@import './components/modal';
+@import './components/message';
+@import './components/dialogue';
+@import './components/kebabMenu';
+@import './pages/profilePage';
+@import './pages/chats';
 
 html {
   max-width: 100%;

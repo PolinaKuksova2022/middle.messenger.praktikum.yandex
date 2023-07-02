@@ -1,7 +1,7 @@
 export const template = `
   <div class="profile-container">
     <section class="profile-container__mane-info">
-      <section onclick={{func}} class="avatar">
+      <section onclick="{{func}}" class="avatar">
         <img name="avatar" class="avatar__img"  src="" alt=""/>
         <span class="avatar__text">Поменять аватар</span>
       </section>

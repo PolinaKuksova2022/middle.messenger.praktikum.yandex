@@ -37,14 +37,30 @@
   }
 
   &-incorrect {
-    border: 1px solid $excretion-color;
+    border: 1px solid $excretion-color !important;
     background-color: rgba($second-color, 0.3);
   }
 }
 
-.error-message{
+.input-message {
+  padding: 10px 0 10px 20px;
+  width: 100%;
+  border: none;
+  border-radius: 30px;
+  @include font-face(12px, 500, 12px);
+  color: $second-color;
+  background: $background-color;
+}
+
+.error-message {
   position: absolute;
-  right: 0;
+  bottom: -20px;
+  @include font-face(9px, 500, 9px);
+  color: $excretion-color;
+}
+
+.error-empty {
+  position: absolute;
   bottom: -20px;
   @include font-face(9px, 500, 9px);
   color: $excretion-color;

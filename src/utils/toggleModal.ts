@@ -14,7 +14,9 @@ export function toggleModal() {
     article.appendChild(modal.getContent()!);
     app!.append(article);
   } else {
+    console.log('3');
     const modalData = document.getElementById("modalData");
-    app!.removeChild(modalData!);
+    if(modalData) 
+      app!.removeChild(modalData);
   }
 }
