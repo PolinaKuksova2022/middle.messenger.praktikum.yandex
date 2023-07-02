@@ -7,7 +7,6 @@
   padding-bottom: 10px;
 
   @extend %bottom-border;
-
   @include font-face(13px, 500, 13px);
 
   &__title {
