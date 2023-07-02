@@ -20,21 +20,32 @@ module.exports = {
   },
 
   plugins: ["@typescript-eslint"],
+  
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".d.ts", ".tsx"]
+      }
+    }
+  },
 
-  rules: {
+  "rules": {
+    "no-param-reassign": 0,
     "import/extensions": [
       "error",
       "ignorePackages",
       {
-        js: "never",
-        ts: "never",
-        tmpl: "never",
+        "": "never",
+        "js": "never",
+        "ts": "never",
+        "tmpl": "never",
       },
     ],
     "@typescript-eslint/no-use-before-define": ["error"],
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-empty-function": "warn",
     "import/no-extraneous-dependencies": "off",
+    "import/prefer-default-export": "off",
     "class-methods-use-this": "off",
     "no-underscore-dangle": "off",
     "max-classes-per-file": "off",

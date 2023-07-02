@@ -1,6 +1,6 @@
-import getPage from "./getPage";
-import renderPage from "./renderPage";
+import getPage from './getPage';
+import renderPage from './renderPage';
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   renderPage(getPage());
 });

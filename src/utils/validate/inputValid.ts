@@ -19,11 +19,11 @@ import {
 
 export function inputOut(event: Event) {
   const target = event.target as HTMLTextAreaElement;
-  const value = target.value;
+  const { value } = target;
   const error = document.createElement('div');
   error.className = 'error-message';
 
-  if (value.length == 0) {
+  if (value.length === 0) {
     error.className = 'error-empty';
     error.innerHTML = 'Поле не может быть пустым';
     target.after(error);
@@ -75,23 +75,25 @@ export function inputOut(event: Event) {
         }
         break;
       case 'password':
-        if (!value.match(regPassword)) {
-          error.innerHTML = passwordText;
-          target.after(error);
-          target.classList.add('input-incorrect');
-        }
+        {
+          if (!value.match(regPassword)) {
+            error.innerHTML = passwordText;
+            target.after(error);
+            target.classList.add('input-incorrect');
+          }
 
-        const passwordArr = Array.from(document.getElementsByName('password'));
-        const passwordsValues = passwordArr.map((i) => (i as HTMLInputElement).value);
-        const isPasswordsField = passwordsValues.every((i) => i.length !== 0);
-        if (
-          passwordsValues[0] !== passwordsValues[1] &&
-          isPasswordsField &&
-          passwordsValues.length > 1
-        ) {
-          error.innerHTML = passwordsMismatch;
-          target.after(error);
-          target.classList.add('input-incorrect');
+          const passwordArr = Array.from(document.getElementsByName('password'));
+          const passwordsValues = passwordArr.map((i) => (i as HTMLInputElement).value);
+          const isPasswordsField = passwordsValues.every((i) => i.length !== 0);
+          if (
+            passwordsValues[0] !== passwordsValues[1] &&
+            isPasswordsField &&
+            passwordsValues.length > 1
+          ) {
+            error.innerHTML = passwordsMismatch;
+            target.after(error);
+            target.classList.add('input-incorrect');
+          }
         }
         break;
       case 'phone':

@@ -7,7 +7,7 @@ interface GroupDataProps {
 }
 export class GroupData extends Block<GroupDataProps> {
   constructor(props: GroupDataProps) {
-    super(props);
+    super(props, 'div');
   }
 
   render() {

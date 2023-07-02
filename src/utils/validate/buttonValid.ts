@@ -26,7 +26,7 @@ export default function buttonValid() {
           return true;
       }
     }
-    return true
+    return true;
   });
   if (isAllValid) {
     window.__FORMS_DATA__[window.location.pathname] = inputs;

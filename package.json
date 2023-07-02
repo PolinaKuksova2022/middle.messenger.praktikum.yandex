@@ -8,6 +8,7 @@
     "prebuild": "tsc --noEmit",
     "build": "vite build",
     "lint": "tsc --noEmit && eslint src/**/*.{ts,tsx}",
+    "lint:fix": "tsc --noEmit && eslint src/**/*.{ts,tsx} --fix",
     "start": "npm run build && node server.js",
     "preview": "vite preview",
     "stylelint": "stylelint '**/*{.css,.scss}'",
