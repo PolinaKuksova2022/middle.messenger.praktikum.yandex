@@ -6,7 +6,7 @@ const METHODS = {
 };
 
 function queryStringify(data) {
-  let str =
+  const str =
     '?' +
     Object.keys(data)
       .reduce(function (a, k) {
@@ -34,23 +34,21 @@ class HTTPTransport {
     return this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
   };
 
-  request = (url, options, timeout = 5000) => {
-    const { method, data, headers } = options;
+  request = (url, options) => {
+    const { method, data } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
 
       // xhr.open(method, url, true);
-      xhr.onload = function () {
-        resolve(xhr);
-      };
+      xhr.onload = () => resolve(xhr);
 
       xhr.onabort = reject;
       xhr.onerror = reject;
       xhr.ontimeout = reject;
 
       if (method === METHODS.GET || !data) {
-        data == undefined ? xhr.open(method, url) : xhr.open(method, url + queryStringify(data));
+        data === undefined ? xhr.open(method, url) : xhr.open(method, url + queryStringify(data));
         xhr.send();
       } else {
         xhr.open(method, url);
