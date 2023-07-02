@@ -113,10 +113,10 @@ export function inputIn(event: Event) {
   const empty = document.getElementsByClassName('error-empty');
   if (target.classList.contains('input-incorrect')) {
     target.classList.remove('input-incorrect');
-    if(error[0]) {
+    if (error[0]) {
       error[0].remove();
     }
-    if(empty[0]) {
+    if (empty[0]) {
       empty[0].remove();
     }
   }
