@@ -7,12 +7,13 @@
   &__input {
     margin-bottom: 40px;
   }
+
   &__button {
     margin-top: auto;
   }
 }
 
-.inputGroup {
+.input-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
@@ -21,13 +22,16 @@
 
 .label {
   margin-bottom: 4px;
+
   @include font-face(9px, 500, 9px);
+
   color: $second-color;
 }
 
 .input {
   border: none;
   border-bottom: 1px solid $selected-color;
+
   @include font-face(13px, 500, 13px);
 
   &:focus {
@@ -47,7 +51,9 @@
   width: 100%;
   border: none;
   border-radius: 30px;
+
   @include font-face(12px, 500, 12px);
+
   color: $second-color;
   background: $background-color;
 }
@@ -55,13 +61,17 @@
 .error-message {
   position: absolute;
   bottom: -20px;
+
   @include font-face(9px, 500, 9px);
+
   color: $excretion-color;
 }
 
 .error-empty {
   position: absolute;
   bottom: -20px;
+
   @include font-face(9px, 500, 9px);
+
   color: $excretion-color;
 }

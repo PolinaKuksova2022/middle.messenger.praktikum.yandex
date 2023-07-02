@@ -120,13 +120,13 @@ export class Registration extends Block<RegistrationProps> {
 
     this.children.button_1.element?.classList.add(...['button', 'disabled']);
     this.children.button_2.element?.classList.add(...['button', 'navigation-btn']);
-    this.children.group_1.element?.classList.add('inputGroup');
-    this.children.group_2.element?.classList.add('inputGroup');
-    this.children.group_3.element?.classList.add('inputGroup');
-    this.children.group_4.element?.classList.add('inputGroup');
-    this.children.group_5.element?.classList.add('inputGroup');
-    this.children.group_6.element?.classList.add('inputGroup');
-    this.children.group_7.element?.classList.add('inputGroup');
+    this.children.group_1.element?.classList.add('input-group');
+    this.children.group_2.element?.classList.add('input-group');
+    this.children.group_3.element?.classList.add('input-group');
+    this.children.group_4.element?.classList.add('input-group');
+    this.children.group_5.element?.classList.add('input-group');
+    this.children.group_6.element?.classList.add('input-group');
+    this.children.group_7.element?.classList.add('input-group');
   }
 
   render() {

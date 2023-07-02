@@ -18,7 +18,9 @@
 
   &__content {
     margin-top: 5px;
+
     @include font-face(12px, 500, 15px);
+    
     color: $second-color;
   }
 
@@ -29,7 +31,9 @@
 
   &__time {
     margin-bottom: 14px;
+
     @include font-face(9px, 500, 13px);
+
     color: $second-color;
   }
 
@@ -40,7 +44,9 @@
     background: $selected-color;
     text-align: center;
     vertical-align: middle;
+
     @include font-face(12px, 500, 20px);
+
     color: $light-text-color;
   }
 }

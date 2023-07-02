@@ -5,10 +5,13 @@
   height: 37px;
   border: none;
   border-radius: 8px;
+
   @include font-face(13px, 500, 13px);
+  
   background: $selected-color;
   color: $light-text-color;
   cursor: pointer;
+
   > a {
     display: flex;
     justify-content: center;
@@ -24,6 +27,7 @@
   background: $light-text-color;
   color: $selected-color;
   cursor: pointer;
+
   > a {
     color: $selected-color;
   }
@@ -51,6 +55,7 @@
 
 .excretion-btn {
   text-align: left;
+
   > a {
     justify-content: start;
     color: $excretion-color;
@@ -59,6 +64,7 @@
 
 .chats-btn {
   background: none;
+
   > a {
     justify-content: end;
     color: $second-color;

@@ -1,7 +1,7 @@
 .message {
   display: flex;
   flex-direction: column;
-  padding: 10px 10px 0 10px;
+  padding: 10px 10px 0px 10px;
 
   &__header {
     display: flex;
@@ -17,13 +17,16 @@
     align-items: center;
     gap: 10px;
   }
+  
   &__field {
     display: flex;
     flex-direction: column;
     flex: 1 0 auto;
   }
+
   &__data {
     text-align: center;
+
     @include font-face(12px, 500, 12px);
     color: $second-color;
   }
@@ -35,8 +38,9 @@
     width: fit-content;
     border-radius: 5px;
     text-align: justify;
+
     @include font-face(12px, 500, 15px);
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 14%);
 
     &-from {
       background: $background-color;
@@ -51,6 +55,7 @@
   &__time {
     margin-top: 5px;
     text-align: right;
+
     @include font-face(9px, 500, 9px);
     color: $second-color;
   }
@@ -68,6 +73,7 @@
     position: relative;
     margin: 0 10px;
     width: 80%;
+
     label {
       display: none;
     }
