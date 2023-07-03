@@ -1,11 +1,11 @@
-import { Auth } from '../pages/Auth';
-import { Registration } from '../pages/Registration';
-import { Profile } from '../pages/Profile';
-import { Chats } from '../pages/Chats';
-import { Main } from '../pages/Main';
-import { Error404 } from '../pages/Error404';
-import { Error500 } from '../pages/Error500';
-import { toggleModal } from '../utils/toggleModal';
+import Auth from '../pages/Auth';
+import Registration from '../pages/Registration';
+import Profile from '../pages/Profile';
+import Chats from '../pages/Chats';
+import Main from '../pages/Main';
+import Error404 from '../pages/Error404';
+import Error500 from '../pages/Error500';
+import toggleModal from '../utils/toggleModal';
 
 window.toggleModal = toggleModal;
 

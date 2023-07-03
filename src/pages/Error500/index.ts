@@ -1,11 +1,11 @@
 import Block from '../../utils/core/Block';
-import { Button } from '../../component/button/button';
-import { template } from './error500.tmpl';
+import Button from '../../component/button/button';
+import template from './error500.tmpl';
 
 interface Error500Props {
   title: string;
 }
-export class Error500 extends Block<Error500Props> {
+export default class Error500 extends Block<Error500Props> {
   constructor(props: Error500Props) {
     super(props, 'div');
   }

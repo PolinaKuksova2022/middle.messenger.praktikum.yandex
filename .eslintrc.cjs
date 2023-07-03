@@ -45,7 +45,7 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-empty-function": "warn",
     "import/no-extraneous-dependencies": "off",
-    "import/prefer-default-export": "off",
+    // "import/prefer-default-export": "off",
     "class-methods-use-this": "off",
     "no-underscore-dangle": "off",
     "max-classes-per-file": "off",

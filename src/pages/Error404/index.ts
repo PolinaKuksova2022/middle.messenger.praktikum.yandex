@@ -1,11 +1,11 @@
 import Block from '../../utils/core/Block';
-import { Button } from '../../component/button/button';
-import { template } from './error404.tmpl';
+import Button from '../../component/button/button';
+import template from './error404.tmpl';
 
 interface Error404Props {
   title: string;
 }
-export class Error404 extends Block<Error404Props> {
+export default class Error404 extends Block<Error404Props> {
   constructor(props: Error404Props) {
     super(props, 'div');
   }

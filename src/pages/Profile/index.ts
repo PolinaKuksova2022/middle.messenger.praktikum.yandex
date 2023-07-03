@@ -1,13 +1,13 @@
 import Block from '../../utils/core/Block';
-import { template } from './profile.tmpl';
-import { GroupData } from '../../component/groupData/groupData';
-import { Button } from '../../component/button/button';
+import template from './profile.tmpl';
+import GroupData from '../../component/groupData/groupData';
+import Button from '../../component/button/button';
 
 interface ProfileProps {
   name: string;
   func: string;
 }
-export class Profile extends Block<ProfileProps> {
+export default class Profile extends Block<ProfileProps> {
   constructor(props: ProfileProps) {
     super(props, 'div');
   }

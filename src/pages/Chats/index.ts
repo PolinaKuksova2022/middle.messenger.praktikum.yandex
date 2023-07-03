@@ -1,13 +1,13 @@
 import Block from '../../utils/core/Block';
-import { Button } from '../../component/button/button';
-import { template } from './chats.tmpl';
-import { Dialogue } from '../../component/dialogue/dialogue';
-import { Message } from '../../component/message/message';
+import Button from '../../component/button/button';
+import template from './chats.tmpl';
+import Dialogue from '../../component/dialogue/dialogue';
+import Message from '../../component/message/message';
 
 interface ChatsProps {
   title: string;
 }
-export class Chats extends Block<ChatsProps> {
+export default class Chats extends Block<ChatsProps> {
   constructor(props: ChatsProps) {
     super(props, 'div');
   }

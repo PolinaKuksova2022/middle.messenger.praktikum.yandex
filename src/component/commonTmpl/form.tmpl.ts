@@ -1,4 +1,4 @@
-export const formTemplate = `
+const formTemplate = `
 <div class="{{containerClass}}">
   <h1 class="container__title">{{title}}</h1>
   <form class="form-group">
@@ -18,3 +18,5 @@ export const formTemplate = `
  </form>
 </div>
 `;
+
+export default formTemplate;

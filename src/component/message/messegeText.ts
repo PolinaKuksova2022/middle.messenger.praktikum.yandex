@@ -5,7 +5,7 @@ interface MessageTextProps {
   data: string;
 }
 
-export class MessageText extends Block<MessageTextProps> {
+export default class MessageText extends Block<MessageTextProps> {
   constructor(props: MessageTextProps) {
     super(props, 'div');
   }

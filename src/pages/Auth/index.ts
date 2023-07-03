@@ -1,7 +1,7 @@
 import Block from '../../utils/core/Block';
-import { formTemplate } from '../../component/commonTmpl/form.tmpl';
-import { InputGroup } from '../../component/form/inputGroup';
-import { Button } from '../../component/button/button';
+import formTemplate from '../../component/commonTmpl/form.tmpl';
+import InputGroup from '../../component/form/inputGroup';
+import Button from '../../component/button/button';
 import buttonValid from '../../utils/validate/buttonValid';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
 
@@ -9,7 +9,7 @@ interface AuthProps {
   title: string;
   containerClass: string;
 }
-export class Auth extends Block<AuthProps> {
+export default class Auth extends Block<AuthProps> {
   constructor(props: AuthProps) {
     super(props, 'div');
   }

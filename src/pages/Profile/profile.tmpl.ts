@@ -1,4 +1,4 @@
-export const template = `
+const template = `
   <div class="profile-container">
     <section class="profile-container__mane-info">
       <section onclick="{{func}}" class="avatar">
@@ -22,3 +22,5 @@ export const template = `
     </section>
   </div>
 `;
+
+export default template;

@@ -5,7 +5,7 @@ interface GroupDataProps {
   name: string;
   value: string;
 }
-export class GroupData extends Block<GroupDataProps> {
+export default class GroupData extends Block<GroupDataProps> {
   constructor(props: GroupDataProps) {
     super(props, 'div');
   }

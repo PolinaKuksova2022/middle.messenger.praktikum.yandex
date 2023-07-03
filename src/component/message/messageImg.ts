@@ -5,7 +5,7 @@ interface MessageImgProps {
   data: string;
 }
 
-export class MessageImg extends Block<MessageImgProps> {
+export default class MessageImg extends Block<MessageImgProps> {
   constructor(props: MessageImgProps) {
     super(props, 'div');
   }

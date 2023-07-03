@@ -1,12 +1,12 @@
 import Block from '../../utils/core/Block';
-import { Button } from '../button/button';
-import { formTemplate } from '../commonTmpl/form.tmpl';
+import Button from '../button/button';
+import formTemplate from '../commonTmpl/form.tmpl';
 
 interface ModalProps {
   title: string;
   containerClass: string;
 }
-export class Modal extends Block<ModalProps> {
+export default class Modal extends Block<ModalProps> {
   constructor(props: ModalProps) {
     super(props, 'div');
   }

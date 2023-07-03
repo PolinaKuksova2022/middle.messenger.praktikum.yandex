@@ -1,11 +1,11 @@
-import { template } from './main.tmpl';
+import template from './main.tmpl';
 import Block from '../../utils/core/Block';
-import { Button } from '../../component/button/button';
+import Button from '../../component/button/button';
 
 interface MainProps {
   title: string;
 }
-export class Main extends Block<MainProps> {
+export default class Main extends Block<MainProps> {
   constructor(props: MainProps) {
     super(props, 'div');
   }

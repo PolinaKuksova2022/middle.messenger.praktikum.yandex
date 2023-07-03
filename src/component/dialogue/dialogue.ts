@@ -7,7 +7,7 @@ interface DialogueProps {
   count: string;
   avatar: string;
 }
-export class Dialogue extends Block<DialogueProps> {
+export default class Dialogue extends Block<DialogueProps> {
   constructor(props: DialogueProps) {
     super(props, 'li');
   }

@@ -1,9 +1,9 @@
-import { Modal } from '../component/modal/modal';
+import Modal from '../component/modal/modal';
 
 let show = false;
 const app = document.getElementById('app');
 
-export function toggleModal() {
+export default function toggleModal() {
   show = !show;
   if (show) {
     const article = document.createElement('article');

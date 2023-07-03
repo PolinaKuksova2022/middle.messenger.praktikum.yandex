@@ -1,9 +1,9 @@
 import Block from '../../utils/core/Block';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
-import { InputGroup } from '../form/inputGroup';
-import { KebabMenu } from '../menu/kebabMenu';
-import { MessageImg } from './messageImg';
-import { MessageText } from './messegeText';
+import InputGroup from '../form/inputGroup';
+import KebabMenu from '../menu/kebabMenu';
+import MessageImg from './messageImg';
+import MessageText from './messegeText';
 
 interface MessageProps {
   author: string;
@@ -11,7 +11,7 @@ interface MessageProps {
   from?: string;
   to?: string;
 }
-export class Message extends Block<MessageProps> {
+export default class Message extends Block<MessageProps> {
   constructor(props: MessageProps) {
     super(props, 'section');
   }

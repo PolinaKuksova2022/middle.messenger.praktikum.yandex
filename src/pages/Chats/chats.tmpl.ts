@@ -1,4 +1,4 @@
-export const template = `
+const template = `
   <div class="chats">
     <section class="dialogues">
       {{{button}}}
@@ -11,3 +11,5 @@ export const template = `
     {{{message}}}
   </div>
 `;
+
+export default template;

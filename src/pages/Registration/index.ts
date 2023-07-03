@@ -1,7 +1,7 @@
 import Block from '../../utils/core/Block';
-import { formTemplate } from '../../component/commonTmpl/form.tmpl';
-import { InputGroup } from '../../component/form/inputGroup';
-import { Button } from '../../component/button/button';
+import formTemplate from '../../component/commonTmpl/form.tmpl';
+import InputGroup from '../../component/form/inputGroup';
+import Button from '../../component/button/button';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
 import buttonValid from '../../utils/validate/buttonValid';
 
@@ -9,7 +9,7 @@ interface RegistrationProps {
   title: string;
   containerClass: string;
 }
-export class Registration extends Block<RegistrationProps> {
+export default class Registration extends Block<RegistrationProps> {
   constructor(props: RegistrationProps) {
     super(props, 'div');
   }

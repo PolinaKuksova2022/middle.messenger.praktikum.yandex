@@ -4,7 +4,7 @@ interface KebabMenuProps {
   text: string;
 }
 
-export class KebabMenu extends Block<KebabMenuProps> {
+export default class KebabMenu extends Block<KebabMenuProps> {
   constructor(props: KebabMenuProps) {
     super(props, 'div');
   }

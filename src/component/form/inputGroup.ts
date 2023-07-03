@@ -12,7 +12,7 @@ interface InputGroupProps {
   };
   placeholder: string;
 }
-export class InputGroup extends Block<InputGroupProps> {
+export default class InputGroup extends Block<InputGroupProps> {
   constructor(props: InputGroupProps) {
     super(props, 'article');
   }
