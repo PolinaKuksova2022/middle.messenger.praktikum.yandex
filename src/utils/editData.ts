@@ -8,38 +8,21 @@ export default function editData(event: Event) {
     (i) => i as HTMLInputElement
   );
 
-  if(!editMode || isAllValid(inputArr)) {
+  if (!editMode || isAllValid(inputArr)) {
     btn.textContent = editMode ? 'Изменить данные' : 'Cохранить изменения';
-    inputArr.map((i) => {
-        i.disabled = editMode;
-      });
+    inputArr.map((i) => (i.disabled = editMode));
     editMode = !editMode;
 
-    if(editMode) {
-        btn.addEventListener('mouseover', () => {
-            if (isAllValid(inputArr)) {
-            btn.classList.remove('disabled');
-            } else {
-                btn.classList.add('disabled');
-            }
-        });
-    }
-    else {
-        btn.removeEventListener('mouseover', () => {
-            console.log('1');
-          });
+    if (editMode) {
+      btn.addEventListener('mouseover', () => {
+        if (isAllValid(inputArr)) {
+          btn.classList.remove('disabled');
+        } else {
+          btn.classList.add('disabled');
+        }
+      });
+    } else {
+      btn.removeEventListener('mouseover', () => {});
     }
   }
-
-//   if (btn.classList.contains('disabled')) {
-//     btn.addEventListener('mouseover', () => {
-//       if (isAllValid(inputArr)) {
-//         btn.classList.remove('disabled');
-//       }
-//     });
-//   } else {
-//     btn.removeEventListener('mouseover', () => {
-//       console.log('1');
-//     });
-//   }
 }

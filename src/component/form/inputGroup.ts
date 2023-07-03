@@ -11,7 +11,7 @@ interface InputGroupProps {
     focusin: (event: Event) => void;
   };
   placeholder: string;
-  disabled?: string,
+  disabled?: string;
 }
 export default class InputGroup extends Block<InputGroupProps> {
   constructor(props: InputGroupProps) {
