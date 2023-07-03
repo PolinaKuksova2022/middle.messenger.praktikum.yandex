@@ -60,7 +60,9 @@
 
 .error-message {
   position: absolute;
+  right: 0;
   bottom: -20px;
+  text-align: right;
 
   @include font-face(9px, 500, 9px);
 
@@ -69,6 +71,7 @@
 
 .error-empty {
   position: absolute;
+  right: 0;
   bottom: -20px;
 
   @include font-face(9px, 500, 9px);
