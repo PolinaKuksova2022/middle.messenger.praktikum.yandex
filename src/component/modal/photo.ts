@@ -6,7 +6,7 @@ interface ModalProps {
   title: string;
   containerClass: string;
 }
-export default class Modal extends Block<ModalProps> {
+export default class Photo extends Block<ModalProps> {
   constructor(props: ModalProps) {
     super(props, 'div');
   }
@@ -15,16 +15,10 @@ export default class Modal extends Block<ModalProps> {
     this.children.button_1 = new Button({
       text: 'Выбрать файл на компьютере',
       path: '/',
-      // events: {
-      //   click: () => window.location.href="/",
-      // },
     });
     this.children.button_2 = new Button({
       text: 'Поменять',
-      path: '/',
-      // events: {
-      //   click: () => window.location.href="/profile",
-      // },
+      id: 'change',
     });
 
     this.children.button_1.element?.classList.add(...['button', 'navigation-btn']);

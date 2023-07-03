@@ -103,8 +103,11 @@ export function inputOut(event: Event) {
           target.classList.add('input-incorrect');
         }
         break;
-      default:
+      case 'message':
         console.log(`message input: ${value}`);
+        break;
+      default:
+        console.log('Успех');
     }
   }
 }

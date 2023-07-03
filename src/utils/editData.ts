@@ -1,3 +1,4 @@
+import { FormInput } from './global/definitions';
 import isAllValid from './validate/isAllValid';
 
 let editMode = false;
@@ -23,6 +24,15 @@ export default function editData(event: Event) {
       });
     } else {
       btn.removeEventListener('mouseover', () => {});
+    }
+
+    if (isAllValid(inputArr)) {
+      const inputs: FormInput[] = inputArr.map((i) => ({ name: i.name, value: i.value }));
+
+      window.__FORMS_DATA__[window.location.pathname] = inputs;
+
+      console.log('FORMS_DATA:');
+      console.log(window.__FORMS_DATA__);
     }
   }
 }

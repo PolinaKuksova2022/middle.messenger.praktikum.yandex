@@ -5,9 +5,9 @@ import Chats from '../pages/Chats';
 import Main from '../pages/Main';
 import Error404 from '../pages/Error404';
 import Error500 from '../pages/Error500';
-import toggleModal from '../utils/toggleModal';
+import { togglePhoto } from '../utils/toggleModal';
 
-window.toggleModal = toggleModal;
+window.togglePhoto = togglePhoto;
 
 export default function getPage() {
   if (!window.__FORMS_DATA__) window.__FORMS_DATA__ = {};
@@ -17,7 +17,7 @@ export default function getPage() {
     case '/registration':
       return new Registration({ title: 'Регистрация', containerClass: 'container container_big' });
     case '/profile':
-      return new Profile({ name: 'Иван', func: 'window.toggleModal()' });
+      return new Profile({ name: 'Иван', func: 'window.togglePhoto()' });
     case '/chat':
       return new Chats({ title: 'chat' });
     case '/internal-server-error':

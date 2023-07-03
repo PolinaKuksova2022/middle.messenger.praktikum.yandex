@@ -5,7 +5,7 @@ export interface FormInput {
 
 declare global {
   interface Window {
-    toggleModal: () => void;
+    togglePhoto: () => void;
     __FORMS_DATA__: { [path: string]: FormInput[] };
   }
 }

@@ -4,6 +4,7 @@ import Button from '../../component/button/button';
 import InputGroup from '../../component/form/inputGroup';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
 import editData from '../../utils/editData';
+import { togglePassword } from '../../utils/toggleModal';
 
 interface ProfileProps {
   name: string;
@@ -26,11 +27,13 @@ export default class Profile extends Block<ProfileProps> {
     });
     this.children.button_2 = new Button({
       text: 'Изменить пароль',
-      path: '/registrationa',
-
-      // events: {
-      //   click: () => (window.location.href = "/"),
-      // },
+      id: 'password',
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          togglePassword();
+        },
+      },
     });
     this.children.button_3 = new Button({
       text: 'Выйти',
