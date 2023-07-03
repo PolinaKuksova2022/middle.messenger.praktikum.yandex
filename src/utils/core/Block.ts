@@ -96,6 +96,14 @@ class Block<P extends Record<string, any> = any> {
 
   protected init() {}
 
+  private _removeEvents() {
+    const { events = {} } = this.props;
+
+    Object.keys(events).forEach((eventName) => {
+      this._element!.removeEventListener(eventName, events[eventName]);
+    });
+  }
+
   _componentDidMount() {
     this.componentDidMount();
   }
@@ -133,10 +141,15 @@ class Block<P extends Record<string, any> = any> {
 
   private _render() {
     const fragment = this.render();
-    this._element!.innerHTML = '';
-    this._element!.append(fragment);
 
-    this._addEvents();
+    this._removeEvents();
+    if (this._element) {
+      this._element!.innerHTML = "";
+      this._element!.append(fragment);
+      this._addEvents();
+    }
+
+    // this._addEvents();
   }
 
   protected compile(template: string, context: any) {
@@ -167,7 +180,6 @@ class Block<P extends Record<string, any> = any> {
     return temp.content;
   }
 
-  // Может переопределять пользователь, необязательно трогать
   protected render(): DocumentFragment {
     return new DocumentFragment();
   }
@@ -199,7 +211,6 @@ class Block<P extends Record<string, any> = any> {
   }
 
   _createDocumentElement(tagName: string) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     return document.createElement(tagName);
   }
 
