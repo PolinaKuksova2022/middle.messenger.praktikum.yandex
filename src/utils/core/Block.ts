@@ -144,7 +144,7 @@ class Block<P extends Record<string, any> = any> {
 
     this._removeEvents();
     if (this._element) {
-      this._element!.innerHTML = "";
+      this._element!.innerHTML = '';
       this._element!.append(fragment);
       this._addEvents();
     }
