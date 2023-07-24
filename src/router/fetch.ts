@@ -19,7 +19,6 @@ type OptionType = {
   method: METHOD;
   data?: any;
 };
-
 class HTTPTransport {
   get = (url: string, options: Omit<OptionType, 'method'> = {}) => {
     return this.request(url, { ...options, method: METHOD.GET });

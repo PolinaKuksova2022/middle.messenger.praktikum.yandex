@@ -15,6 +15,6 @@ export default class Button extends Block<ButtonProps> {
   }
 
   render() {
-    return this.compile(`<a id="{{id}}" href={{path}}>{{text}}</a>`, this.props);
+    return this.compile(`<a id="{{id}}" href="{{path}}">{{text}}</a>`, this.props);
   }
 }

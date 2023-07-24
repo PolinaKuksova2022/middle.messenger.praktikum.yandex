@@ -4,16 +4,9 @@ import InputGroup from '../../component/form/inputGroup';
 import Button from '../../component/button/button';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
 import buttonValid from '../../utils/validate/buttonValid';
+import router from '../../router/router';
 
-interface RegistrationProps {
-  title: string;
-  containerClass: string;
-}
-export default class Registration extends Block<RegistrationProps> {
-  constructor(props: RegistrationProps) {
-    super(props, 'div');
-  }
-
+export default class Registration extends Block {
   init() {
     this.children.button_1 = new Button({
       text: 'Зарегистрироваться',
@@ -26,7 +19,12 @@ export default class Registration extends Block<RegistrationProps> {
     });
     this.children.button_2 = new Button({
       text: 'Войти',
-      path: '/auth',
+      events: {
+        click: () => {
+          router.go('/auth');
+        },
+      },
+      // path: '/auth',
       // events: {
       //   click: () => window.location.href="/auth",
       // },
@@ -130,6 +128,9 @@ export default class Registration extends Block<RegistrationProps> {
   }
 
   render() {
-    return this.compile(formTemplate, this.props);
+    return this.compile(formTemplate, {
+      title: 'Регистрация',
+      containerClass: 'container container_big',
+    });
   }
 }

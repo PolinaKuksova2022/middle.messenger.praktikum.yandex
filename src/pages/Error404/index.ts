@@ -1,19 +1,18 @@
 import Block from '../../utils/core/Block';
 import Button from '../../component/button/button';
 import template from './error404.tmpl';
+import router from '../../router/router';
 
-interface Error404Props {
-  title: string;
-}
-export default class Error404 extends Block<Error404Props> {
-  constructor(props: Error404Props) {
-    super(props, 'div');
-  }
-
+export default class Error404 extends Block {
   init() {
     this.children.button = new Button({
       text: 'Назад к чатам',
-      path: '/chat',
+      events: {
+        click: () => {
+          router.go('/chat');
+        },
+      },
+      // path: '/chat',
       // events: {
       //   click: () => window.location.href="/chat",
       // },

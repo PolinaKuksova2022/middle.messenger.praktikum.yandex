@@ -3,19 +3,18 @@ import Button from '../../component/button/button';
 import template from './chats.tmpl';
 import Dialogue from '../../component/dialogue/dialogue';
 import Message from '../../component/message/message';
+import router from '../../router/router';
 
-interface ChatsProps {
-  title: string;
-}
-export default class Chats extends Block<ChatsProps> {
-  constructor(props: ChatsProps) {
-    super(props, 'div');
-  }
-
+export default class Chats extends Block {
   init() {
     this.children.button = new Button({
       text: 'Профиль >',
-      path: '/profile',
+      events: {
+        click: () => {
+          router.go("/profile");
+        },
+      },
+      // path: '/profile',
     });
 
     this.children.dialogue_1 = new Dialogue({
@@ -44,6 +43,6 @@ export default class Chats extends Block<ChatsProps> {
   }
 
   render() {
-    return this.compile(template, this.props);
+    return this.compile(template, { title: 'chat' });
   }
 }

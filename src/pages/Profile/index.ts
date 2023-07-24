@@ -5,16 +5,13 @@ import InputGroup from '../../component/form/inputGroup';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
 import editData from '../../utils/editData';
 import { togglePassword } from '../../utils/toggleModal';
+import router from '../../router/router';
 
-interface ProfileProps {
-  name: string;
-  func: string;
-}
-export default class Profile extends Block<ProfileProps> {
-  constructor(props: ProfileProps) {
-    super(props, 'div');
-  }
-
+// interface ProfileProps {
+//   name: string;
+//   func: string;
+// }
+export default class Profile extends Block {
   init() {
     this.children.button_1 = new Button({
       text: 'Изменить данные',
@@ -37,7 +34,12 @@ export default class Profile extends Block<ProfileProps> {
     });
     this.children.button_3 = new Button({
       text: 'Выйти',
-      path: '/auth',
+      events: {
+        click: () => {
+          router.go('/auth');
+        },
+      },
+      // path: '/auth',
       // events: {
       //   click: () => (window.location.href = "/chat"),
       // },
@@ -134,6 +136,6 @@ export default class Profile extends Block<ProfileProps> {
   }
 
   render() {
-    return this.compile(template, this.props);
+    return this.compile(template, { name: 'Иван', func: 'window.togglePhoto()' });
   }
 }

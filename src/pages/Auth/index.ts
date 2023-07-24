@@ -4,16 +4,9 @@ import InputGroup from '../../component/form/inputGroup';
 import Button from '../../component/button/button';
 import buttonValid from '../../utils/validate/buttonValid';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
+import router from '../../router/router';
 
-interface AuthProps {
-  title: string;
-  containerClass: string;
-}
-export default class Auth extends Block<AuthProps> {
-  constructor(props: AuthProps) {
-    super(props, 'div');
-  }
-
+export default class Auth extends Block {
   init() {
     this.children.button_1 = new Button({
       text: 'Авторизация',
@@ -26,7 +19,12 @@ export default class Auth extends Block<AuthProps> {
     });
     this.children.button_2 = new Button({
       text: 'Нет аккаунта?',
-      path: '/registration',
+      events: {
+        click: () => {
+          router.go('/registration');
+        },
+      },
+      // path: '/registration',
     });
 
     this.children.group_1 = new InputGroup({
@@ -62,6 +60,6 @@ export default class Auth extends Block<AuthProps> {
   }
 
   render() {
-    return this.compile(formTemplate, this.props);
+    return this.compile(formTemplate, { title: 'Авторизация', containerClass: 'container' });
   }
 }
