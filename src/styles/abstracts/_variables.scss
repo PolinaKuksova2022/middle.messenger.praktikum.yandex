@@ -1,8 +1,9 @@
 $text-color: #1e1e1e;
-$light-text-color: #ffffff;
+$light-text-color: #fff;
 $selected-color: #3369f3;
-$second-color: #999999;
-$excretion-color: #ff0000;
+$second-color: #999;
+$excretion-color: #f00;
+$background-color: #efefef;
 
 %bottom-border {
   border-bottom: 1px solid $second-color;

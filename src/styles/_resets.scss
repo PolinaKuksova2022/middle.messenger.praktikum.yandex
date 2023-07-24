@@ -32,8 +32,12 @@ dd {
   margin: 0;
 }
 
-ul[class] {
+ul[class], li {
   list-style: none;
+}
+
+ul {
+  padding: 0;
 }
 
 img {

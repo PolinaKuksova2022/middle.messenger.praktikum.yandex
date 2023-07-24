@@ -2,17 +2,30 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: relative;
   width: 100%;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
+  margin-bottom: 30px;
+  padding-bottom: 2px;
+
   @extend %bottom-border;
   @include font-face(13px, 500, 13px);
 
-  &__title {
+  > label {
+    margin: 0;
     color: $text-color;
+
+    @include font-face(13px, 500, 13px);
   }
 
   &__value {
     color: $second-color;
+    border: none;
+    text-align: right;
+
+    &:focus {
+      outline: none;
+      border: 1px solid $selected-color;
+      background-color: rgba($second-color, 0.3);
+    }
   }
 }

@@ -7,30 +7,74 @@
   &__input {
     margin-bottom: 40px;
   }
+
   &__button {
     margin-top: auto;
   }
 }
 
-.inputGroup {
+.input-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;
+  margin-bottom: 30px;
+  position: relative;
 }
 
 .label {
   margin-bottom: 4px;
+
   @include font-face(9px, 500, 9px);
+
   color: $second-color;
 }
 
 .input {
   border: none;
   border-bottom: 1px solid $selected-color;
+
   @include font-face(13px, 500, 13px);
 
   &:focus {
     outline: none;
-    background-color: $second-color;
+    border: 1px solid $selected-color;
+    background-color: rgba($second-color, 0.3);
   }
+
+  &-incorrect {
+    border: 1px solid $excretion-color !important;
+    background-color: rgba($second-color, 0.3);
+  }
+}
+
+.input-message {
+  padding: 10px 0 10px 20px;
+  width: 100%;
+  border: none;
+  border-radius: 30px;
+
+  @include font-face(12px, 500, 12px);
+
+  color: $second-color;
+  background: $background-color;
+}
+
+.error-message {
+  position: absolute;
+  right: 0;
+  bottom: -20px;
+  text-align: right;
+
+  @include font-face(9px, 500, 9px);
+
+  color: $excretion-color;
+}
+
+.error-empty {
+  position: absolute;
+  right: 0;
+  bottom: -20px;
+
+  @include font-face(9px, 500, 9px);
+
+  color: $excretion-color;
 }
