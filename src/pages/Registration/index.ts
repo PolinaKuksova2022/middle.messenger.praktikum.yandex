@@ -5,7 +5,7 @@ import Button from '../../component/button/button';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
 import buttonValid from '../../utils/validate/buttonValid';
 import router from '../../router/router';
-
+import AuthController from '../../controllers/AuthController';
 export default class Registration extends Block {
   init() {
     this.children.button_1 = new Button({
@@ -13,7 +13,9 @@ export default class Registration extends Block {
       events: {
         click: (e) => {
           e.preventDefault();
-          buttonValid();
+          if (buttonValid()) {
+            this.onSubmit();
+          }
         },
       },
     });
@@ -125,6 +127,17 @@ export default class Registration extends Block {
     this.children.group_5.element?.classList.add('input-group');
     this.children.group_6.element?.classList.add('input-group');
     this.children.group_7.element?.classList.add('input-group');
+  }
+
+  onSubmit() {
+    const inputArr = Array.from(document.getElementsByTagName('INPUT'));
+    const inputs = inputArr.map((i) => i as HTMLInputElement).map((i) => [i.name, i.value]);
+
+    const data = Object.fromEntries(inputs);
+
+    console.log(data, 'Registration(signup) data');
+
+    AuthController.signup(data);
   }
 
   render() {

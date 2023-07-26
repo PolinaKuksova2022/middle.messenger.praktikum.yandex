@@ -5,15 +5,22 @@ import Button from '../../component/button/button';
 import buttonValid from '../../utils/validate/buttonValid';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
 import router from '../../router/router';
+import AuthController from '../../controllers/AuthController';
 
 export default class Auth extends Block {
+  constructor() {
+    super({});
+  }
+
   init() {
     this.children.button_1 = new Button({
-      text: 'Авторизация',
+      text: 'Войти',
       events: {
         click: (e) => {
           e.preventDefault();
-          buttonValid();
+          if (buttonValid()) {
+            this.onSubmit();
+          }
         },
       },
     });
@@ -59,6 +66,17 @@ export default class Auth extends Block {
     this.children.group_2.element?.classList.add('input-group');
   }
 
+  onSubmit() {
+    const inputArr = Array.from(document.getElementsByTagName('INPUT'));
+    const inputs = inputArr.map((i) => i as HTMLInputElement).map((i) => [i.name, i.value]);
+
+    const data = Object.fromEntries(inputs);
+
+    console.log(data, 'Auth(signin) data');
+
+    AuthController.signin(data);
+  }
+  
   render() {
     return this.compile(formTemplate, { title: 'Авторизация', containerClass: 'container' });
   }

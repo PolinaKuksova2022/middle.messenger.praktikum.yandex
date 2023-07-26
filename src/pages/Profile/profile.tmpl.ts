@@ -5,7 +5,7 @@ const template = `
         <img name="avatar" class="avatar__img"  src="" alt=""/>
         <span class="avatar__text">Поменять аватар</span>
       </section>
-      <h1 class="name">{{name}}</h1>
+      <h1 class="name">{{ first_name }}</h1>
     </section>
     <section class="profile-container__info">
       {{{group_1}}}

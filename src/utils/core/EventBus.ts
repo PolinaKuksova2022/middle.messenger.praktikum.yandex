@@ -8,25 +8,23 @@ export default class EventBus<
   private readonly listeners: { [K in MapInterface<E>]?: Handler<Args[K]>[] } = {};
 
   on<Event extends MapInterface<E>>(event: Event, callback: Handler<Args[Event]>) {
-    if (!this.listeners[event]) {
-      this.listeners[event] = [];
-    }
-
-    this.listeners[event]?.push(callback);
+    const events = this.listeners[event] ?? [];
+    events.push(callback);
+    this.listeners[event] = events;
   }
 
   off<Event extends MapInterface<E>>(event: Event, callback: Handler<Args[Event]>) {
-    if (!this.listeners[event]) {
-      throw new Error(`Нет события: ${event}`);
-    }
+    // if (!this.listeners[event]) {
+    //   throw new Error(`Нет события: ${event}`);
+    // }
 
-    this.listeners[event] = this.listeners[event]?.filter((listener) => listener !== callback);
+    this.listeners[event] = this.listeners[event]?.filter((listener) => listener !== callback) ?? [];
   }
 
   emit<Event extends MapInterface<E>>(event: Event, ...args: Args[Event]) {
-    if (!this.listeners[event]) {
-      throw new Error(`Нет события: ${event}`);
-    }
+    // if (!this.listeners[event]) {
+    //   throw new Error(`Нет события: ${event}`);
+    // }
 
     this.listeners[event]?.forEach(function (listener) {
       listener(...args);

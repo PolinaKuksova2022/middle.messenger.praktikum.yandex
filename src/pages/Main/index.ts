@@ -3,6 +3,10 @@ import Block from '../../utils/core/Block';
 import Button from '../../component/button/button';
 import router from '../../router/router';
 export default class Main extends Block {
+  constructor() {
+    super({});
+  }
+  
   init() {
     this.children.button_1 = new Button({
       text: 'Авторизация',

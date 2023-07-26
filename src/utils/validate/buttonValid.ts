@@ -10,14 +10,18 @@ export default function buttonValid() {
     .map((i) => ({ name: i.name, value: i.value }));
 
   if (isAllValid(inputs)) {
-    window.__FORMS_DATA__[window.location.pathname] = inputs;
+    // window.__FORMS_DATA__[window.location.pathname] = inputs;
     button.classList.remove('disabled');
 
-    console.log('FORMS_DATA:');
-    console.log(window.__FORMS_DATA__);
+    // console.log('FORMS_DATA:');
+    // console.log(window.__FORMS_DATA__);
 
-    setTimeout(() => {
-      window.location.href = '/chat';
-    }, 3000);
+    // setTimeout(() => {
+    //   window.location.href = '/chat';
+    // }, 3000);
+
+    return true
   }
+
+  return  false;
 }

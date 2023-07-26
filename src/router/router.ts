@@ -12,7 +12,7 @@ class Router {
       return Router.__instance;
     }
 
-    // this._routes = [];
+    this.routes = [];
     // this._history = window.history;
     // this._currentRoute = null;
     // this._rootQuery = rootQuery;
@@ -20,14 +20,14 @@ class Router {
     Router.__instance = this;
   }
 
-  use(pathname: string, block: typeof Block) {
+  public use(pathname: string, block: typeof Block) {
     const route = new Route(pathname, block, this.rootQuery);
     this.routes.push(route);
 
     return this;
   }
 
-  start() {
+  public start() {
     // запустить роутер
     window.onpopstate = (event: PopStateEvent) => {
       const target = event.currentTarget as Window;
@@ -38,7 +38,7 @@ class Router {
     this._onRoute(window.location.pathname);
   }
 
-  _onRoute(pathname: string) {
+  private _onRoute(pathname: string) {
     const route = this.getRoute(pathname);
 
     if (!route) {
@@ -58,26 +58,25 @@ class Router {
     //route.render(route, pathname);
   }
 
-  go(pathname: string) {
+  public go(pathname: string) {
     this.history.pushState({}, '', pathname);
     this._onRoute(pathname);
   }
 
-  back() {
+  public back() {
     // переход назад по истории браузера
     window.history.back();
   }
 
-  forward() {
+  public forward() {
     // переход вперёд по истории браузера
     window.history.forward();
   }
 
-  getRoute(pathname: string) {
+  public getRoute(pathname: string) {
     return this.routes.find((route) => route.match(pathname));
   }
 }
 
 const router = new Router('#app');
-
 export default router;

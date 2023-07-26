@@ -5,13 +5,9 @@ import InputGroup from '../../component/form/inputGroup';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
 import editData from '../../utils/editData';
 import { togglePassword } from '../../utils/toggleModal';
-import router from '../../router/router';
-
-// interface ProfileProps {
-//   name: string;
-//   func: string;
-// }
-export default class Profile extends Block {
+import AuthController from '../../controllers/AuthController';
+import { State, withStore } from '../../utils/core/Store';
+export class BaseProfile extends Block {
   init() {
     this.children.button_1 = new Button({
       text: 'Изменить данные',
@@ -35,14 +31,8 @@ export default class Profile extends Block {
     this.children.button_3 = new Button({
       text: 'Выйти',
       events: {
-        click: () => {
-          router.go('/auth');
-        },
-      },
-      // path: '/auth',
-      // events: {
-      //   click: () => (window.location.href = "/chat"),
-      // },
+        click: () => { AuthController.logout(); }
+      }
     });
 
     this.children.group_1 = new InputGroup({
@@ -135,7 +125,21 @@ export default class Profile extends Block {
     this.children.group_6.element?.classList.add('group-data');
   }
 
+  componentDidMount(): void {
+    console.log('1');
+    AuthController.fetchUser();
+    console.log('2');
+  }
+
   render() {
-    return this.compile(template, { name: 'Иван', func: 'window.togglePhoto()' });
+    return this.compile(template, {func: 'window.togglePhoto()' });
   }
 }
+
+function mapStateToProps(state: State) {
+
+  console.log("{ ...state.user }" ,{ ...state.user });
+  return { ...state.user };
+}
+
+export const Profile = withStore(mapStateToProps)(BaseProfile);

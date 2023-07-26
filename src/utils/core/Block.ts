@@ -123,7 +123,8 @@ class Block<P extends Record<string, any> = any> {
     }
   }
 
-  protected componentDidUpdate(_oldProps: P, _newProps: P) {
+  //@ts-ignore
+  protected componentDidUpdate(oldProps: P, newProps: P) {
     return true;
   }
 
@@ -149,7 +150,7 @@ class Block<P extends Record<string, any> = any> {
       this._addEvents();
     }
 
-    // this._addEvents();
+    this._addEvents();
   }
 
   protected compile(template: string, context: any) {
