@@ -114,6 +114,7 @@ export default class Registration extends Block {
 
     this.children.button_1.element?.classList.add(...['button', 'disabled']);
     this.children.button_2.element?.classList.add(...['button', 'navigation-btn']);
+    this.children.button_2.element?.setAttribute('type', 'button');
     this.children.group_1.element?.classList.add('input-group');
     this.children.group_2.element?.classList.add('input-group');
     this.children.group_3.element?.classList.add('input-group');

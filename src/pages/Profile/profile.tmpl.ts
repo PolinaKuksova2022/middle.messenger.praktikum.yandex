@@ -19,6 +19,7 @@ const template = `
       {{{button_1}}}
       {{{button_2}}}
       {{{button_3}}}
+      {{{button_4}}}
     </section>
   </div>
 `;

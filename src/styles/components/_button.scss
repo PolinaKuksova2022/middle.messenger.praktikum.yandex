@@ -55,11 +55,8 @@
 
 .excretion-btn {
   text-align: left;
-
-  > a {
-    justify-content: start;
-    color: $excretion-color;
-  }
+  justify-content: start;
+  color: $excretion-color;
 }
 
 .chats-btn {

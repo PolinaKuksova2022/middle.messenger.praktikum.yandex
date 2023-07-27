@@ -1,6 +1,6 @@
 import Block from '../../utils/core/Block';
 
-interface ButtonProps {
+export interface ButtonProps {
   text: string;
   events?: {
     click: (e: Event) => void;
@@ -14,6 +14,6 @@ export default class Button extends Block<ButtonProps> {
   }
 
   render() {
-    return this.compile(`<a id="{{id}}">{{text}}</a>`, this.props);
+    return this.compile(`{{text}}`, this.props);
   }
 }

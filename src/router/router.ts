@@ -6,6 +6,7 @@ class Router {
   private routes: Route[] = [];
   private currentRoute: Route | null = null;
   private history = window.history;
+  private onRoutedCallback: (route: Route) => void = () => {};
 
   constructor(private readonly rootQuery: string) {
     if (Router.__instance) {
@@ -24,6 +25,15 @@ class Router {
     const route = new Route(pathname, block, this.rootQuery);
     this.routes.push(route);
 
+    return this;
+  }
+
+  public exists(pathname: string){
+    return !!this.routes.find(x => x.pathname == pathname);
+  }
+
+  public setOnRoutedCallback(callback: (route: Route) => void){
+    this.onRoutedCallback = callback;
     return this;
   }
 
@@ -52,10 +62,7 @@ class Router {
     this.currentRoute = route;
 
     route.render();
-    //if () {
-    //  this._currentRoute.leave();
-    //}
-    //route.render(route, pathname);
+    this.onRoutedCallback(route);
   }
 
   public go(pathname: string) {

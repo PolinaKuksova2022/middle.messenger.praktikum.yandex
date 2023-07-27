@@ -27,13 +27,6 @@ export default class Route {
     public readonly query: string
   ) {}
 
-  //   navigate(pathname: string) {
-  //     if (this.match(pathname)) {
-  //       this._pathname = pathname;
-  //       this.render();
-  //     }
-  //   }
-
   leave() {
     if (this.block) {
       this.block.hide();
@@ -45,13 +38,9 @@ export default class Route {
   }
 
   render() {
-    if (!this.block) {
-      this.block = new this.blockClass({});
+    this.block = new this.blockClass({});
 
-      render(this.query, this.block);
-      return;
-    }
-
-    // this.block.show();
+    render(this.query, this.block);
+    return;
   }
 }

@@ -7,6 +7,7 @@ import Main from './pages/Main';
 import { Profile } from './pages/Profile';
 import Registration from './pages/Registration';
 import router from './router/router';
+import store from './utils/core/Store';
 
 export enum Routes {
   Main = '/',
@@ -19,6 +20,7 @@ export enum Routes {
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
+  console.log('DOM LOADED');
   router
     .use(Routes.Main, Main)
     .use(Routes.Register, Registration)
@@ -27,37 +29,33 @@ window.addEventListener('DOMContentLoaded', async () => {
     .use(Routes.Chat, Chats)
     .use(Routes.Error404, Error404)
     .use(Routes.Error500, Error500)
+    .setOnRoutedCallback((route) => {
+      if (store.state.user) {
+        switch (route.pathname) {
+          case Routes.Auth:
+          case Routes.Register:
+            router.go(Routes.Profile);
+            return;
+        }
+      } else {
+        switch (route.pathname) {
+          case Routes.Chat:
+          case Routes.Profile:
+            router.go(Routes.Auth);
+            return;
+        }
+      }
+    })
     .start();
 
-  let isProtectedRoute = true;
-
-  switch (window.location.pathname) {
-    case Routes.Main:
-    case Routes.Register:
-    case Routes.Auth:
-      isProtectedRoute = false;
-      break;
+  if (!router.exists(window.location.pathname)) {
+    router.go(Routes.Error404);
+    return;
   }
-
-  // switch (window.location.pathname) {
-  //   case Routes.Main: AuthController.fetchUser().then(isProtectedRoute => {
-  //     isProtectedRoute ? router.go(Routes.Chat) : router.go(Routes.Main);
-  //   })
-  //   case Routes.Register:
-  //   case Routes.Auth:
-  //     isProtectedRoute = false;
-  //     break;
-  // }
 
   try {
     await AuthController.fetchUser();
-
-  } catch (err) {
-    console.log(err, 'Here');
-
-    if (isProtectedRoute) {
-      router.go(Routes.Main);
-      console.log(isProtectedRoute, 'isProtectedRoute');
-    }
+  } catch (e) {
+    console.log(e, 'Here');
   }
 });
