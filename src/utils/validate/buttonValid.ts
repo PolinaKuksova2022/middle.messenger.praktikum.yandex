@@ -1,27 +1,17 @@
-import { FormInput } from '../global/definitions';
 import isAllValid from './isAllValid';
 
 export default function buttonValid() {
   const button = document.getElementsByClassName('disabled')[0];
 
   const inputArr = Array.from(document.getElementsByTagName('INPUT'));
-  const inputs: FormInput[] = inputArr
-    .map((i) => i as HTMLInputElement)
-    .map((i) => ({ name: i.name, value: i.value }));
+  const value = inputArr.map((i) => i as HTMLInputElement).map((i) => [i.name, i.value]);
 
-  if (isAllValid(inputs)) {
-    // window.__FORMS_DATA__[window.location.pathname] = inputs;
+  const data = Object.fromEntries(value);
+
+  if (isAllValid(data)) {
     button.classList.remove('disabled');
-
-    // console.log('FORMS_DATA:');
-    // console.log(window.__FORMS_DATA__);
-
-    // setTimeout(() => {
-    //   window.location.href = '/chat';
-    // }, 3000);
-
-    return true
+    return true;
   }
 
-  return  false;
+  return false;
 }

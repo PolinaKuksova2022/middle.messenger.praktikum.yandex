@@ -53,7 +53,7 @@ class AuthController {
       // if (user.id) {
       //   store.set('user', user);
       // }
-      console.log("fetch");
+      // console.log('store.getState()', store.getState());
     } catch (error) {
       throw error;
     }

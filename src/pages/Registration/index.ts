@@ -3,9 +3,9 @@ import formTemplate from '../../component/commonTmpl/form.tmpl';
 import InputGroup from '../../component/form/inputGroup';
 import Button from '../../component/button/button';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
-import buttonValid from '../../utils/validate/buttonValid';
 import router from '../../router/router';
 import AuthController from '../../controllers/AuthController';
+import isAllValid from '../../utils/validate/isAllValid';
 export default class Registration extends Block {
   init() {
     this.children.button_1 = new Button({
@@ -13,9 +13,7 @@ export default class Registration extends Block {
       events: {
         click: (e) => {
           e.preventDefault();
-          if (buttonValid()) {
-            this.onSubmit();
-          }
+          this.onSubmit();
         },
       },
     });
@@ -26,10 +24,6 @@ export default class Registration extends Block {
           router.go('/auth');
         },
       },
-      // path: '/auth',
-      // events: {
-      //   click: () => window.location.href="/auth",
-      // },
     });
 
     this.children.group_1 = new InputGroup({
@@ -135,9 +129,11 @@ export default class Registration extends Block {
 
     const data = Object.fromEntries(inputs);
 
-    console.log(data, 'Registration(signup) data');
+    if (isAllValid(data)) {
+      console.log(data, 'Registration(signup) data');
 
-    AuthController.signup(data);
+      AuthController.signup(data);
+    }
   }
 
   render() {

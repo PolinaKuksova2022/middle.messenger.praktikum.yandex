@@ -26,7 +26,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     .use(Routes.Profile, Profile)
     .use(Routes.Chat, Chats)
     .use(Routes.Error404, Error404)
-    .use(Routes.Error500, Error500);
+    .use(Routes.Error500, Error500)
+    .start();
 
   let isProtectedRoute = true;
 
@@ -38,14 +39,21 @@ window.addEventListener('DOMContentLoaded', async () => {
       break;
   }
 
+  // switch (window.location.pathname) {
+  //   case Routes.Main: AuthController.fetchUser().then(isProtectedRoute => {
+  //     isProtectedRoute ? router.go(Routes.Chat) : router.go(Routes.Main);
+  //   })
+  //   case Routes.Register:
+  //   case Routes.Auth:
+  //     isProtectedRoute = false;
+  //     break;
+  // }
+
   try {
     await AuthController.fetchUser();
 
-    router.start();
   } catch (err) {
     console.log(err, 'Here');
-
-    router.start();
 
     if (isProtectedRoute) {
       router.go(Routes.Main);

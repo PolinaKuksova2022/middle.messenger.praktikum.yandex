@@ -14,7 +14,7 @@ export enum StoreEvents {
 // наследуем Store от EventBus, чтобы его методы были сразу доступны у экземпляра Store
 class Store extends EventBus {
   private state: State = {};
-
+  
   public getState() {
     return this.state;
   }
@@ -22,7 +22,6 @@ class Store extends EventBus {
   public set(path: string, value: unknown) {
     set(this.state, path, value);
 
-    console.log('Store state:', this.state);
     // метод EventBus
     this.emit(StoreEvents.Updated);
   }

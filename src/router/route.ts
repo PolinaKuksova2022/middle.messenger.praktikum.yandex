@@ -23,8 +23,8 @@ export default class Route {
 
   constructor(
     public pathname: string,
-    public blockClass: typeof Block,
-    public query: string
+    public readonly blockClass: typeof Block,
+    public readonly query: string
   ) {}
 
   //   navigate(pathname: string) {

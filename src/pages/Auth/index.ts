@@ -2,10 +2,10 @@ import Block from '../../utils/core/Block';
 import formTemplate from '../../component/commonTmpl/form.tmpl';
 import InputGroup from '../../component/form/inputGroup';
 import Button from '../../component/button/button';
-import buttonValid from '../../utils/validate/buttonValid';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
 import router from '../../router/router';
 import AuthController from '../../controllers/AuthController';
+import isAllValid from '../../utils/validate/isAllValid';
 
 export default class Auth extends Block {
   constructor() {
@@ -18,9 +18,7 @@ export default class Auth extends Block {
       events: {
         click: (e) => {
           e.preventDefault();
-          if (buttonValid()) {
-            this.onSubmit();
-          }
+          this.onSubmit();
         },
       },
     });
@@ -31,7 +29,6 @@ export default class Auth extends Block {
           router.go('/registration');
         },
       },
-      // path: '/registration',
     });
 
     this.children.group_1 = new InputGroup({
@@ -68,13 +65,15 @@ export default class Auth extends Block {
 
   onSubmit() {
     const inputArr = Array.from(document.getElementsByTagName('INPUT'));
-    const inputs = inputArr.map((i) => i as HTMLInputElement).map((i) => [i.name, i.value]);
+    const value = inputArr.map((i) => i as HTMLInputElement).map((i) => [i.name, i.value]);
+    
+    const data = Object.fromEntries(value);
 
-    const data = Object.fromEntries(inputs);
+    if(isAllValid(data)) {
+      console.log(data, 'Auth(signin) data');
 
-    console.log(data, 'Auth(signin) data');
-
-    AuthController.signin(data);
+      AuthController.signin(data);
+    }
   }
   
   render() {

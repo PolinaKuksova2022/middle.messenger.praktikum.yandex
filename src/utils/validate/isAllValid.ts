@@ -1,10 +1,12 @@
-import { FormInput } from '../global/definitions';
 import { regEmail, regLogin, regName, regPassword } from './constants';
 
-export default function isAllValid(inputs: FormInput[] | HTMLInputElement[]) {
-  return inputs.every((i) => {
+export default function isAllValid(data: Record<string, string>) {
+  return Object
+    .entries(data)
+    .map(x => ({key: x[0], value: x[1]}))
+    .every((i) => {
     if (i.value.length !== 0) {
-      switch (i.name) {
+      switch (i.key) {
         case 'login':
           return i.value.match(regLogin);
         case 'password':

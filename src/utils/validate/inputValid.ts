@@ -1,3 +1,5 @@
+import buttonValid from './buttonValid';
+
 import {
   capitalText,
   charactersText,
@@ -18,6 +20,9 @@ import {
 } from './constants';
 
 export function inputOut(event: Event) {
+  // при выходе из поля, проверяем валидность и снимаем disabled класс у кнопки
+  buttonValid();
+  
   const target = event.target as HTMLTextAreaElement;
   const { value } = target;
   const error = document.createElement('div');

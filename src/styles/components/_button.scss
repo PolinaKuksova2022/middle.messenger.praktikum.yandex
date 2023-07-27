@@ -7,7 +7,7 @@
   border-radius: 8px;
 
   @include font-face(13px, 500, 13px);
-  
+
   background: $selected-color;
   color: $light-text-color;
   cursor: pointer;
@@ -72,8 +72,10 @@
 }
 
 .disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+  &:hover {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 }
 
 .round-btn {

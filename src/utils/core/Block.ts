@@ -142,7 +142,7 @@ class Block<P extends Record<string, any> = any> {
 
   private _render() {
     const fragment = this.render();
-
+    
     this._removeEvents();
     if (this._element) {
       this._element!.innerHTML = '';
@@ -190,6 +190,8 @@ class Block<P extends Record<string, any> = any> {
   }
 
   _makePropsProxy(props: P) {
+    const self = this;
+
     return new Proxy(props, {
       get(target, prop: string) {
         if (prop.indexOf('_') === 0) {
@@ -200,9 +202,10 @@ class Block<P extends Record<string, any> = any> {
       },
       set(target, prop: string, value) {
         const oldTarget = { ...target };
+
         target[prop as keyof P] = value;
 
-        (this as Block).eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
+        self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },
       deleteProperty() {

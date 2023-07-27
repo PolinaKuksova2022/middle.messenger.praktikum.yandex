@@ -1,7 +1,7 @@
-export interface FormInput {
-  name: string;
-  value: string;
-}
+// export interface FormInput {
+//   name: string;
+//   value: string;
+// }
 
 declare global {
   interface Window {

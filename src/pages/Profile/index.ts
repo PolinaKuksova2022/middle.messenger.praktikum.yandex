@@ -1,7 +1,7 @@
 import Block from '../../utils/core/Block';
 import template from './profile.tmpl';
 import Button from '../../component/button/button';
-import InputGroup from '../../component/form/inputGroup';
+import InputGroup, { InputGroupProps } from '../../component/form/inputGroup';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
 import editData from '../../utils/editData';
 import { togglePassword } from '../../utils/toggleModal';
@@ -45,7 +45,7 @@ export class BaseProfile extends Block {
         focusout: (event) => inputOut(event),
         focusin: (event) => inputIn(event),
       },
-      placeholder: 'pochta@yandex.ru',
+      placeholder: '',
       disabled: 'disabled',
     });
     this.children.group_2 = new InputGroup({
@@ -58,7 +58,7 @@ export class BaseProfile extends Block {
         focusout: (event) => inputOut(event),
         focusin: (event) => inputIn(event),
       },
-      placeholder: 'ivanivanov',
+      placeholder: '',
       disabled: 'disabled',
     });
     this.children.group_3 = new InputGroup({
@@ -71,7 +71,7 @@ export class BaseProfile extends Block {
         focusout: (event) => inputOut(event),
         focusin: (event) => inputIn(event),
       },
-      placeholder: 'Иван',
+      placeholder: '',
       disabled: 'disabled',
     });
     this.children.group_4 = new InputGroup({
@@ -84,7 +84,7 @@ export class BaseProfile extends Block {
         focusout: (event) => inputOut(event),
         focusin: (event) => inputIn(event),
       },
-      placeholder: 'Иванов',
+      placeholder: '',
       disabled: 'disabled',
     });
     this.children.group_5 = new InputGroup({
@@ -97,7 +97,7 @@ export class BaseProfile extends Block {
         focusout: (event) => inputOut(event),
         focusin: (event) => inputIn(event),
       },
-      placeholder: 'Иван',
+      placeholder: '',
       disabled: 'disabled',
     });
     this.children.group_6 = new InputGroup({
@@ -110,7 +110,7 @@ export class BaseProfile extends Block {
         focusout: (event) => inputOut(event),
         focusin: (event) => inputIn(event),
       },
-      placeholder: '+7 (909) 967 30 30',
+      placeholder: '',
       disabled: 'disabled',
     });
 
@@ -126,13 +126,20 @@ export class BaseProfile extends Block {
   }
 
   componentDidMount(): void {
-    console.log('1');
     AuthController.fetchUser();
-    console.log('2');
   }
 
   render() {
-    return this.compile(template, {func: 'window.togglePhoto()' });
+    if (this.props.user) {
+      console.log('this.props.user.email', this.props.user.email);
+      (this.children.group_1 as Block).setProps({
+        placeholder: this.props.user.email
+      });
+
+    }
+
+
+    return this.compile(template, {...this.props});
   }
 }
 
