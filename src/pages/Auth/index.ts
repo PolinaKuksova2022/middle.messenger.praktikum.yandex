@@ -6,6 +6,7 @@ import { inputIn, inputOut } from '../../utils/validate/inputValid';
 import router from '../../router/router';
 import AuthController from '../../controllers/AuthController';
 import isAllValid from '../../utils/validate/isAllValid';
+import getInputsData from '../../utils/validate/getInputs';
 
 export default class Auth extends Block {
   constructor() {
@@ -41,7 +42,6 @@ export default class Auth extends Block {
         focusout: (event) => inputOut(event),
         focusin: (event) => inputIn(event),
       },
-      placeholder: '',
     });
 
     this.children.group_2 = new InputGroup({
@@ -54,7 +54,6 @@ export default class Auth extends Block {
         focusout: (event) => inputOut(event),
         focusin: (event) => inputIn(event),
       },
-      placeholder: '',
     });
 
     this.children.button_1.element?.classList.add(...['button', 'disabled']);
@@ -64,18 +63,13 @@ export default class Auth extends Block {
   }
 
   onSubmit() {
-    const inputArr = Array.from(document.getElementsByTagName('INPUT'));
-    const value = inputArr.map((i) => i as HTMLInputElement).map((i) => [i.name, i.value]);
-    
-    const data = Object.fromEntries(value);
+    const data = getInputsData();
 
-    if(isAllValid(data)) {
-      console.log(data, 'Auth(signin) data');
-
+    if (isAllValid(data)) {
       AuthController.signin(data);
     }
   }
-  
+
   render() {
     return this.compile(formTemplate, { title: 'Авторизация', containerClass: 'container' });
   }

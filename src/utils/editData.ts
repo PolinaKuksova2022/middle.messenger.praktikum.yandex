@@ -1,4 +1,6 @@
-import { FormInput } from './global/definitions';
+import UserController from '../controllers/UserController';
+import store from './core/Store';
+import getInputsData from './validate/getInputs';
 import isAllValid from './validate/isAllValid';
 
 let editMode = false;
@@ -9,14 +11,14 @@ export default function editData(event: Event) {
     (i) => i as HTMLInputElement
   );
 
-  if (!editMode || isAllValid(inputArr)) {
+  if (!editMode || isAllValid(getInputsData())) {
     btn.textContent = editMode ? 'Изменить данные' : 'Cохранить изменения';
     inputArr.map((i) => (i.disabled = editMode));
     editMode = !editMode;
 
     if (editMode) {
       btn.addEventListener('mouseover', () => {
-        if (isAllValid(inputArr)) {
+        if (isAllValid(getInputsData())) {
           btn.classList.remove('disabled');
         } else {
           btn.classList.add('disabled');
@@ -24,15 +26,10 @@ export default function editData(event: Event) {
       });
     } else {
       btn.removeEventListener('mouseover', () => {});
-    }
 
-    if (isAllValid(inputArr)) {
-      const inputs: FormInput[] = inputArr.map((i) => ({ name: i.name, value: i.value }));
-
-      window.__FORMS_DATA__[window.location.pathname] = inputs;
-
-      console.log('FORMS_DATA:');
-      console.log(window.__FORMS_DATA__);
+      UserController.putProfile(getInputsData());
+      
+      console.log('при изменении данных', store.state);
     }
   }
 }

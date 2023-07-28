@@ -30,21 +30,19 @@ export class AuthAPI extends API {
     super('/auth');
   }
 
-  signin(data: ILoginData): Promise<void> {
-    console.log('signin');
+  signin(data: ILoginData) {
     return this.http.post('/signin', data);
   }
 
-  signup(data: IRegistrationData): Promise<void> {
-    console.log('signup');
+  signup(data: IRegistrationData) {
     return this.http.post('/signup', data);
   }
 
-  logout(): Promise<void> {
+  logout() {
     return this.http.post('/logout');
   }
 
-  getUser(): Promise<IUser> {
+  getUser() {
     return this.http.get('/user');
   }
-};
+}

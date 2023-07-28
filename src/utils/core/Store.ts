@@ -34,13 +34,14 @@ export function withStore(mapStateToProps: (state: State) => any) {
     return class extends Component {
       constructor(props: any) {
         super({ ...props, ...mapStateToProps(store.getState()) });
-        
+
         store.on(StoreEvents.Updated, () => {
           const propsFromState = mapStateToProps(store.getState());
           this.setProps(propsFromState);
         });
       }
-    }
-  }
+    };
+  };
 }
+
 export default store;

@@ -4,13 +4,15 @@ import Button from '../../component/button/button';
 import InputGroup from '../../component/form/inputGroup';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
 import editData from '../../utils/editData';
-import { togglePassword } from '../../utils/toggleModal';
+import { togglePassword, togglePhoto } from '../../utils/toggleModal';
 import AuthController from '../../controllers/AuthController';
 import { State, withStore } from '../../utils/core/Store';
 import router from '../../router/router';
 import { Routes } from '../../main';
-export class BaseProfile extends Block {
+class BaseProfile extends Block {
   init() {
+    // this.props.toggleModal = () => togglePhoto();
+    
     this.children.button_1 = new Button({
       text: 'Изменить данные',
       events: {
@@ -145,22 +147,22 @@ export class BaseProfile extends Block {
   render() {
     if (this.props) {
       (this.children.group_1 as Block).setProps({
-        placeholder: this.props.email,
+        value: this.props.email,
       });
       (this.children.group_2 as Block).setProps({
-        placeholder: this.props.login,
+        value: this.props.login,
       });
       (this.children.group_3 as Block).setProps({
-        placeholder: this.props.first_name,
+        value: this.props.first_name,
       });
       (this.children.group_4 as Block).setProps({
-        placeholder: this.props.second_name,
+        value: this.props.second_name,
       });
       (this.children.group_5 as Block).setProps({
-        placeholder: this.props.display_name ? this.props.display_name : this.props.login,
+        value: this.props.display_name ? this.props.display_name : this.props.login,
       });
       (this.children.group_6 as Block).setProps({
-        placeholder: this.props.phone,
+        value: this.props.phone,
       });
     }
 
@@ -169,8 +171,11 @@ export class BaseProfile extends Block {
 }
 
 function mapStateToProps(state: State) {
-  console.log('{ ...state.user }', { ...state.user });
   return { ...state.user };
 }
 
 export const Profile = withStore(mapStateToProps)(BaseProfile);
+function toggleModal(): any {
+  throw new Error('Function not implemented.');
+}
+

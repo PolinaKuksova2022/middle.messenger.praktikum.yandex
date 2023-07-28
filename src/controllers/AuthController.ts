@@ -50,10 +50,6 @@ class AuthController {
     try {
       const user = await this.api.getUser();
       store.set('user', user);
-      // if (user.id) {
-      //   store.set('user', user);
-      // }
-      // console.log('store.getState()', store.getState());
     } catch (error) {
       throw error;
     }

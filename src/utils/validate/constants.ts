@@ -15,7 +15,7 @@ const passwordText =
   'Допускается 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра';
 const emailText = 'Недопустимый email';
 const phoneText = 'Недопустимый номер';
-const passwordsMismatch = 'Пароли не совпадают';
+const passwordsMismatch = 'Новые пароли не совпадают';
 
 // const loginInput = 'login';
 // const input = document.getElementsByName(loginInput)[0];

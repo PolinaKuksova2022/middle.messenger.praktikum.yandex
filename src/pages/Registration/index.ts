@@ -6,8 +6,12 @@ import { inputIn, inputOut } from '../../utils/validate/inputValid';
 import router from '../../router/router';
 import AuthController from '../../controllers/AuthController';
 import isAllValid from '../../utils/validate/isAllValid';
+import getInputsData from '../../utils/validate/getInputs';
 export default class Registration extends Block {
   init() {
+    this.props.title = 'Регистрация',
+    this.props.containerClass =  'container container_big',
+    
     this.children.button_1 = new Button({
       text: 'Зарегистрироваться',
       events: {
@@ -125,11 +129,7 @@ export default class Registration extends Block {
   }
 
   onSubmit() {
-    const inputArr = Array.from(document.getElementsByTagName('INPUT'));
-    const inputs = inputArr.map((i) => i as HTMLInputElement).map((i) => [i.name, i.value]);
-
-    const data = Object.fromEntries(inputs);
-
+    const data = getInputsData();
     if (isAllValid(data)) {
       console.log(data, 'Registration(signup) data');
 
@@ -138,9 +138,6 @@ export default class Registration extends Block {
   }
 
   render() {
-    return this.compile(formTemplate, {
-      title: 'Регистрация',
-      containerClass: 'container container_big',
-    });
+    return this.compile(formTemplate, {...this.props});
   }
 }

@@ -80,6 +80,8 @@ export function inputOut(event: Event) {
         }
         break;
       case 'password':
+      case 'newPassword':
+      case 'oldPassword':
         {
           if (!value.match(regPassword)) {
             error.innerHTML = passwordText;
@@ -87,7 +89,7 @@ export function inputOut(event: Event) {
             target.classList.add('input-incorrect');
           }
 
-          const passwordArr = Array.from(document.getElementsByName('password'));
+          const passwordArr = Array.from(document.getElementsByName('newPassword'));
           const passwordsValues = passwordArr.map((i) => (i as HTMLInputElement).value);
           const isPasswordsField = passwordsValues.every((i) => i.length !== 0);
           if (
@@ -95,6 +97,7 @@ export function inputOut(event: Event) {
             isPasswordsField &&
             passwordsValues.length > 1
           ) {
+            console.log(passwordsValues);
             error.innerHTML = passwordsMismatch;
             target.after(error);
             target.classList.add('input-incorrect');
@@ -111,8 +114,6 @@ export function inputOut(event: Event) {
       case 'message':
         console.log(`message input: ${value}`);
         break;
-      default:
-        console.log('Успех');
     }
   }
 }

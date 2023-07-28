@@ -1,22 +1,30 @@
+import UserController from '../../controllers/UserController';
 import Block from '../../utils/core/Block';
+import store, { withStore } from '../../utils/core/Store';
+import getInputsData from '../../utils/validate/getInputs';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
+import isAllValid from '../../utils/validate/isAllValid';
 import Button from '../button/button';
 import formTemplate from '../commonTmpl/form.tmpl';
 import InputGroup from '../form/inputGroup';
-
-interface ModalProps {
-  title: string;
-  containerClass: string;
-}
-export default class Password extends Block<ModalProps> {
-  constructor(props: ModalProps) {
-    super(props, 'div');
-  }
-
+class PasswordBase extends Block {
   init() {
-    this.children.group_1 = new InputGroup({
-      name: 'password',
-      label: 'Пароль',
+    (this.props.title = 'Измените пароль'),
+      (this.props.containerClass = 'container container_big'),
+      (this.children.group_1 = new InputGroup({
+        name: 'oldPassword',
+        label: 'Старый пароль',
+        inputClass: 'input',
+        id: 'password-old',
+        type: 'password',
+        events: {
+          focusout: (event) => inputOut(event),
+          focusin: (event) => inputIn(event),
+        },
+      }));
+    this.children.group_2 = new InputGroup({
+      name: 'newPassword',
+      label: 'Новый пароль',
       inputClass: 'input',
       id: 'password',
       type: 'password',
@@ -24,12 +32,11 @@ export default class Password extends Block<ModalProps> {
         focusout: (event) => inputOut(event),
         focusin: (event) => inputIn(event),
       },
-      placeholder: '',
     });
 
-    this.children.group_2 = new InputGroup({
-      name: 'password',
-      label: 'Повторите пароль',
+    this.children.group_3 = new InputGroup({
+      name: 'newPassword',
+      label: 'Повторите новый пароль',
       inputClass: 'input',
       id: 'password-2',
       type: 'password',
@@ -37,19 +44,47 @@ export default class Password extends Block<ModalProps> {
         focusout: (event) => inputOut(event),
         focusin: (event) => inputIn(event),
       },
-      placeholder: '',
     });
     this.children.button_1 = new Button({
       text: 'Поменять',
       id: 'change',
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          this.onChange();
+        },
+      },
     });
 
     this.children.group_1.element?.classList.add('input-group');
     this.children.group_2.element?.classList.add('input-group');
-    this.children.button_1.element?.classList.add('button');
+    this.children.group_3.element?.classList.add('input-group');
+    this.children.button_1.element?.classList.add(...['button', 'disabled']);
+  }
+
+  onChange() {
+    function transformObject(data: Record<string, string>) {
+      return {
+        oldPassword: data.oldPassword,
+        newPassword: data.newPassword,
+      };
+    }
+
+    let data = getInputsData();
+
+    data = transformObject(data);
+
+    if (isAllValid(data)) {
+      console.log(data);
+      UserController.putPassword(data);
+
+      console.log('при изменении пароля', store.state);
+    }
   }
 
   render() {
     return this.compile(formTemplate, this.props);
   }
 }
+
+export const Password = withStore((state) => state.user)(PasswordBase);
