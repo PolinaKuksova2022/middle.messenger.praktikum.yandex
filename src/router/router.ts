@@ -14,9 +14,6 @@ class Router {
     }
 
     this.routes = [];
-    // this._history = window.history;
-    // this._currentRoute = null;
-    // this._rootQuery = rootQuery;
 
     Router.__instance = this;
   }

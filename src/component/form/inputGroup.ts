@@ -2,13 +2,14 @@ import Block from '../../utils/core/Block';
 
 export interface InputGroupProps {
   name: string;
-  label: string;
-  inputClass: string;
+  label?: string;
+  inputClass?: string;
   id: string;
   type: string;
   events?: {
-    focusout: (event: Event) => void;
-    focusin: (event: Event) => void;
+    submit?: (event: Event) => void;
+    focusout?: (event: Event) => void;
+    focusin?: (event: Event) => void;
   };
   value?: string;
   placeholder?: string;

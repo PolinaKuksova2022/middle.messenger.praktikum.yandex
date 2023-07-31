@@ -30,7 +30,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     .use(Routes.Error404, Error404)
     .use(Routes.Error500, Error500)
     .setOnRoutedCallback((route) => {
-      if (store.state.user) {
+      if (store.state) {
         switch (route.pathname) {
           case Routes.Auth:
           case Routes.Register:
@@ -52,6 +52,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     router.go(Routes.Error404);
     return;
   }
+  
 
   try {
     await AuthController.fetchUser();

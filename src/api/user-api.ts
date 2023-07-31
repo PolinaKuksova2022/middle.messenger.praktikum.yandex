@@ -9,15 +9,6 @@ export interface IProfileData {
   phone: string;
 }
 
-export interface IAvatar {
-  id: number;
-  first_name: string;
-  second_name: string;
-  display_name: string;
-  login: string;
-  avatar: string;
-}
-
 export interface IPassword {
   newPassword: string;
   oldPassword: string;
@@ -50,8 +41,8 @@ export class UserAPI extends API {
     return this.http.put('/profile', data);
   }
 
-  avatar(data: IAvatar) {
-    return this.http.put('/profile/avatar', data);
+  avatar(img: FormData) {
+    return this.http.put('/profile/avatar', img);
   }
 
   password(data: IPassword) {

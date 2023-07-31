@@ -1,6 +1,6 @@
-import { IAvatar, IPassword, IProfileData, UserAPI } from '../api/user-api';
+import { IPassword, IProfileData, UserAPI } from '../api/user-api';
 import store from '../utils/core/Store';
-import AuthController from './AuthController';
+import { closeModal } from '../utils/toggleModal';
 
 class UserController {
   private api = new UserAPI();
@@ -16,14 +16,17 @@ class UserController {
     }
   }
 
-  async putAvatar(data: IAvatar) {
+  async putAvatar(img: FormData) {
     try {
-      const user = await this.api.avatar(data);
+      const user = await this.api.avatar(img);
       store.set('user', user);
+
+      //закрыть модальное окно
+      closeModal();
 
       alert('Вы изменили фото');
     } catch (error) {
-      alert(error)
+      alert((error as Record<string, string>).reason)
       console.log(error);
     }
   }
@@ -33,11 +36,7 @@ class UserController {
       await this.api.password(data);
 
       //закрыть модальное окно
-      const app = document.getElementById('app');
-      const  modalPassword = document.getElementById('modalData')
-      if(modalPassword) {
-        app?.removeChild(modalPassword);
-      };
+      closeModal();
 
       alert('Вы изменили пароль');
     } catch (error) {
@@ -50,7 +49,7 @@ class UserController {
     try {
       await this.api.getUserId(id);
     } catch (error) {
-      console.log(error);
+      console.log((error as Record<string, string>).reason);
     }
   }
 }

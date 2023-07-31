@@ -41,8 +41,8 @@ export default class HTTPTransport {
     return this.request<Response>(this.endpoint + url, { data, method: METHOD.PUT });
   }
 
-  public delete<Response>(url: string): Promise<Response> {
-    return this.request<Response>(this.endpoint + url, { method: METHOD.DELETE });
+  public delete<Response>(url: string, data?: unknown): Promise<Response> {
+    return this.request<Response>(this.endpoint + url, { data, method: METHOD.DELETE });
   }
 
   private request<Response>(

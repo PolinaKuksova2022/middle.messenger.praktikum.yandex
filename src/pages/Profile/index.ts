@@ -9,10 +9,16 @@ import AuthController from '../../controllers/AuthController';
 import { State, withStore } from '../../utils/core/Store';
 import router from '../../router/router';
 import { Routes } from '../../main';
+import Avatar from '../../component/Avatar/Avatar';
+
 class BaseProfile extends Block {
   init() {
-    // this.props.toggleModal = () => togglePhoto();
-    
+    this.children.avatar = new Avatar({
+      events: {
+        click: () => togglePhoto(),
+      },
+      src: '',
+    });
     this.children.button_1 = new Button({
       text: 'Изменить данные',
       events: {
@@ -128,6 +134,7 @@ class BaseProfile extends Block {
       disabled: 'disabled',
     });
 
+    this.children.avatar.element?.classList.add('avatar');
     this.children.button_1.element?.classList.add(...['button', 'modal-btn', 'navigation-btn']);
     this.children.button_2.element?.classList.add(...['button', 'modal-btn', 'navigation-btn']);
     this.children.button_3.element?.classList.add(...['button', 'excretion-btn', 'navigation-btn']);
@@ -146,6 +153,12 @@ class BaseProfile extends Block {
 
   render() {
     if (this.props) {
+      if (this.props.avatar) {
+        (this.children.avatar as Block).setProps({
+          src: `https://ya-praktikum.tech/api/v2/resources${this.props.avatar}`,
+        });
+      }
+      
       (this.children.group_1 as Block).setProps({
         value: this.props.email,
       });
@@ -164,6 +177,10 @@ class BaseProfile extends Block {
       (this.children.group_6 as Block).setProps({
         value: this.props.phone,
       });
+
+      // this.props.avatar.setProps({
+      //   src: 'https://ya-praktikum.tech/api/v2/resources${this.props.avatar}'
+      // })
     }
 
     return this.compile(template, { ...this.props });
@@ -175,7 +192,3 @@ function mapStateToProps(state: State) {
 }
 
 export const Profile = withStore(mapStateToProps)(BaseProfile);
-function toggleModal(): any {
-  throw new Error('Function not implemented.');
-}
-
