@@ -1,6 +1,7 @@
 import UserController from '../../controllers/UserController';
 import Block from '../../utils/core/Block';
 import store, { withStore } from '../../utils/core/Store';
+import { closeModal } from '../../utils/toggleModal';
 import getInputsData from '../../utils/validate/getInputs';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
 import isAllValid from '../../utils/validate/isAllValid';
@@ -9,9 +10,10 @@ import formTemplate from '../commonTmpl/form.tmpl';
 import InputGroup from '../form/inputGroup';
 class PasswordBase extends Block {
   init() {
-    (this.props.title = 'Измените пароль'),
-      (this.props.containerClass = 'container container_big'),
-      (this.children.group_1 = new InputGroup({
+    this.props.title = 'Измените пароль',
+    this.props.containerClass = 'container container_big',
+    
+    this.children.group_1 = new InputGroup({
         name: 'oldPassword',
         label: 'Старый пароль',
         inputClass: 'input',
@@ -21,7 +23,7 @@ class PasswordBase extends Block {
           focusout: (event) => inputOut(event),
           focusin: (event) => inputIn(event),
         },
-      }));
+    });
     this.children.group_2 = new InputGroup({
       name: 'newPassword',
       label: 'Новый пароль',
@@ -45,6 +47,7 @@ class PasswordBase extends Block {
         focusin: (event) => inputIn(event),
       },
     });
+
     this.children.button_1 = new Button({
       text: 'Поменять',
       id: 'change',
@@ -55,11 +58,20 @@ class PasswordBase extends Block {
         },
       },
     });
+    this.children.button_2 = new Button({
+      text: 'Закрыть',
+      events: {
+        click: () => {
+          closeModal();
+        },
+      },
+    });
 
     this.children.group_1.element?.classList.add('input-group');
     this.children.group_2.element?.classList.add('input-group');
     this.children.group_3.element?.classList.add('input-group');
     this.children.button_1.element?.classList.add(...['button', 'disabled']);
+    this.children.button_2.element?.classList.add(...['button', 'excretion-btn', 'navigation-btn']);
   }
 
   onChange() {

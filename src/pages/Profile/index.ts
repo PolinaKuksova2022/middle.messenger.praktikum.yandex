@@ -147,9 +147,10 @@ class BaseProfile extends Block {
     this.children.group_6.element?.classList.add('group-data');
   }
 
-  componentDidMount(): void {
-    AuthController.fetchUser();
-  }
+  // componentDidMount(): void {
+  //   console.log('sdsdsdsd');
+  //   AuthController.fetchUser();
+  // }
 
   render() {
     if (this.props) {
@@ -177,10 +178,6 @@ class BaseProfile extends Block {
       (this.children.group_6 as Block).setProps({
         value: this.props.phone,
       });
-
-      // this.props.avatar.setProps({
-      //   src: 'https://ya-praktikum.tech/api/v2/resources${this.props.avatar}'
-      // })
     }
 
     return this.compile(template, { ...this.props });
@@ -188,6 +185,7 @@ class BaseProfile extends Block {
 }
 
 function mapStateToProps(state: State) {
+  console.log('1');
   return { ...state.user };
 }
 

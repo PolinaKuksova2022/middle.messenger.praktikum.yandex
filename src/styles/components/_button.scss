@@ -11,15 +11,6 @@
   background: $selected-color;
   color: $light-text-color;
   cursor: pointer;
-
-  > a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    color: $light-text-color;
-  }
 }
 
 .navigation-btn {
@@ -27,20 +18,12 @@
   background: $light-text-color;
   color: $selected-color;
   cursor: pointer;
-
-  > a {
-    color: $selected-color;
-  }
 }
 
 .modal-btn {
   width: 100%;
   position: relative;
   text-align: left;
-
-  > a {
-    justify-content: start;
-  }
 
   &::after {
     content: '';
@@ -60,12 +43,19 @@
 }
 
 .chats-btn {
+  margin-right: 0;
+  width: fit-content;
   background: none;
+  color: $second-color;
+}
 
-  > a {
-    justify-content: end;
-    color: $second-color;
-  }
+.close-btn {
+  display: block;
+  margin-top: 0;
+  text-align: right;
+  height: fit-content;
+  color: $excretion-color;
+  background: none;
 }
 
 .disabled {

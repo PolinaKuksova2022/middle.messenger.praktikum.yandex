@@ -1,6 +1,7 @@
 import AuthController from './controllers/AuthController';
+import ChatsController from './controllers/ChatsController';
 import Auth from './pages/Auth';
-import Chats from './pages/Chats';
+import { Chats } from './pages/Chats';
 import Error404 from './pages/Error404';
 import Error500 from './pages/Error500';
 import Main from './pages/Main';
@@ -20,7 +21,13 @@ export enum Routes {
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
-  console.log('DOM LOADED');
+  try {
+    await AuthController.fetchUser();
+    await ChatsController.fetchChats();
+  } catch (e) {
+    console.log(e, 'Here');
+  }
+
   router
     .use(Routes.Main, Main)
     .use(Routes.Register, Registration)
@@ -30,7 +37,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     .use(Routes.Error404, Error404)
     .use(Routes.Error500, Error500)
     .setOnRoutedCallback((route) => {
-      if (store.state) {
+      if (store.state.user?.first_name) {
         switch (route.pathname) {
           case Routes.Auth:
           case Routes.Register:
@@ -51,12 +58,5 @@ window.addEventListener('DOMContentLoaded', async () => {
   if (!router.exists(window.location.pathname)) {
     router.go(Routes.Error404);
     return;
-  }
-  
-
-  try {
-    await AuthController.fetchUser();
-  } catch (e) {
-    console.log(e, 'Here');
   }
 });

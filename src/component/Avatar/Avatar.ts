@@ -15,7 +15,7 @@ export default class Avatar extends Block<AvatarProps> {
   render() {
     return this.compile(
       `<img name="avatar" class="avatar__img" src="{{ src }}" alt=""/>
-            <span class="avatar__text">Поменять аватар</span>`,
+       <span class="avatar__text">Поменять аватар</span>`,
       this.props
     );
   }

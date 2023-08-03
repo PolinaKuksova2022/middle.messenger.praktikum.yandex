@@ -25,7 +25,7 @@ export default class Registration extends Block {
       text: 'Войти',
       events: {
         click: () => {
-          router.go('/auth');
+          router.go('/profile');
         },
       },
     });

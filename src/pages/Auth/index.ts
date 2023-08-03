@@ -9,10 +9,6 @@ import isAllValid from '../../utils/validate/isAllValid';
 import getInputsData from '../../utils/validate/getInputs';
 
 export default class Auth extends Block {
-  constructor() {
-    super({});
-  }
-
   init() {
     this.children.button_1 = new Button({
       text: 'Войти',

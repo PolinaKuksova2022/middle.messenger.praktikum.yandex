@@ -1,3 +1,5 @@
+import ChatModal from '../component/modal/addChat';
+import { ChangeChat } from '../component/modal/changeChat';
 import { Password } from '../component/modal/password';
 import Photo from '../component/modal/photo';
 import Block from './core/Block';
@@ -27,5 +29,15 @@ export function togglePhoto() {
 
 export function togglePassword() {
   const modal = new Password({});
+  openModal(modal);
+}
+
+export function toggleChatModal() {
+  const modal = new ChatModal({});
+  openModal(modal);
+}
+
+export function toggleActiveChatModal() {
+  const modal = new ChangeChat({});
   openModal(modal);
 }

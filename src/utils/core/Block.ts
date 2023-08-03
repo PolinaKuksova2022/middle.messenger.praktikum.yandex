@@ -157,25 +157,37 @@ class Block<P extends Record<string, any> = any> {
     const contextAndStubs = { ...context };
 
     Object.entries(this.children).forEach(([name, component]) => {
-      contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
+      if (Array.isArray(component)) {
+        contextAndStubs[name] = component
+          .map(child => `<div data-id="${child.id}"></div>`)
+          .join('');
+      } else {
+        contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
+      }
     });
 
     const html = Handlebars.compile(template)(contextAndStubs);
+    
 
     const temp = document.createElement('template');
 
     temp.innerHTML = html;
 
-    Object.entries(this.children).forEach(([_, component]) => {
+    const stubReplace = (component: Block) => {
       const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
-
       if (!stub) {
         return;
       }
-
       component.getContent()?.append(...Array.from(stub.childNodes));
-
       stub.replaceWith(component.getContent()!);
+    };
+
+    Object.entries(this.children).forEach(([_, component]) => {
+      if (Array.isArray(component)) {
+        component.forEach(stubReplace);
+      } else {
+        stubReplace(component);
+      }
     });
 
     return temp.content;

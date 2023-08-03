@@ -2,9 +2,14 @@ import set from '../index';
 import { IUser } from '../../api/auth-api';
 import EventBus from './EventBus';
 import Block from './Block';
+import { IChat } from '../../api/chats-api';
 
 export interface State {
   user?: IUser;
+  activeChat?: IChat;
+  chatToken?: string;
+  chats?: IChat[] | null;
+  activeChatUsers?: IUser[];
 }
 
 export enum StoreEvents {

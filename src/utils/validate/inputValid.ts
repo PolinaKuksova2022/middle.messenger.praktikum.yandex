@@ -4,6 +4,7 @@ import {
   capitalText,
   charactersText,
   emailText,
+  idText,
   loginText,
   passwordText,
   passwordsMismatch,
@@ -11,6 +12,7 @@ import {
   regCapital,
   regCharacters,
   regEmail,
+  regId,
   regLogin,
   regName,
   regPassword,
@@ -22,7 +24,7 @@ import {
 export function inputOut(event: Event) {
   // при выходе из поля, проверяем валидность и снимаем disabled класс у кнопки
   buttonValid();
-  
+
   const target = event.target as HTMLTextAreaElement;
   const { value } = target;
   const error = document.createElement('div');
@@ -113,6 +115,13 @@ export function inputOut(event: Event) {
         break;
       case 'message':
         console.log(`message input: ${value}`);
+        break;
+      case 'userId':
+        if (!regId.test(value)) {
+          error.innerHTML = idText;
+          target.after(error);
+          target.classList.add('input-incorrect');
+        }
         break;
     }
   }
