@@ -2,7 +2,8 @@ import Block from '../../utils/core/Block';
 
 interface MessageTextProps {
   text: string;
-  data: string;
+  time: string;
+  classMessage: string;
 }
 
 export default class MessageText extends Block<MessageTextProps> {
@@ -13,8 +14,10 @@ export default class MessageText extends Block<MessageTextProps> {
   render() {
     return this.compile(
       `
+      <section class="{{classMessage}}">
         <div class="message__text">{{text}}</div>
-        <p class="message__time">{{data}}</p>
+        <p class="message__time">{{time}}</p>
+      </section>
       `,
       this.props
     );

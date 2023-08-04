@@ -3,13 +3,15 @@ import { IUser } from '../../api/auth-api';
 import EventBus from './EventBus';
 import Block from './Block';
 import { IChat } from '../../api/chats-api';
+import { IMessage } from '../../controllers/WSControllers';
 
 export interface State {
   user?: IUser;
   activeChat?: IChat;
-  chatToken?: string;
+  socketList?: any;
   chats?: IChat[] | null;
   activeChatUsers?: IUser[];
+  messagesByChatId?: { [chatId: number] : IMessage[]; };
 }
 
 export enum StoreEvents {

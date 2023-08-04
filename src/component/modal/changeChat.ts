@@ -1,6 +1,7 @@
 import ChatsController from '../../controllers/ChatsController';
 import Block from '../../utils/core/Block';
-import { State, withStore } from '../../utils/core/Store';
+import store, { State, withStore } from '../../utils/core/Store';
+import isEqual from '../../utils/isEqual';
 import { closeModal } from '../../utils/toggleModal';
 import getInputsData from '../../utils/validate/getInputs';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
@@ -31,17 +32,16 @@ class BaseChangeChat extends Block {
         click: (e) => {
           e.preventDefault();
           this.addUser();
-          // const user = document.getElementsByName('login')[0];
-          // console.log(user);
-          // ChatsController.putAddUserToChat(this.props.id)
         },
       },
     });
     this.children.button_2 = new Button({
       text: 'Удалить пользователя',
       events: {
-        click: () => {
-          console.log(this.props);
+        click: (e) => {
+          e.preventDefault();
+          this.deleteUser();
+          // store.set('activeChatUsers', []);
         },
       },
     });
@@ -52,6 +52,7 @@ class BaseChangeChat extends Block {
           e.preventDefault();
           ChatsController.deleteChat({ chatId: this.props.activeChat.id });
           closeModal();
+          store.set('activeChat', undefined);
         },
       },
     });
@@ -71,23 +72,50 @@ class BaseChangeChat extends Block {
     this.children.button_4.element?.classList.add(...['button', 'excretion-btn', 'navigation-btn']);
   }
 
-  addUser() {
-    if (isAllValid({ userId: getInputsData().userId })) {
+  componentDidUpdate(oldProps: any, newProps: any): boolean {
+    return !isEqual(oldProps, newProps);
+  }
+
+  async addUser() {
+    const userId = getInputsData().userId;
+    if (isAllValid({ userId: userId })) {
       ChatsController.putAddUserToChat({
+        users: [userId],
+        chatId: this.props.activeChat.id,
+      });
+      // console.log('1', this.props.activeChatUsers);
+      // await ChatsController.fetchChatUsers(this.props.activeChat.id);
+      // store.set('activeChat', this.props.activeChat);
+      // store.set('activeChatUsers', this.props.activeChatUsers);
+      // console.log('2', this.props.activeChatUsers);
+      // // store.set('activeChatUsers', []);
+      // // store.set('activeChat', this.props.activeChat);
+      closeModal();
+    }
+  }
+
+  deleteUser() {
+    console.log(getInputsData().userId);
+    if (isAllValid({ userId: getInputsData().userId })) {
+      ChatsController.deleteUserFromChat({
         users: [getInputsData().userId],
         chatId: this.props.activeChat.id,
       });
+      ChatsController.fetchChatUsers(this.props.activeChat.id);
       closeModal();
     }
   }
 
   render() {
-    return this.compile(formTemplate, this.props);
+    return this.compile(formTemplate, { ...this.props });
   }
 }
 
 function mapStateToProps(state: State) {
-  return { chats: state.chats, activeChat: state.activeChat, user: state.user };
+  return {
+    activeChatUsers: state.activeChatUsers,
+    activeChat: state.activeChat,
+  };
 }
 
 export const ChangeChat = withStore(mapStateToProps)(BaseChangeChat);

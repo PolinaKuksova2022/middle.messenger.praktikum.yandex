@@ -113,9 +113,9 @@ export function inputOut(event: Event) {
           target.classList.add('input-incorrect');
         }
         break;
-      case 'message':
-        console.log(`message input: ${value}`);
-        break;
+      // case 'message':
+      //   console.log(`message input: ${value}`);
+      //   break;
       case 'userId':
         if (!regId.test(value)) {
           error.innerHTML = idText;

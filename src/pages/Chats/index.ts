@@ -2,7 +2,7 @@ import Block from '../../utils/core/Block';
 import Button from '../../component/button/button';
 import template from './chats.tmpl';
 import Dialogue from '../../component/dialogue/dialogue';
-import { ActiveChat } from '../../component/message/activeChat';
+import { ActiveChat } from '../../component/activeChat/activeChat';
 import router from '../../router/router';
 import store, { State, withStore } from '../../utils/core/Store';
 import ChatsController from '../../controllers/ChatsController';
@@ -18,6 +18,7 @@ class BaseChats extends Block {
       events: {
         click: () => {
           router.go('/profile');
+          store.set('activeChat', undefined);
         },
       },
     });
@@ -26,46 +27,46 @@ class BaseChats extends Block {
       events: {
         click: () => {
           toggleChatModal();
+          store.set('activeChat', undefined);
         },
       },
     });
 
-    this.children.message = new ActiveChat({});
+    this.children.activeChat = new ActiveChat({});
 
     this.children.button_1.element?.classList.add(...['button', 'chats-btn']);
     this.children.button_2.element?.classList.add('button');
-    this.children.message.element?.classList.add('message');
+    this.children.activeChat.element?.classList.add('activeChat');
   }
 
   componentDidUpdate(oldProps: any, newProps: any): boolean {
     if (
-      (!isEqual(oldProps, newProps))
+      !isEqual(oldProps, newProps) && this.props.chats &&
+      this.props.chats.length > 0
     ) {
+      // console.log('OOOOOOOOOOOOLD', oldProps);
+      // console.log('NEEEEEEEW', newProps);
       this.renderChats();
-      console.log('activechat upd');
     }
 
     return !isEqual(oldProps, newProps);
   }
 
   renderChats() {
-    console.log('render', this.props.activeChat?.id);
     this.children.chatList = this.props.chats.map(
       (chat: IChat) =>
         new Dialogue({
           events: {
             click: () => {
-              store.set('activeChat', chat);
               ChatsController.fetchChatUsers(chat.id);
-              
-              console.log('store.state',store.state.activeChat?.id);
-              console.log('this.props',this.props.activeChat?.id);
+              store.set('activeChat', chat);
+              console.log('index', store.state.activeChat?.id);
             },
           },
           id: +chat.id,
           name: chat.title,
           classTitle: 'dialogue__author',
-          author: chat.id === this.props.user.id ? this.props.user.login : 'собеседник',
+          author: '',
           lastMessage: chat.last_message ? chat.last_message.content : '',
           // time: 'пт',
           unreadCount: chat.unread_count,
@@ -75,7 +76,7 @@ class BaseChats extends Block {
   }
 
   render() {
-    if (this.props.chats) {
+    if (this.props.chats && this.props.chats.length > 0) {
       this.renderChats();
     }
     return this.compile(template, this.props);
@@ -83,7 +84,7 @@ class BaseChats extends Block {
 }
 
 function mapStateToProps(state: State) {
-  return { chats: state.chats, activeChat: state.activeChat, user: state.user, };
+  return { chats: state.chats, activeChat: state.activeChat};
 }
 
 export const Chats = withStore(mapStateToProps)(BaseChats);

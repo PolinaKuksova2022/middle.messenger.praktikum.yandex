@@ -7,7 +7,7 @@ const template = `
         {{{chatList}}}
       </ul>
     </section>
-    {{{message}}}
+    {{{activeChat}}}
   </div>
 `;
 

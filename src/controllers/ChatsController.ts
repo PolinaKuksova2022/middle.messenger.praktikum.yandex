@@ -1,5 +1,6 @@
 import { ChatAPI, IChangeUser, IChatId, ICreateChat } from '../api/chats-api';
 import store from '../utils/core/Store';
+import WSController from './WSControllers';
 
 class ChatsController {
   private api = new ChatAPI();
@@ -9,6 +10,23 @@ class ChatsController {
       const chats = await this.api.getChats();
 
       store.set('chats', chats);
+
+      if (Object.keys(chats!).length > 0) {
+        const socketList: Record<string, any>[] = [];
+        
+        const chatFetching = Object.values(chats!).map(async (i) => {
+          const chatToken = await this.fetchChatToken(i.id);
+
+          socketList.push({
+            id: i.id,
+            socket: new WSController(String(store.state.user?.id), chatToken!, i.id),
+          });
+        });
+        Promise.all(chatFetching);
+        store.set('socketList', socketList);
+        console.log('socketList', socketList);
+      }
+
     } catch (error) {
       console.log((error as Record<string, string>).reason);
     }
@@ -35,7 +53,7 @@ class ChatsController {
 
       alert('Вы удалили чат');
     } catch (error) {
-      alert((error as Record<string, string>).reason);
+      alert('Этот чат создал другой человек, вы не можете его удалить');
       console.log((error as Record<string, string>).reason);
     }
   }
@@ -43,6 +61,7 @@ class ChatsController {
   async fetchChatUsers(id: number) {
     try {
       const users = await this.api.getChatUsers(id);
+      // store.set('activeChat', chat);
       store.set('activeChatUsers', users);
     } catch (error) {
       alert((error as Record<string, string>).reason);
@@ -54,7 +73,7 @@ class ChatsController {
     try {
       await this.api.addUserToChat(data);
 
-      await this.fetchChats();
+      // await this.fetchChats();
 
       alert('Вы добавили собеседника');
     } catch (error) {
@@ -67,7 +86,7 @@ class ChatsController {
     try {
       await this.api.removeUserFromChat(data);
 
-      await this.fetchChats();
+      // await this.fetchChats();
 
       alert('Вы удалили собеседника');
     } catch (error) {
@@ -76,11 +95,10 @@ class ChatsController {
     }
   }
 
-  async fetchChatToken(token: number) {
+  async fetchChatToken(chatId: number) {
     try {
-      await this.api.requestChatToken(token);
-
-      alert('Вы получили токен чата');
+      const tokenObject = (await this.api.requestChatToken(chatId)) as any;
+      return tokenObject.token!;
     } catch (error) {
       alert((error as Record<string, string>).reason);
       console.log((error as Record<string, string>).reason);
