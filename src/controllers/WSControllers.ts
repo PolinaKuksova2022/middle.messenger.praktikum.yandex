@@ -86,10 +86,7 @@ class WSController {
   }
 
   public sendMessage(message: string) {
-    console.log('sEEEEEEEEEEEEEEEnt', message);
     this.socket.send(JSON.stringify({ content: message, type: 'message' }));
-
-    // ChatsController.fetchChats();
   }
 }
 

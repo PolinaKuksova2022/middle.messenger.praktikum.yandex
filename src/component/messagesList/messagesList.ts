@@ -14,7 +14,12 @@ class BaseMessagesList extends Block {
       (message: IMessage) =>
         new MessageText({
           text: message.content,
-          time: message.time.match(/(?<=T)\d{2}:\d{2}/g)!.join(),
+          time: new Date(message.time).toLocaleTimeString('ru-RU', {
+            timeZone: 'Europe/Moscow',
+            hour12: false,
+            hour: 'numeric',
+            minute: 'numeric',
+          }),
           classMessage:
             message.user_id === store.state.user?.id
               ? 'activeChat__item activeChat__item-to'
@@ -40,7 +45,7 @@ class BaseMessagesList extends Block {
 function mapStateToProps(state: State) {
   if (state.messagesByChatId && state.activeChat) {
     const activeChatMessages = state.messagesByChatId[state.activeChat.id];
-    
+
     return {
       activeChatMessages,
     };

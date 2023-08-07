@@ -59,7 +59,7 @@ class ChatsController {
   async fetchChatUsers(id: number) {
     try {
       const users = await this.api.getChatUsers(id);
-      
+
       store.set('activeChatUsers', users);
     } catch (error) {
       alert((error as Record<string, string>).reason);

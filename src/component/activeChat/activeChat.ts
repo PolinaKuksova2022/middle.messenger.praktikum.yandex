@@ -86,7 +86,6 @@ class BaseActiveChat extends Block {
       const activeChatSocket = store.state.socketList.find(
         (i: any) => i.id === this.props.activeChat.id
       );
-      console.log(activeChatSocket);
       activeChatSocket.socket.sendMessage(messageValue);
       (messageField as HTMLInputElement).value = '';
     }

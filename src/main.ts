@@ -23,7 +23,7 @@ export enum Routes {
 window.addEventListener('DOMContentLoaded', async () => {
   try {
     await AuthController.fetchUser();
-    
+
     // await ChatsController.fetchChats();
   } catch (e) {
     console.log(e, 'Here');
