@@ -142,7 +142,7 @@ class Block<P extends Record<string, any> = any> {
 
   private _render() {
     const fragment = this.render();
-    
+
     this._removeEvents();
     if (this._element) {
       this._element!.innerHTML = '';
@@ -159,7 +159,7 @@ class Block<P extends Record<string, any> = any> {
     Object.entries(this.children).forEach(([name, component]) => {
       if (Array.isArray(component)) {
         contextAndStubs[name] = component
-          .map(child => `<div data-id="${child.id}"></div>`)
+          .map((child) => `<div data-id="${child.id}"></div>`)
           .join('');
       } else {
         contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
@@ -167,7 +167,6 @@ class Block<P extends Record<string, any> = any> {
     });
 
     const html = Handlebars.compile(template)(contextAndStubs);
-    
 
     const temp = document.createElement('template');
 

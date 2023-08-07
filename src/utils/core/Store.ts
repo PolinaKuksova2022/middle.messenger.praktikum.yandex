@@ -11,7 +11,7 @@ export interface State {
   socketList?: any;
   chats?: IChat[] | null;
   activeChatUsers?: IUser[];
-  messagesByChatId?: { [chatId: number] : IMessage[]; };
+  messagesByChatId?: { [chatId: number]: IMessage[] };
 }
 
 export enum StoreEvents {
@@ -30,7 +30,7 @@ class Store extends EventBus {
     set(this.state, path, value);
 
     // метод EventBus
-    this.emit(StoreEvents.Updated);
+    this.emit(StoreEvents.Updated, this.state);
   }
 }
 

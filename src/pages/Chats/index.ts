@@ -6,7 +6,6 @@ import { ActiveChat } from '../../component/activeChat/activeChat';
 import router from '../../router/router';
 import store, { State, withStore } from '../../utils/core/Store';
 import ChatsController from '../../controllers/ChatsController';
-import WSControllers from '../../controllers/WSControllers';
 import { toggleChatModal } from '../../utils/toggleModal';
 import isEqual from '../../utils/isEqual';
 import { IChat } from '../../api/chats-api';
@@ -40,12 +39,7 @@ class BaseChats extends Block {
   }
 
   componentDidUpdate(oldProps: any, newProps: any): boolean {
-    if (
-      !isEqual(oldProps, newProps) && this.props.chats &&
-      this.props.chats.length > 0
-    ) {
-      // console.log('OOOOOOOOOOOOLD', oldProps);
-      // console.log('NEEEEEEEW', newProps);
+    if (!isEqual(oldProps, newProps) && this.props.chats && this.props.chats.length > 0) {
       this.renderChats();
     }
 
@@ -60,22 +54,23 @@ class BaseChats extends Block {
             click: () => {
               ChatsController.fetchChatUsers(chat.id);
               store.set('activeChat', chat);
-              console.log('index', store.state.activeChat?.id);
             },
           },
           id: +chat.id,
           name: chat.title,
           classTitle: 'dialogue__author',
           author: '',
-          lastMessage: chat.last_message ? chat.last_message.content : '',
+          // lastMessage: chat.last_message ? chat.last_message.content : '',
           // time: 'пт',
-          unreadCount: chat.unread_count,
+          // unreadCount: chat.unread_count,
           avatar: chat.avatar,
         })
     );
   }
 
   render() {
+    ChatsController.fetchChats();
+
     if (this.props.chats && this.props.chats.length > 0) {
       this.renderChats();
     }
@@ -84,7 +79,7 @@ class BaseChats extends Block {
 }
 
 function mapStateToProps(state: State) {
-  return { chats: state.chats, activeChat: state.activeChat};
+  return { chats: state.chats, activeChat: state.activeChat };
 }
 
 export const Chats = withStore(mapStateToProps)(BaseChats);

@@ -31,21 +31,6 @@ function set(object: Indexed | unknown, path: string, value: unknown): Indexed |
     throw new Error('path must be string');
   }
 
-  // const keys = path.split('.'); //['foo', 'bar']
-
-  //  let current = object;
-
-  //  for (let i = 0; i < keys.length - 1; i++) {
-  //    const key = keys[i];
-  //    if (!current[key]) {
-  //      current[key] = {};
-  //    }
-  //    current = current[key];
-  //  }
-  //  current[keys[keys.length - 1]] = value;
-  //  return object;
-  //}
-
   const result = path.split('.').reduceRight<Indexed>(
     (acc, key) => ({
       [key]: acc,

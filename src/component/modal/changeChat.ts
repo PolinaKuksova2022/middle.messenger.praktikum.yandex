@@ -1,3 +1,4 @@
+import { IUser } from '../../api/auth-api';
 import ChatsController from '../../controllers/ChatsController';
 import Block from '../../utils/core/Block';
 import store, { State, withStore } from '../../utils/core/Store';
@@ -41,7 +42,6 @@ class BaseChangeChat extends Block {
         click: (e) => {
           e.preventDefault();
           this.deleteUser();
-          // store.set('activeChatUsers', []);
         },
       },
     });
@@ -51,8 +51,6 @@ class BaseChangeChat extends Block {
         click: (e) => {
           e.preventDefault();
           ChatsController.deleteChat({ chatId: this.props.activeChat.id });
-          closeModal();
-          store.set('activeChat', undefined);
         },
       },
     });
@@ -78,30 +76,28 @@ class BaseChangeChat extends Block {
 
   async addUser() {
     const userId = getInputsData().userId;
-    if (isAllValid({ userId: userId })) {
-      ChatsController.putAddUserToChat({
-        users: [userId],
-        chatId: this.props.activeChat.id,
-      });
-      // console.log('1', this.props.activeChatUsers);
-      // await ChatsController.fetchChatUsers(this.props.activeChat.id);
-      // store.set('activeChat', this.props.activeChat);
-      // store.set('activeChatUsers', this.props.activeChatUsers);
-      // console.log('2', this.props.activeChatUsers);
-      // // store.set('activeChatUsers', []);
-      // // store.set('activeChat', this.props.activeChat);
+
+    if (this.props.activeChatUsers.find((i: IUser) => i.id === +userId)) {
+      alert(userId + ' уже есть в этом чате');
       closeModal();
+    } else {
+      if (isAllValid({ userId: userId })) {
+        ChatsController.putAddUserToChat({
+          users: [userId],
+          chatId: this.props.activeChat.id,
+        });
+        closeModal();
+      }
     }
   }
 
   deleteUser() {
-    console.log(getInputsData().userId);
-    if (isAllValid({ userId: getInputsData().userId })) {
+    const userId = getInputsData().userId;
+    if (isAllValid({ userId: userId })) {
       ChatsController.deleteUserFromChat({
-        users: [getInputsData().userId],
+        users: [userId],
         chatId: this.props.activeChat.id,
       });
-      ChatsController.fetchChatUsers(this.props.activeChat.id);
       closeModal();
     }
   }

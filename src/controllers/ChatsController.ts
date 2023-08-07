@@ -13,7 +13,7 @@ class ChatsController {
 
       if (Object.keys(chats!).length > 0) {
         const socketList: Record<string, any>[] = [];
-        
+
         const chatFetching = Object.values(chats!).map(async (i) => {
           const chatToken = await this.fetchChatToken(i.id);
 
@@ -24,9 +24,7 @@ class ChatsController {
         });
         Promise.all(chatFetching);
         store.set('socketList', socketList);
-        console.log('socketList', socketList);
       }
-
     } catch (error) {
       console.log((error as Record<string, string>).reason);
     }
@@ -61,7 +59,7 @@ class ChatsController {
   async fetchChatUsers(id: number) {
     try {
       const users = await this.api.getChatUsers(id);
-      // store.set('activeChat', chat);
+      
       store.set('activeChatUsers', users);
     } catch (error) {
       alert((error as Record<string, string>).reason);
@@ -73,9 +71,11 @@ class ChatsController {
     try {
       await this.api.addUserToChat(data);
 
-      // await this.fetchChats();
-
       alert('Вы добавили собеседника');
+
+      if (store.state.activeChat) {
+        this.fetchChatUsers(store.state.activeChat.id);
+      }
     } catch (error) {
       alert((error as Record<string, string>).reason);
       console.log((error as Record<string, string>).reason);
@@ -86,9 +86,11 @@ class ChatsController {
     try {
       await this.api.removeUserFromChat(data);
 
-      // await this.fetchChats();
-
       alert('Вы удалили собеседника');
+
+      if (store.state.activeChat) {
+        this.fetchChatUsers(store.state.activeChat.id);
+      }
     } catch (error) {
       alert((error as Record<string, string>).reason);
       console.log((error as Record<string, string>).reason);

@@ -147,11 +147,6 @@ class BaseProfile extends Block {
     this.children.group_6.element?.classList.add('group-data');
   }
 
-  // componentDidMount(): void {
-  //   console.log('sdsdsdsd');
-  //   AuthController.fetchUser();
-  // }
-
   render() {
     if (this.props) {
       if (this.props.avatar) {
@@ -159,7 +154,7 @@ class BaseProfile extends Block {
           src: `https://ya-praktikum.tech/api/v2/resources${this.props.avatar}`,
         });
       }
-      
+
       (this.children.group_1 as Block).setProps({
         value: this.props.email,
       });
@@ -185,7 +180,6 @@ class BaseProfile extends Block {
 }
 
 function mapStateToProps(state: State) {
-  console.log('1');
   return { ...state.user };
 }
 

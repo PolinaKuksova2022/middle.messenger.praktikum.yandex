@@ -7,17 +7,16 @@ interface DialogueProps {
   id: number;
   name: string;
   author: string;
-  lastMessage: string;
+  lastMessage?: string;
   classTitle: string;
   // time: string;
-  unreadCount: number;
+  unreadCount?: number;
   avatar: string;
 }
 export default class Dialogue extends Block<DialogueProps> {
   constructor(props: DialogueProps) {
     super(props, 'li');
   }
-
 
   // componentDidUpdate(oldProps: any, newProps: any): boolean {
   //   return !isEqual(oldProps, newProps);
@@ -33,9 +32,6 @@ export default class Dialogue extends Block<DialogueProps> {
           <h4 class="dialogue__author">{{author}}</h4>
           <h5 class="dialogue__content">{{lastMessage}}</h5>
         </div>
-        <div class="dialogue__addition">
-          <h5 class="dialogue__count">{{unreadCount}}</h5>
-        </div>
       </div>
       `,
       this.props
@@ -43,4 +39,7 @@ export default class Dialogue extends Block<DialogueProps> {
   }
 }
 
-//           <h4 class="dialogue__time">{{time}}</h4>
+// <div class="dialogue__addition">
+// <h4 class="dialogue__time">{{time}}</h4>
+// <h5 class="dialogue__count">{{unreadCount}}</h5>
+// </div>
