@@ -1,5 +1,4 @@
 import AuthController from './controllers/AuthController';
-import ChatsController from './controllers/ChatsController';
 import Auth from './pages/Auth';
 import { Chats } from './pages/Chats';
 import Error404 from './pages/Error404';

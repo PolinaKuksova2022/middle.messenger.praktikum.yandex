@@ -1,6 +1,4 @@
 import store, { State } from '../utils/core/Store';
-import ChatsController from './ChatsController';
-
 export interface IMessage {
   chat_id: number;
   content: string;

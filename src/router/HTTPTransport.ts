@@ -5,15 +5,15 @@ enum METHOD {
   DELETE = 'DELETE',
 }
 
-function queryStringify(data: Record<string, any>) {
-  const str = `?${Object.keys(data)
-    .reduce(function (a: string[], k: string) {
-      a.push(`${k}=${data[k]}`);
-      return a;
-    }, [])
-    .join('&')}`;
-  return str;
-}
+// function queryStringify(data: Record<string, any>) {
+//   const str = `?${Object.keys(data)
+//     .reduce(function (a: string[], k: string) {
+//       a.push(`${k}=${data[k]}`);
+//       return a;
+//     }, [])
+//     .join('&')}`;
+//   return str;
+// }
 
 type OptionType = {
   method: METHOD;
@@ -58,7 +58,6 @@ export default class HTTPTransport {
 
       //@ts-expect-error
       xhr.onreadystatechange = (e) => {
-        
         if (xhr.readyState === XMLHttpRequest.DONE) {
           if (xhr.status < 400) {
             resolve(xhr.response);
@@ -72,9 +71,9 @@ export default class HTTPTransport {
       xhr.onerror = () => reject({ reason: 'network error' });
       xhr.ontimeout = () => reject({ reason: 'timeout' });
 
-      if(!url.includes('avatar')){
+      if (!url.includes('avatar')) {
         xhr.setRequestHeader('Content-Type', 'application/json');
-      };
+      }
 
       xhr.withCredentials = true;
       xhr.responseType = 'json';

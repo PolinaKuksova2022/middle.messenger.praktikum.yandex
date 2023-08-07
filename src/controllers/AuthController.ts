@@ -2,15 +2,13 @@ import { AuthAPI, ILoginData, IRegistrationData } from '../api/auth-api';
 import { Routes } from '../main';
 import router from '../router/router';
 import store from '../utils/core/Store';
-import ChatsController from './ChatsController';
-
 class AuthController {
   private api = new AuthAPI();
 
   async signin(data: ILoginData) {
     try {
       await this.api.signin(data);
-      
+
       await this.fetchUser();
 
       // await ChatsController.fetchChats()
@@ -52,7 +50,7 @@ class AuthController {
   async fetchUser() {
     try {
       const user = await this.api.getUser();
-      
+
       store.set('user', user);
     } catch (error) {
       throw error;

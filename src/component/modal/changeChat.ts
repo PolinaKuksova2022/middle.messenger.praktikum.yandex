@@ -1,7 +1,7 @@
 import { IUser } from '../../api/auth-api';
 import ChatsController from '../../controllers/ChatsController';
 import Block from '../../utils/core/Block';
-import store, { State, withStore } from '../../utils/core/Store';
+import { State, withStore } from '../../utils/core/Store';
 import isEqual from '../../utils/isEqual';
 import { closeModal } from '../../utils/toggleModal';
 import getInputsData from '../../utils/validate/getInputs';
