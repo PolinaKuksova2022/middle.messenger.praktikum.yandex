@@ -10,11 +10,11 @@ import router from './router/router';
 import store from './utils/core/Store';
 
 enum Routes {
-  Main = '/',
-  Register = '/registration',
-  Auth = '/auth',
-  Profile = '/profile',
-  Chat = '/chat',
+  Main = '/main',
+  Register = '/sign-up',
+  Auth = '/',
+  Profile = '/settings',
+  Chat = '/messenger',
   Error404 = '*',
   Error500 = '/internal-server-error',
 }

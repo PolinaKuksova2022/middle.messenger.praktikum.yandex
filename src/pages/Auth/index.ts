@@ -7,6 +7,7 @@ import router from '../../router/router';
 import AuthController from '../../controllers/AuthController';
 import isAllValid from '../../utils/validate/isAllValid';
 import getInputsData from '../../utils/validate/getInputs';
+import Routes from '../../main';
 
 export default class Auth extends Block {
   init() {
@@ -23,7 +24,7 @@ export default class Auth extends Block {
       text: 'Нет аккаунта?',
       events: {
         click: () => {
-          router.go('/registration');
+          router.go(Routes.Register);
         },
       },
     });

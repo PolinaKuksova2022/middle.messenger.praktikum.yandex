@@ -2,6 +2,7 @@ import Block from '../../utils/core/Block';
 import Button from '../../component/button/button';
 import template from './error500.tmpl';
 import router from '../../router/router';
+import Routes from '../../main';
 
 export default class Error500 extends Block {
   init() {
@@ -9,7 +10,7 @@ export default class Error500 extends Block {
       text: 'Назад к чатам',
       events: {
         click: () => {
-          router.go('/chat');
+          router.go(Routes.Chat);
         },
       },
     });

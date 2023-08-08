@@ -9,6 +9,7 @@ import ChatsController from '../../controllers/ChatsController';
 import { toggleChatModal } from '../../utils/toggleModal';
 import isEqual from '../../utils/isEqual';
 import { IChat } from '../../api/chats-api';
+import Routes from '../../main';
 
 class BaseChats extends Block {
   init() {
@@ -16,7 +17,7 @@ class BaseChats extends Block {
       text: 'Профиль >',
       events: {
         click: () => {
-          router.go('/profile');
+          router.go(Routes.Profile);
           store.set('activeChat', undefined);
         },
       },

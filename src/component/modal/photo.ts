@@ -51,7 +51,7 @@ export default class Photo extends Block {
     const formData = new FormData();
     formData.append('avatar', inputElement.files[0]);
 
-    if (window.location.pathname === '/profile') {
+    if (window.location.pathname === '/settings') {
       UserController.putAvatar(formData);
     } else if (store.state.activeChat) {
       formData.append('chatId', String(store.state.activeChat.id));

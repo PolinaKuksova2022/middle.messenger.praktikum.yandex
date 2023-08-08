@@ -2,6 +2,7 @@ import template from './main.tmpl';
 import Block from '../../utils/core/Block';
 import Button from '../../component/button/button';
 import router from '../../router/router';
+import Routes from '../../main';
 
 export default class Main extends Block {
   constructor() {
@@ -13,7 +14,7 @@ export default class Main extends Block {
       text: 'Авторизация',
       events: {
         click: () => {
-          router.go('/auth');
+          router.go(Routes.Auth);
         },
       },
     });
@@ -21,7 +22,7 @@ export default class Main extends Block {
       text: 'Регистрация',
       events: {
         click: () => {
-          router.go('/registration');
+          router.go(Routes.Register);
         },
       },
     });
@@ -29,7 +30,7 @@ export default class Main extends Block {
       text: 'Профиль',
       events: {
         click: () => {
-          router.go('/profile');
+          router.go(Routes.Profile);
         },
       },
     });
@@ -37,7 +38,7 @@ export default class Main extends Block {
       text: 'Лента переписки',
       events: {
         click: () => {
-          router.go('/chat');
+          router.go(Routes.Chat);
         },
       },
     });
@@ -45,7 +46,7 @@ export default class Main extends Block {
       text: 'Error404',
       events: {
         click: () => {
-          router.go('*');
+          router.go(Routes.Error404);
         },
       },
     });
@@ -53,7 +54,7 @@ export default class Main extends Block {
       text: 'Error500',
       events: {
         click: () => {
-          router.go('/internal-server-error');
+          router.go(Routes.Error500);
         },
       },
     });

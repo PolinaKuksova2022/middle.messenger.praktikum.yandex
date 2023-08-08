@@ -7,6 +7,7 @@ import router from '../../router/router';
 import AuthController from '../../controllers/AuthController';
 import isAllValid from '../../utils/validate/isAllValid';
 import getInputsData from '../../utils/validate/getInputs';
+import Routes from '../../main';
 
 export default class Registration extends Block {
   init() {
@@ -26,7 +27,7 @@ export default class Registration extends Block {
       text: 'Войти',
       events: {
         click: () => {
-          router.go('/profile');
+          router.go(Routes.Profile);
         },
       },
     });
