@@ -1,15 +1,15 @@
 import AuthController from './controllers/AuthController';
 import Auth from './pages/Auth';
-import { Chats } from './pages/Chats';
+import Chats from './pages/Chats';
 import Error404 from './pages/Error404';
 import Error500 from './pages/Error500';
 import Main from './pages/Main';
-import { Profile } from './pages/Profile';
+import Profile from './pages/Profile';
 import Registration from './pages/Registration';
 import router from './router/router';
 import store from './utils/core/Store';
 
-export enum Routes {
+enum Routes {
   Main = '/',
   Register = '/registration',
   Auth = '/auth',
@@ -19,11 +19,11 @@ export enum Routes {
   Error500 = '/internal-server-error',
 }
 
+export default Routes;
+
 window.addEventListener('DOMContentLoaded', async () => {
   try {
     await AuthController.fetchUser();
-
-    // await ChatsController.fetchChats();
   } catch (e) {
     console.log(e, 'Here');
   }
@@ -42,14 +42,16 @@ window.addEventListener('DOMContentLoaded', async () => {
           case Routes.Auth:
           case Routes.Register:
             router.go(Routes.Profile);
-            return;
+            break;
+          default:
         }
       } else {
         switch (route.pathname) {
           case Routes.Chat:
           case Routes.Profile:
             router.go(Routes.Auth);
-            return;
+            break;
+          default:
         }
       }
     })
@@ -57,6 +59,5 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   if (!router.exists(window.location.pathname)) {
     router.go(Routes.Error404);
-    return;
   }
 });

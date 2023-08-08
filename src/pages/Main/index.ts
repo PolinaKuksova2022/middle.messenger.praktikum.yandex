@@ -2,11 +2,12 @@ import template from './main.tmpl';
 import Block from '../../utils/core/Block';
 import Button from '../../component/button/button';
 import router from '../../router/router';
+
 export default class Main extends Block {
   constructor() {
     super({});
   }
-  
+
   init() {
     this.children.button_1 = new Button({
       text: 'Авторизация',
@@ -15,10 +16,6 @@ export default class Main extends Block {
           router.go('/auth');
         },
       },
-      // path: '/auth',
-      // events: {
-      //   click: () => window.location.href="/auth",
-      // },
     });
     this.children.button_2 = new Button({
       text: 'Регистрация',
@@ -27,10 +24,6 @@ export default class Main extends Block {
           router.go('/registration');
         },
       },
-      // path: '/registration',
-      // events: {
-      //   click: () => window.location.href="/registration",
-      // },
     });
     this.children.button_3 = new Button({
       text: 'Профиль',
@@ -39,10 +32,6 @@ export default class Main extends Block {
           router.go('/profile');
         },
       },
-      // path: '/profile',
-      // events: {
-      //   click: () => window.location.href="/profile",
-      // },
     });
     this.children.button_4 = new Button({
       text: 'Лента переписки',
@@ -51,10 +40,6 @@ export default class Main extends Block {
           router.go('/chat');
         },
       },
-      // path: '/chat',
-      // events: {
-      //   click: () => window.location.href="/chat",
-      // },
     });
     this.children.button_5 = new Button({
       text: 'Error404',
@@ -63,10 +48,6 @@ export default class Main extends Block {
           router.go('*');
         },
       },
-      // path: '*',
-      // events: {
-      //   click: () => window.location.href="*",
-      // },
     });
     this.children.button_6 = new Button({
       text: 'Error500',
@@ -75,10 +56,6 @@ export default class Main extends Block {
           router.go('/internal-server-error');
         },
       },
-      // path: '/internal-server-error',
-      // events: {
-      //   click: () => window.location.href="/internal-server-error",
-      // },
     });
 
     this.children.button_1.element?.classList.add('button');

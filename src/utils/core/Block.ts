@@ -91,7 +91,6 @@ class Block<P extends Record<string, any> = any> {
     this.init();
 
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-    // my: this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
   protected init() {}
@@ -123,7 +122,8 @@ class Block<P extends Record<string, any> = any> {
     }
   }
 
-  //@ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   protected componentDidUpdate(oldProps: P, newProps: P) {
     return true;
   }
@@ -201,25 +201,23 @@ class Block<P extends Record<string, any> = any> {
   }
 
   _makePropsProxy(props: P) {
-    const self = this;
-
     return new Proxy(props, {
-      get(target, prop: string) {
+      get: (target, prop: string) => {
         if (prop.indexOf('_') === 0) {
           throw new Error('Нет прав');
         }
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target, prop: string, value) {
+      set: (target, prop: string, value) => {
         const oldTarget = { ...target };
 
         target[prop as keyof P] = value;
 
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
+        this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },
-      deleteProperty() {
+      deleteProperty: () => {
         throw new Error('Нет доступа');
       },
     });

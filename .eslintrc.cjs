@@ -31,6 +31,7 @@ module.exports = {
 
   "rules": {
     "no-param-reassign": 0,
+    "no-useless-constructor": 0,
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -50,6 +51,7 @@ module.exports = {
     "no-underscore-dangle": "off",
     "max-classes-per-file": "off",
     "no-plusplus": "off",
+    "no-use-before-define": "off",
     "no-shadow": "off",
     "no-unused-expressions": "warn",
     "no-return-assign": "off",

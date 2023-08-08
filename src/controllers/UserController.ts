@@ -12,7 +12,7 @@ class UserController {
 
       alert('Вы изменили данные');
     } catch (error) {
-      throw error;
+      console.log(error);
     }
   }
 
@@ -21,12 +21,12 @@ class UserController {
       const user = await this.api.avatar(img);
       store.set('user', user);
 
-      //закрыть модальное окно
+      // закрыть модальное окно
       closeModal();
 
       alert('Вы изменили фото');
     } catch (error) {
-      alert((error as Record<string, string>).reason)
+      alert((error as Record<string, string>).reason);
       console.log(error);
     }
   }
@@ -35,12 +35,12 @@ class UserController {
     try {
       await this.api.password(data);
 
-      //закрыть модальное окно
+      // закрыть модальное окно
       closeModal();
 
       alert('Вы изменили пароль');
     } catch (error) {
-      alert((error as Record<string, string>).reason)
+      alert((error as Record<string, string>).reason);
       console.log(error);
     }
   }

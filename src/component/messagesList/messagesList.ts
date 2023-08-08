@@ -2,7 +2,7 @@ import { IMessage } from '../../controllers/WSControllers';
 import Block from '../../utils/core/Block';
 import store, { State, withStore } from '../../utils/core/Store';
 import isEqual from '../../utils/isEqual';
-import MessageText from '../activeChat/messegeText';
+import MessageText from '../activeChat/messageText';
 
 class BaseMessagesList extends Block {
   componentDidUpdate(oldProps: any, newProps: any): boolean {
@@ -45,12 +45,14 @@ class BaseMessagesList extends Block {
 function mapStateToProps(state: State) {
   if (state.messagesByChatId && state.activeChat) {
     const activeChatMessages = state.messagesByChatId[state.activeChat.id];
-
     return {
       activeChatMessages,
     };
   }
-  return;
+
+  return {};
 }
 
-export const MessagesList = withStore(mapStateToProps)(BaseMessagesList);
+const MessagesList = withStore(mapStateToProps)(BaseMessagesList);
+
+export default MessagesList;

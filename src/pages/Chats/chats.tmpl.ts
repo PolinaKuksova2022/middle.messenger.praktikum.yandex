@@ -11,6 +11,4 @@ const template = `
   </div>
 `;
 
-//       <input class="dialogues__search" type="text" id="search-input" placeholder="🔍︎ Поиск">
-
 export default template;

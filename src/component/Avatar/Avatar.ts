@@ -20,8 +20,3 @@ export default class Avatar extends Block<AvatarProps> {
     );
   }
 }
-
-//   `<section onclick="window.togglePhoto()" class="avatar">
-//         <img name="avatar" class="avatar__img" src="{{ src }}" alt=""/>
-//         <span class="avatar__text">Поменять аватар</span>
-//     </section>`

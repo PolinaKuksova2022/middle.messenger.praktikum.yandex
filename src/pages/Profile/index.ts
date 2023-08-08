@@ -8,7 +8,7 @@ import { togglePassword, togglePhoto } from '../../utils/toggleModal';
 import AuthController from '../../controllers/AuthController';
 import { State, withStore } from '../../utils/core/Store';
 import router from '../../router/router';
-import { Routes } from '../../main';
+import Routes from '../../main';
 import Avatar from '../../component/Avatar/Avatar';
 
 class BaseProfile extends Block {
@@ -183,4 +183,6 @@ function mapStateToProps(state: State) {
   return { ...state.user };
 }
 
-export const Profile = withStore(mapStateToProps)(BaseProfile);
+const Profile = withStore(mapStateToProps)(BaseProfile);
+
+export default Profile;

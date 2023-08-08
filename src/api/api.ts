@@ -1,7 +1,6 @@
-import HTTPTransport from "../router/HTTPTransport";
+import HTTPTransport from '../router/HTTPTransport';
 
-
-export abstract class API {
+export default abstract class API {
   protected http: HTTPTransport;
 
   protected constructor(endpoint: string) {

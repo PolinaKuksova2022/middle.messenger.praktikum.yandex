@@ -3,14 +3,18 @@ import Route from './route';
 
 class Router {
   private static __instance: Router;
+
   private routes: Route[] = [];
+
   private currentRoute: Route | null = null;
+
   private history = window.history;
+
   private onRoutedCallback: (route: Route) => void = () => {};
 
   constructor(private readonly rootQuery: string) {
     if (Router.__instance) {
-      return Router.__instance;
+      throw new Error('Instance already exists.');
     }
 
     this.routes = [];
@@ -25,11 +29,11 @@ class Router {
     return this;
   }
 
-  public exists(pathname: string){
-    return !!this.routes.find(x => x.pathname == pathname);
+  public exists(pathname: string) {
+    return !!this.routes.find((x) => x.pathname === pathname);
   }
 
-  public setOnRoutedCallback(callback: (route: Route) => void){
+  public setOnRoutedCallback(callback: (route: Route) => void) {
     this.onRoutedCallback = callback;
     return this;
   }

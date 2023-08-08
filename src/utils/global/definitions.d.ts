@@ -1,8 +1,3 @@
-// export interface FormInput {
-//   name: string;
-//   value: string;
-// }
-
 declare global {
   interface Window {
     togglePhoto: () => void;

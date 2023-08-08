@@ -6,8 +6,7 @@ const regSymbol = /^[A-Za-z0-9_-]+$/;
 const regPassword = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
 const regEmail = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const regPhone = /^\+?\d{10,15}$/;
-const regId= /^\d+$/;
-
+const regId = /^\d+$/;
 
 const loginText = 'Логин может содержать цифры, но не состоять из них';
 const charactersText = 'Допустимая длина от 3 до 20 символов';
@@ -20,11 +19,6 @@ const phoneText = 'Недопустимый номер';
 const passwordsMismatch = 'Новые пароли не совпадают';
 const idText = 'Введите только числа';
 
-// const loginInput = 'login';
-// const input = document.getElementsByName(loginInput)[0];
-// const passwordInput = 'password';
-// const password = document.getElementsByName(passwordInput)[0];
-
 export {
   regLogin,
   regName,
@@ -35,9 +29,6 @@ export {
   regEmail,
   regPhone,
   regId,
-
-  // loginInput,
-  // input,
   loginText,
   charactersText,
   capitalText,

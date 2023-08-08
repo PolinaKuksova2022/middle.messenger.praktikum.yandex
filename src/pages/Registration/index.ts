@@ -7,11 +7,12 @@ import router from '../../router/router';
 import AuthController from '../../controllers/AuthController';
 import isAllValid from '../../utils/validate/isAllValid';
 import getInputsData from '../../utils/validate/getInputs';
+
 export default class Registration extends Block {
   init() {
-    this.props.title = 'Регистрация',
-    this.props.containerClass =  'container container_big',
-    
+    this.props.title = 'Регистрация';
+    this.props.containerClass = 'container container_big';
+
     this.children.button_1 = new Button({
       text: 'Зарегистрироваться',
       events: {
@@ -131,13 +132,11 @@ export default class Registration extends Block {
   onSubmit() {
     const data = getInputsData();
     if (isAllValid(data)) {
-      console.log(data, 'Registration(signup) data');
-
       AuthController.signup(data);
     }
   }
 
   render() {
-    return this.compile(formTemplate, {...this.props});
+    return this.compile(formTemplate, { ...this.props });
   }
 }

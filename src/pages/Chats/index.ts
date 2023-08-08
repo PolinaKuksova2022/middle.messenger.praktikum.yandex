@@ -2,7 +2,7 @@ import Block from '../../utils/core/Block';
 import Button from '../../component/button/button';
 import template from './chats.tmpl';
 import Dialogue from '../../component/dialogue/dialogue';
-import { ActiveChat } from '../../component/activeChat/activeChat';
+import ActiveChat from '../../component/activeChat/activeChat';
 import router from '../../router/router';
 import store, { State, withStore } from '../../utils/core/Store';
 import ChatsController from '../../controllers/ChatsController';
@@ -60,9 +60,6 @@ class BaseChats extends Block {
           name: chat.title,
           classTitle: 'dialogue__author',
           author: '',
-          // lastMessage: chat.last_message ? chat.last_message.content : '',
-          // time: 'пт',
-          // unreadCount: chat.unread_count,
           avatar: chat.avatar,
         })
     );
@@ -82,4 +79,6 @@ function mapStateToProps(state: State) {
   return { chats: state.chats, activeChat: state.activeChat };
 }
 
-export const Chats = withStore(mapStateToProps)(BaseChats);
+const Chats = withStore(mapStateToProps)(BaseChats);
+
+export default Chats;

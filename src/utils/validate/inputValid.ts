@@ -99,7 +99,6 @@ export function inputOut(event: Event) {
             isPasswordsField &&
             passwordsValues.length > 1
           ) {
-            console.log(passwordsValues);
             error.innerHTML = passwordsMismatch;
             target.after(error);
             target.classList.add('input-incorrect');
@@ -113,9 +112,6 @@ export function inputOut(event: Event) {
           target.classList.add('input-incorrect');
         }
         break;
-      // case 'message':
-      //   console.log(`message input: ${value}`);
-      //   break;
       case 'userId':
         if (!regId.test(value)) {
           error.innerHTML = idText;
@@ -123,6 +119,7 @@ export function inputOut(event: Event) {
           target.classList.add('input-incorrect');
         }
         break;
+      default:
     }
   }
 }

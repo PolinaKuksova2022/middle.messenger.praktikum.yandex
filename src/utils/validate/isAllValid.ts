@@ -1,4 +1,4 @@
-import { regEmail, regId, regLogin, regName, regPassword } from './constants';
+import { regEmail, regId, regLogin, regName, regPassword, regPhone } from './constants';
 
 export default function isAllValid(data: Record<string, string>) {
   return Object.entries(data)
@@ -20,6 +20,8 @@ export default function isAllValid(data: Record<string, string>) {
             return i.value.match(regName);
           case 'userId':
             return i.value.match(regId);
+          case 'phone':
+            return i.value.match(regPhone);
           default:
             return true;
         }

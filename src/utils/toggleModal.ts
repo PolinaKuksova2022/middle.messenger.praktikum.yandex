@@ -1,6 +1,6 @@
 import ChatModal from '../component/modal/addChat';
-import { ChangeChat } from '../component/modal/changeChat';
-import { Password } from '../component/modal/password';
+import ChangeChat from '../component/modal/changeChat';
+import Password from '../component/modal/password';
 import Photo from '../component/modal/photo';
 import Block from './core/Block';
 

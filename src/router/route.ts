@@ -23,7 +23,7 @@ export default class Route {
 
   constructor(
     public pathname: string,
-    public readonly blockClass: typeof Block,
+    public readonly BlockClass: typeof Block,
     public readonly query: string
   ) {}
 
@@ -38,9 +38,8 @@ export default class Route {
   }
 
   render() {
-    this.block = new this.blockClass({});
+    this.block = new this.BlockClass({});
 
     render(this.query, this.block);
-    return;
   }
 }

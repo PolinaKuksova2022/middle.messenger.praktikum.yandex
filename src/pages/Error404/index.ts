@@ -12,10 +12,6 @@ export default class Error404 extends Block {
           router.go('/chat');
         },
       },
-      // path: '/chat',
-      // events: {
-      //   click: () => window.location.href="/chat",
-      // },
     });
 
     this.children.button.element?.classList.add(...['button', 'navigation-btn']);

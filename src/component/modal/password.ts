@@ -1,6 +1,6 @@
 import UserController from '../../controllers/UserController';
 import Block from '../../utils/core/Block';
-import store, { withStore } from '../../utils/core/Store';
+import { withStore } from '../../utils/core/Store';
 import { closeModal } from '../../utils/toggleModal';
 import getInputsData from '../../utils/validate/getInputs';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
@@ -8,21 +8,22 @@ import isAllValid from '../../utils/validate/isAllValid';
 import Button from '../button/button';
 import formTemplate from '../commonTmpl/form.tmpl';
 import InputGroup from '../form/inputGroup';
+
 class PasswordBase extends Block {
   init() {
-    this.props.title = 'Измените пароль',
-    this.props.containerClass = 'container container_big',
-    
+    this.props.title = 'Измените пароль';
+    this.props.containerClass = 'container container_big';
+
     this.children.group_1 = new InputGroup({
-        name: 'oldPassword',
-        label: 'Старый пароль',
-        inputClass: 'input',
-        id: 'password-old',
-        type: 'password',
-        events: {
-          focusout: (event) => inputOut(event),
-          focusin: (event) => inputIn(event),
-        },
+      name: 'oldPassword',
+      label: 'Старый пароль',
+      inputClass: 'input',
+      id: 'password-old',
+      type: 'password',
+      events: {
+        focusout: (event) => inputOut(event),
+        focusin: (event) => inputIn(event),
+      },
     });
     this.children.group_2 = new InputGroup({
       name: 'newPassword',
@@ -89,8 +90,6 @@ class PasswordBase extends Block {
     if (isAllValid(data)) {
       console.log(data);
       UserController.putPassword(data);
-
-      console.log('при изменении пароля', store.state);
     }
   }
 
@@ -99,4 +98,6 @@ class PasswordBase extends Block {
   }
 }
 
-export const Password = withStore((state) => state.user)(PasswordBase);
+const Password = withStore((state) => state.user)(PasswordBase);
+
+export default Password;

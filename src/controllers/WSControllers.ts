@@ -1,4 +1,5 @@
 import store, { State } from '../utils/core/Store';
+
 export interface IMessage {
   chat_id: number;
   content: string;
@@ -11,10 +12,15 @@ export interface IMessage {
 }
 class WSController {
   state: State;
+
   token: string;
+
   chatId: number;
+
   userId: string;
+
   socket: WebSocket;
+
   ping!: ReturnType<typeof setInterval>;
 
   constructor(userId: string, token: string, chatId: number) {

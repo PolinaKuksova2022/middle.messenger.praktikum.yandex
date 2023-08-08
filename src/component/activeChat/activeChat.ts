@@ -1,3 +1,4 @@
+import { IUser } from '../../api/auth-api';
 import GroupUsers from '../../groupUsers/gropUsers';
 import Block from '../../utils/core/Block';
 import store, { State, withStore } from '../../utils/core/Store';
@@ -9,7 +10,7 @@ import ChatName from '../ChatName/ChatName';
 import Button from '../button/button';
 import InputGroup from '../form/inputGroup';
 import KebabMenu from '../menu/kebabMenu';
-import { MessagesList } from '../messagesList/messagesList';
+import MessagesList from '../messagesList/messagesList';
 
 class BaseActiveChat extends Block {
   init() {
@@ -70,7 +71,7 @@ class BaseActiveChat extends Block {
       });
 
       this.children.img = this.props.activeChatUsers?.map(
-        (user: any) =>
+        (user: IUser) =>
           new GroupUsers({
             src: user.avatar,
             name: user.login,
@@ -107,16 +108,7 @@ class BaseActiveChat extends Block {
       {{/if}}
       {{#if activeChat}}
         <div class="activeChat__field">
-
-          {{#if activeChat.last_message}}
-              {{{messagesList}}}
-          {{else}}
-            <div class="activeChat__empty activeChat__title">Тут пока нет сообщений</div>
-          {{/if}}
-
-          {{{from}}}
-          {{{img}}}
-          {{{to}}}
+          {{{messagesList}}}
         </div>
         <div class="activeChat__footer">  
           {{{group}}}
@@ -136,6 +128,6 @@ function mapStateToProps(state: State) {
   };
 }
 
-export const ActiveChat = withStore(mapStateToProps)(BaseActiveChat);
-// <button class="button attach-btn">📎</button>
-// <img name="avatar" class="avatar__img dialogue__img"  src="{{avatar}}" alt=""/>
+const ActiveChat = withStore(mapStateToProps)(BaseActiveChat);
+
+export default ActiveChat;

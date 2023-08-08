@@ -1,7 +1,7 @@
 import { IUser } from '../../api/auth-api';
 import ChatsController from '../../controllers/ChatsController';
 import Block from '../../utils/core/Block';
-import { State, withStore } from '../../utils/core/Store';
+import store, { State, withStore } from '../../utils/core/Store';
 import isEqual from '../../utils/isEqual';
 import { closeModal } from '../../utils/toggleModal';
 import getInputsData from '../../utils/validate/getInputs';
@@ -13,19 +13,20 @@ import InputGroup from '../form/inputGroup';
 
 class BaseChangeChat extends Block {
   init() {
-    (this.props.title = 'Редактировать чат'),
-      (this.props.containerClass = 'container container_big'),
-      (this.children.group_1 = new InputGroup({
-        name: 'userId',
-        label: 'Введите id пользователя',
-        inputClass: 'input',
-        id: 'userId',
-        type: 'text',
-        events: {
-          focusout: (event) => inputOut(event),
-          focusin: (event) => inputIn(event),
-        },
-      }));
+    this.props.title = 'Редактировать чат';
+    this.props.containerClass = 'container container_big';
+
+    this.children.group_1 = new InputGroup({
+      name: 'userId',
+      label: 'Введите id пользователя',
+      inputClass: 'input',
+      id: 'userId',
+      type: 'text',
+      events: {
+        focusout: (event) => inputOut(event),
+        focusin: (event) => inputIn(event),
+      },
+    });
     this.children.button_1 = new Button({
       text: 'Добавить пользователя',
       id: 'change',
@@ -51,6 +52,8 @@ class BaseChangeChat extends Block {
         click: (e) => {
           e.preventDefault();
           ChatsController.deleteChat({ chatId: this.props.activeChat.id });
+          store.set('activeChat', undefined);
+          closeModal();
         },
       },
     });
@@ -75,25 +78,23 @@ class BaseChangeChat extends Block {
   }
 
   async addUser() {
-    const userId = getInputsData().userId;
+    const { userId } = getInputsData();
 
     if (this.props.activeChatUsers.find((i: IUser) => i.id === +userId)) {
-      alert(userId + ' уже есть в этом чате');
+      alert(`${userId} уже есть в этом чате`);
       closeModal();
-    } else {
-      if (isAllValid({ userId: userId })) {
-        ChatsController.putAddUserToChat({
-          users: [userId],
-          chatId: this.props.activeChat.id,
-        });
-        closeModal();
-      }
+    } else if (isAllValid({ userId })) {
+      ChatsController.putAddUserToChat({
+        users: [userId],
+        chatId: this.props.activeChat.id,
+      });
+      closeModal();
     }
   }
 
   deleteUser() {
-    const userId = getInputsData().userId;
-    if (isAllValid({ userId: userId })) {
+    const { userId } = getInputsData();
+    if (isAllValid({ userId })) {
       ChatsController.deleteUserFromChat({
         users: [userId],
         chatId: this.props.activeChat.id,
@@ -114,4 +115,6 @@ function mapStateToProps(state: State) {
   };
 }
 
-export const ChangeChat = withStore(mapStateToProps)(BaseChangeChat);
+const ChangeChat = withStore(mapStateToProps)(BaseChangeChat);
+
+export default ChangeChat;

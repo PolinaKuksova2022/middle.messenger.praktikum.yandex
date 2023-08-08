@@ -97,13 +97,14 @@ class ChatsController {
     }
   }
 
-  async fetchChatToken(chatId: number) {
+  async fetchChatToken(chatId: number): Promise<string | undefined> {
     try {
       const tokenObject = (await this.api.requestChatToken(chatId)) as any;
       return tokenObject.token!;
     } catch (error) {
       alert((error as Record<string, string>).reason);
       console.log((error as Record<string, string>).reason);
+      return undefined;
     }
   }
 }

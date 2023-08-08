@@ -10,8 +10,9 @@ import InputGroup from '../form/inputGroup';
 
 export default class ChatModal extends Block {
   init() {
-    (this.props.title = 'Введите название чата'),
-      (this.props.containerClass = 'container container_big'),
+    this.props.title = 'Введите название чата';
+    this.props.containerClass = 'container container_big';
+
     this.children.group_1 = new InputGroup({
       name: 'title',
       label: 'Название чата',
@@ -23,7 +24,6 @@ export default class ChatModal extends Block {
         focusin: (event) => inputIn(event),
       },
     });
-
     this.children.button_1 = new Button({
       text: 'Добавить чат',
       events: {
@@ -54,9 +54,8 @@ export default class ChatModal extends Block {
       };
     }
 
-    let title = transformObject(getInputsData());
+    const title = transformObject(getInputsData());
     if (isAllValid(title)) {
-      console.log(title);
       ChatsController.postChat(title);
       closeModal();
     }

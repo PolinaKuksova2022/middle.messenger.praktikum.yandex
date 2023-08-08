@@ -1,7 +1,8 @@
 import { AuthAPI, ILoginData, IRegistrationData } from '../api/auth-api';
-import { Routes } from '../main';
+import Routes from '../main';
 import router from '../router/router';
 import store from '../utils/core/Store';
+
 class AuthController {
   private api = new AuthAPI();
 
@@ -10,8 +11,6 @@ class AuthController {
       await this.api.signin(data);
 
       await this.fetchUser();
-
-      // await ChatsController.fetchChats()
 
       router.go(Routes.Profile);
 
@@ -53,7 +52,7 @@ class AuthController {
 
       store.set('user', user);
     } catch (error) {
-      throw error;
+      console.log(error);
     }
   }
 }

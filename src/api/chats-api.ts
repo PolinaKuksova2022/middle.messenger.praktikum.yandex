@@ -1,4 +1,4 @@
-import { API } from './api';
+import API from './api';
 import { IUser } from './auth-api';
 
 export interface ICreateChat {
@@ -37,27 +37,27 @@ export class ChatAPI extends API {
   }
 
   createChat(data: ICreateChat) {
-    //POST /chats — создать чат;
+    // POST /chats — создать чат;
     return this.http.post(`/`, data);
   }
 
   removeChat(id: IChatId) {
-    //DELETE /chats — удалить чат по его ID;
+    // DELETE /chats — удалить чат по его ID;
     return this.http.delete('/', id);
   }
 
   getChatUsers(id: number) {
-    //GET /chats/:id/users — получить пользователей чата по ID;
+    // GET /chats/:id/users — получить пользователей чата по ID;
     return this.http.get(`/${id}/users`);
   }
 
   addUserToChat(data: IChangeUser) {
-    //PUT /chats/users — добавить пользователя в чат;
+    // PUT /chats/users — добавить пользователя в чат;
     return this.http.put('/users', data);
   }
 
   removeUserFromChat(data: IChangeUser) {
-    //DELETE /chats/users — удалить пользователей из чата.
+    // DELETE /chats/users — удалить пользователей из чата.
     return this.http.delete('/users', data);
   }
 
