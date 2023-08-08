@@ -50,16 +50,16 @@ class BaseActiveChat extends Block {
       placeholder: 'Сообщение',
     });
 
-    this.children.chatName.element?.classList.add('activeChat__title');
+    this.children.chatName.element?.classList.add('active-chat__title');
     this.children.menu.element?.classList.add('kebab-menu');
     this.children.button.element?.classList.add(...['button', 'round-btn']);
-    this.children.group.element?.classList.add('activeChat__input');
+    this.children.group.element?.classList.add('active-chat__input');
   }
 
   componentDidUpdate(oldProps: any, newProps: any): boolean {
     this.children.messagesList = new MessagesList({});
 
-    this.children.messagesList.element?.classList.add('activeChat__messagesList');
+    this.children.messagesList.element?.classList.add('active-chat__messagesList');
 
     return !isEqual(oldProps, newProps);
   }
@@ -98,8 +98,8 @@ class BaseActiveChat extends Block {
     return this.compile(
       `
       {{#if activeChat.title}}
-        <div class="activeChat__header">
-          <section class="activeChat__author">
+        <div class="active-chat__header">
+          <section class="active-chat__author">
             {{{img}}}
             {{{chatName}}}
           </section>
@@ -107,10 +107,10 @@ class BaseActiveChat extends Block {
         </div>
       {{/if}}
       {{#if activeChat}}
-        <div class="activeChat__field">
+        <div class="active-chat__field">
           {{{messagesList}}}
         </div>
-        <div class="activeChat__footer">  
+        <div class="active-chat__footer">  
           {{{group}}}
           {{{button}}}
         </div>
