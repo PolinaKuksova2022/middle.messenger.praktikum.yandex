@@ -5,6 +5,7 @@ export interface AvatarProps {
     click: () => void;
   };
   src: string;
+  className: string;
 }
 
 export default class Avatar extends Block<AvatarProps> {
@@ -14,7 +15,7 @@ export default class Avatar extends Block<AvatarProps> {
 
   render() {
     return this.compile(
-      `<img name="avatar" class="avatar__img" src="{{ src }}" alt=""/>
+      `<img name="avatar" class="{{ className }}" src="{{ src }}" alt=""/>
        <span class="avatar__text">Поменять аватар</span>`,
       this.props
     );

@@ -35,7 +35,7 @@ class BaseChats extends Block {
 
     this.children.button_1.element?.classList.add(...['button', 'chats-btn']);
     this.children.button_2.element?.classList.add('button');
-    this.children.activeChat.element?.classList.add('activeChat');
+    this.children.activeChat.element?.classList.add('active-chat');
   }
 
   componentDidUpdate(oldProps: any, newProps: any): boolean {
@@ -60,7 +60,7 @@ class BaseChats extends Block {
           name: chat.title,
           classTitle: 'dialogue__author',
           author: '',
-          avatar: chat.avatar,
+          avatarImg: chat.avatar,
         })
     );
   }

@@ -3,7 +3,7 @@ import Block from '../../utils/core/Block';
 export interface ChatNameProps {
   chatName: string;
 }
-export default class Avatar extends Block<ChatNameProps> {
+export default class ChatName extends Block<ChatNameProps> {
   constructor(props: ChatNameProps) {
     super(props, 'h4');
   }

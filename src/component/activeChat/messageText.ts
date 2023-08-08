@@ -15,8 +15,8 @@ export default class MessageText extends Block<MessageTextProps> {
     return this.compile(
       `
       <section class="{{classMessage}}">
-        <div class="activeChat__text">{{text}}</div>
-        <p class="activeChat__time">{{time}}</p>
+        <div class="active-chat__text">{{text}}</div>
+        <p class="active-chat__time">{{time}}</p>
       </section>
       `,
       this.props

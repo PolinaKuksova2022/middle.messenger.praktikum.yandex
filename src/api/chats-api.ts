@@ -21,6 +21,23 @@ export interface IChat {
   };
 }
 
+export interface IActiveChat {
+  id: number;
+  title: string;
+  avatar: string;
+  unread_count: number;
+  last_message: {
+    user: {
+      first_name: string;
+      second_name: string;
+      avatar: string;
+      login: string;
+    };
+    time: string;
+    content: string;
+  };
+}
+
 export interface IChangeUser {
   users: number[];
   chatId: number;
@@ -49,6 +66,11 @@ export class ChatAPI extends API {
   getChatUsers(id: number) {
     // GET /chats/:id/users — получить пользователей чата по ID;
     return this.http.get(`/${id}/users`);
+  }
+
+  chatsAvatar(data: FormData) {
+    // PUT /chats/avatar — добавить аватар чата;
+    return this.http.put('/avatar', data);
   }
 
   addUserToChat(data: IChangeUser) {

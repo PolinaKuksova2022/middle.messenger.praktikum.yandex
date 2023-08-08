@@ -22,8 +22,8 @@ class BaseMessagesList extends Block {
           }),
           classMessage:
             message.user_id === store.state.user?.id
-              ? 'activeChat__item activeChat__item-to'
-              : 'activeChat__item activeChat__item-from',
+              ? 'active-chat__item active-chat__item-to'
+              : 'active-chat__item active-chat__item-from',
         })
     );
   }

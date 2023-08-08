@@ -18,6 +18,7 @@ class BaseProfile extends Block {
         click: () => togglePhoto(),
       },
       src: '',
+      className: 'avatar__img',
     });
     this.children.button_1 = new Button({
       text: 'Изменить данные',

@@ -1,4 +1,6 @@
 import Block from '../../utils/core/Block';
+import { togglePhoto } from '../../utils/toggleModal';
+import Avatar from '../Avatar/Avatar';
 
 interface DialogueProps {
   events: {
@@ -10,18 +12,28 @@ interface DialogueProps {
   lastMessage?: string;
   classTitle: string;
   unreadCount?: number;
-  avatar: string;
+  avatarImg: string;
 }
 export default class Dialogue extends Block<DialogueProps> {
   constructor(props: DialogueProps) {
     super(props, 'li');
   }
 
+  init() {
+    this.children.avatar = new Avatar({
+      events: {
+        click: () => togglePhoto(),
+      },
+      src: `https://ya-praktikum.tech/api/v2/resources${this.props.avatarImg}`,
+      className: 'avatar__img dialogue__img',
+    });
+  }
+
   render() {
     return this.compile(
       `
       <div class="dialogue">
-        <img name="avatar" class="avatar__img dialogue__img"  src="{{avatar}}" alt=""/>
+        {{{avatar}}}
         <div class="dialogue__info">
           <h4 class="{{classTitle}}">{{name}}</h4>
           <h4 class="dialogue__author">{{author}}</h4>

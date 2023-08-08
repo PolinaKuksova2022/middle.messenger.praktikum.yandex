@@ -2,12 +2,12 @@ import set from '../index';
 import { IUser } from '../../api/auth-api';
 import EventBus from './EventBus';
 import Block from './Block';
-import { IChat } from '../../api/chats-api';
+import { IActiveChat, IChat } from '../../api/chats-api';
 import { IMessage } from '../../controllers/WSControllers';
 
 export interface State {
   user?: IUser;
-  activeChat?: IChat;
+  activeChat?: IActiveChat;
   socketList?: any;
   chats?: IChat[] | null;
   activeChatUsers?: IUser[];

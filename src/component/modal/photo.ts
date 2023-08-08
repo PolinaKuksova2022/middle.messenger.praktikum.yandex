@@ -1,5 +1,7 @@
+import ChatsController from '../../controllers/ChatsController';
 import UserController from '../../controllers/UserController';
 import Block from '../../utils/core/Block';
+import store from '../../utils/core/Store';
 import { closeModal } from '../../utils/toggleModal';
 import Button from '../button/button';
 import formTemplate from '../commonTmpl/form.tmpl';
@@ -49,7 +51,12 @@ export default class Photo extends Block {
     const formData = new FormData();
     formData.append('avatar', inputElement.files[0]);
 
-    UserController.putAvatar(formData);
+    if (window.location.pathname === '/profile') {
+      UserController.putAvatar(formData);
+    } else if (store.state.activeChat) {
+      formData.append('chatId', String(store.state.activeChat.id));
+      ChatsController.putAvatarToChat(formData);
+    }
   }
 
   render() {

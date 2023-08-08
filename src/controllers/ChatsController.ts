@@ -1,5 +1,6 @@
 import { ChatAPI, IChangeUser, IChatId, ICreateChat } from '../api/chats-api';
 import store from '../utils/core/Store';
+import { closeModal } from '../utils/toggleModal';
 import WSController from './WSControllers';
 
 class ChatsController {
@@ -61,6 +62,22 @@ class ChatsController {
       const users = await this.api.getChatUsers(id);
 
       store.set('activeChatUsers', users);
+    } catch (error) {
+      alert((error as Record<string, string>).reason);
+      console.log((error as Record<string, string>).reason);
+    }
+  }
+
+  async putAvatarToChat(data: FormData) {
+    try {
+      const user = await this.api.chatsAvatar(data);
+
+      store.set('activeChat', user);
+
+      alert('Вы изменили аватар чата');
+
+      // закрыть модальное окно
+      closeModal();
     } catch (error) {
       alert((error as Record<string, string>).reason);
       console.log((error as Record<string, string>).reason);
