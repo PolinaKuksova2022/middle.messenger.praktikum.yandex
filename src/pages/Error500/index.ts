@@ -1,22 +1,18 @@
 import Block from '../../utils/core/Block';
 import Button from '../../component/button/button';
 import template from './error500.tmpl';
+import router from '../../router/router';
+import Routes from '../../main';
 
-interface Error500Props {
-  title: string;
-}
-export default class Error500 extends Block<Error500Props> {
-  constructor(props: Error500Props) {
-    super(props, 'div');
-  }
-
+export default class Error500 extends Block {
   init() {
     this.children.button = new Button({
       text: 'Назад к чатам',
-      path: '/chat',
-      // events: {
-      //   click: () => window.location.href="/chat",
-      // },
+      events: {
+        click: () => {
+          router.go(Routes.Chat);
+        },
+      },
     });
 
     this.children.button.element?.classList.add(...['button', 'navigation-btn']);

@@ -2,31 +2,31 @@ import Block from '../../utils/core/Block';
 import formTemplate from '../../component/commonTmpl/form.tmpl';
 import InputGroup from '../../component/form/inputGroup';
 import Button from '../../component/button/button';
-import buttonValid from '../../utils/validate/buttonValid';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
+import router from '../../router/router';
+import AuthController from '../../controllers/AuthController';
+import isAllValid from '../../utils/validate/isAllValid';
+import getInputsData from '../../utils/validate/getInputs';
+import Routes from '../../main';
 
-interface AuthProps {
-  title: string;
-  containerClass: string;
-}
-export default class Auth extends Block<AuthProps> {
-  constructor(props: AuthProps) {
-    super(props, 'div');
-  }
-
+export default class Auth extends Block {
   init() {
     this.children.button_1 = new Button({
-      text: 'Авторизация',
+      text: 'Войти',
       events: {
         click: (e) => {
           e.preventDefault();
-          buttonValid();
+          this.onSubmit();
         },
       },
     });
     this.children.button_2 = new Button({
       text: 'Нет аккаунта?',
-      path: '/registration',
+      events: {
+        click: () => {
+          router.go(Routes.Register);
+        },
+      },
     });
 
     this.children.group_1 = new InputGroup({
@@ -39,7 +39,6 @@ export default class Auth extends Block<AuthProps> {
         focusout: (event) => inputOut(event),
         focusin: (event) => inputIn(event),
       },
-      placeholder: '',
     });
 
     this.children.group_2 = new InputGroup({
@@ -52,7 +51,6 @@ export default class Auth extends Block<AuthProps> {
         focusout: (event) => inputOut(event),
         focusin: (event) => inputIn(event),
       },
-      placeholder: '',
     });
 
     this.children.button_1.element?.classList.add(...['button', 'disabled']);
@@ -61,7 +59,15 @@ export default class Auth extends Block<AuthProps> {
     this.children.group_2.element?.classList.add('input-group');
   }
 
+  onSubmit() {
+    const data = getInputsData();
+
+    if (isAllValid(data)) {
+      AuthController.signin(data);
+    }
+  }
+
   render() {
-    return this.compile(formTemplate, this.props);
+    return this.compile(formTemplate, { title: 'Авторизация', containerClass: 'container' });
   }
 }

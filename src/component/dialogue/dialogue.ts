@@ -1,28 +1,44 @@
 import Block from '../../utils/core/Block';
+import { togglePhoto } from '../../utils/toggleModal';
+import Avatar from '../Avatar/Avatar';
 
 interface DialogueProps {
+  events: {
+    click: () => void;
+  };
+  id: number;
+  name: string;
   author: string;
-  content: string;
-  time: string;
-  count: string;
-  avatar: string;
+  lastMessage?: string;
+  classTitle: string;
+  unreadCount?: number;
+  avatarImg: string;
 }
 export default class Dialogue extends Block<DialogueProps> {
   constructor(props: DialogueProps) {
     super(props, 'li');
   }
 
+  init() {
+    this.children.avatar = new Avatar({
+      events: {
+        click: () => togglePhoto(),
+      },
+      src: `https://ya-praktikum.tech/api/v2/resources${this.props.avatarImg}`,
+      className: 'avatar__img dialogue__img',
+    });
+  }
+
   render() {
     return this.compile(
       `
-      <img name="avatar" class="avatar__img dialogue__img"  src="{{avatar}}" alt=""/>
-      <div class="dialogue__info">
-        <h4 class="dialogue__author">{{author}}</h4>
-        <h5 class="dialogue__content">{{content}}</h5>
-      </div>
-      <div class="dialogue__addition">
-        <h4 class="dialogue__time">{{time}}</h4>
-        <h5 class="dialogue__count">{{count}}</h5>
+      <div class="dialogue">
+        {{{avatar}}}
+        <div class="dialogue__info">
+          <h4 class="{{classTitle}}">{{name}}</h4>
+          <h4 class="dialogue__author">{{author}}</h4>
+          <h5 class="dialogue__content">{{lastMessage}}</h5>
+        </div>
       </div>
       `,
       this.props

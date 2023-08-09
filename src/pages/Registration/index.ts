@@ -3,33 +3,33 @@ import formTemplate from '../../component/commonTmpl/form.tmpl';
 import InputGroup from '../../component/form/inputGroup';
 import Button from '../../component/button/button';
 import { inputIn, inputOut } from '../../utils/validate/inputValid';
-import buttonValid from '../../utils/validate/buttonValid';
+import router from '../../router/router';
+import AuthController from '../../controllers/AuthController';
+import isAllValid from '../../utils/validate/isAllValid';
+import getInputsData from '../../utils/validate/getInputs';
+import Routes from '../../main';
 
-interface RegistrationProps {
-  title: string;
-  containerClass: string;
-}
-export default class Registration extends Block<RegistrationProps> {
-  constructor(props: RegistrationProps) {
-    super(props, 'div');
-  }
-
+export default class Registration extends Block {
   init() {
+    this.props.title = 'Регистрация';
+    this.props.containerClass = 'container container_big';
+
     this.children.button_1 = new Button({
       text: 'Зарегистрироваться',
       events: {
         click: (e) => {
           e.preventDefault();
-          buttonValid();
+          this.onSubmit();
         },
       },
     });
     this.children.button_2 = new Button({
       text: 'Войти',
-      path: '/auth',
-      // events: {
-      //   click: () => window.location.href="/auth",
-      // },
+      events: {
+        click: () => {
+          router.go(Routes.Profile);
+        },
+      },
     });
 
     this.children.group_1 = new InputGroup({
@@ -120,6 +120,7 @@ export default class Registration extends Block<RegistrationProps> {
 
     this.children.button_1.element?.classList.add(...['button', 'disabled']);
     this.children.button_2.element?.classList.add(...['button', 'navigation-btn']);
+    this.children.button_2.element?.setAttribute('type', 'button');
     this.children.group_1.element?.classList.add('input-group');
     this.children.group_2.element?.classList.add('input-group');
     this.children.group_3.element?.classList.add('input-group');
@@ -129,7 +130,14 @@ export default class Registration extends Block<RegistrationProps> {
     this.children.group_7.element?.classList.add('input-group');
   }
 
+  onSubmit() {
+    const data = getInputsData();
+    if (isAllValid(data)) {
+      AuthController.signup(data);
+    }
+  }
+
   render() {
-    return this.compile(formTemplate, this.props);
+    return this.compile(formTemplate, { ...this.props });
   }
 }

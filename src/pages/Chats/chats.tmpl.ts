@@ -1,14 +1,13 @@
 const template = `
   <div class="chats">
     <section class="dialogues">
-      {{{button}}}
-      <input class="dialogues__search" type="text" id="search-input" placeholder="🔍︎ Поиск">
+      {{{button_1}}}
+      {{{button_2}}}
       <ul class="dialogues__items">
-        {{{dialogue_1}}}
-        {{{dialogue_2}}}
+        {{{chatList}}}
       </ul>
     </section>
-    {{{message}}}
+    {{{activeChat}}}
   </div>
 `;
 

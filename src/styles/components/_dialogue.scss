@@ -2,9 +2,13 @@
   display: grid;
   grid-template-columns: 20% 60% 20%;
   column-gap: 10px;
-  margin-top: 12px;
-  padding-top: 12px;
+  padding: 10px;
   border-top: 1px solid $background-color;
+  cursor: pointer;
+
+  &:hover {
+    background: $second-color;
+  }
 
   &__img {
     width: 47px !important;
@@ -14,6 +18,10 @@
 
   &__author {
     @include font-face(13px, 600, 13px);
+  }
+
+  &__active {
+    color: $selected-color;
   }
 
   &__content {

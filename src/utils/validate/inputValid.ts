@@ -1,7 +1,10 @@
+import buttonValid from './buttonValid';
+
 import {
   capitalText,
   charactersText,
   emailText,
+  idText,
   loginText,
   passwordText,
   passwordsMismatch,
@@ -9,6 +12,7 @@ import {
   regCapital,
   regCharacters,
   regEmail,
+  regId,
   regLogin,
   regName,
   regPassword,
@@ -18,6 +22,9 @@ import {
 } from './constants';
 
 export function inputOut(event: Event) {
+  // при выходе из поля, проверяем валидность и снимаем disabled класс у кнопки
+  buttonValid();
+
   const target = event.target as HTMLTextAreaElement;
   const { value } = target;
   const error = document.createElement('div');
@@ -75,6 +82,8 @@ export function inputOut(event: Event) {
         }
         break;
       case 'password':
+      case 'newPassword':
+      case 'oldPassword':
         {
           if (!value.match(regPassword)) {
             error.innerHTML = passwordText;
@@ -82,7 +91,7 @@ export function inputOut(event: Event) {
             target.classList.add('input-incorrect');
           }
 
-          const passwordArr = Array.from(document.getElementsByName('password'));
+          const passwordArr = Array.from(document.getElementsByName('newPassword'));
           const passwordsValues = passwordArr.map((i) => (i as HTMLInputElement).value);
           const isPasswordsField = passwordsValues.every((i) => i.length !== 0);
           if (
@@ -103,11 +112,14 @@ export function inputOut(event: Event) {
           target.classList.add('input-incorrect');
         }
         break;
-      case 'message':
-        console.log(`message input: ${value}`);
+      case 'userId':
+        if (!regId.test(value)) {
+          error.innerHTML = idText;
+          target.after(error);
+          target.classList.add('input-incorrect');
+        }
         break;
       default:
-        console.log('Успех');
     }
   }
 }

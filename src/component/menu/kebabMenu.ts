@@ -2,6 +2,9 @@ import Block from '../../utils/core/Block';
 
 interface KebabMenuProps {
   text: string;
+  events: {
+    click: () => void;
+  };
 }
 
 export default class KebabMenu extends Block<KebabMenuProps> {

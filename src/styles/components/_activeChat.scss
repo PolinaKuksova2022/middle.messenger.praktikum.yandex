@@ -1,27 +1,62 @@
-.message {
+.active-chat {
   display: flex;
   flex-direction: column;
   padding: 10px 10px 0;
+  height: 100%;
 
   &__header {
     display: flex;
     position: relative;
-    margin-bottom: 48px;
+    margin-bottom: 30px;
     padding-bottom: 10px;
-    height: 55px;
+    height: 90px;
     border-bottom: 1px solid $background-color;
   }
 
   &__author {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
+    padding-left: 20px;
   }
-  
+
   &__field {
     display: flex;
     flex-direction: column;
     flex: 1 0 auto;
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 330px;
+    transform: scaleY(-1);
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $selected-color;
+      border-radius: 10px;
+    }
+  }
+
+  &__title {
+    text-align: center;
+
+    @include font-face(16px, 600, 16px);
+
+    color: $selected-color;
+  }
+
+  &__empty {
+    margin: auto;
+    transform: scaleY(-1);
+  }
+
+  &__text {
+    @include font-face(12px, 500, 12px);
+
+    color: $selected-color;
   }
 
   &__data {
@@ -33,12 +68,16 @@
   }
 
   &__item {
+    display: flex;
+    flex-direction: column;
     margin-top: 10px;
     padding: 11px;
     max-width: 46%;
     width: fit-content;
+    height: fit-content;
     border-radius: 5px;
     text-align: justify;
+    word-break: break-all;
 
     @include font-face(12px, 500, 15px);
 
@@ -49,8 +88,20 @@
     }
 
     &-to {
-      align-self: flex-end;
+      justify-self: end;
       background: #e4edfd;
+    }
+  }
+
+  &__messagesList {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-right: 10px;
+
+    > div {
+      display: grid;
+      width: 100%;
+      transform: scaleY(-1);
     }
   }
 

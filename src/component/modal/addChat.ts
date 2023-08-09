@@ -1,27 +1,31 @@
 import ChatsController from '../../controllers/ChatsController';
-import UserController from '../../controllers/UserController';
 import Block from '../../utils/core/Block';
-import store from '../../utils/core/Store';
 import { closeModal } from '../../utils/toggleModal';
+import getInputsData from '../../utils/validate/getInputs';
+import { inputIn, inputOut } from '../../utils/validate/inputValid';
+import isAllValid from '../../utils/validate/isAllValid';
 import Button from '../button/button';
 import formTemplate from '../commonTmpl/form.tmpl';
 import InputGroup from '../form/inputGroup';
 
-export default class Photo extends Block {
+export default class ChatModal extends Block {
   init() {
-    this.props.title = 'Загрузите файл';
+    this.props.title = 'Введите название чата';
     this.props.containerClass = 'container container_big';
 
     this.children.group_1 = new InputGroup({
-      name: '',
-      id: 'avatar',
-      type: 'file',
-      value: 'Выбрать файл на компьютере',
+      name: 'title',
+      label: 'Название чата',
+      inputClass: 'input',
+      id: 'title',
+      type: 'text',
+      events: {
+        focusout: (event) => inputOut(event),
+        focusin: (event) => inputIn(event),
+      },
     });
-
     this.children.button_1 = new Button({
-      text: 'Поменять',
-      id: 'change',
+      text: 'Добавить чат',
       events: {
         click: (e) => {
           e.preventDefault();
@@ -44,18 +48,16 @@ export default class Photo extends Block {
   }
 
   onChange() {
-    const inputElement = <HTMLInputElement>document.getElementById('avatar');
+    function transformObject(data: Record<string, string>) {
+      return {
+        title: data.title,
+      };
+    }
 
-    if (!inputElement.files) return;
-
-    const formData = new FormData();
-    formData.append('avatar', inputElement.files[0]);
-
-    if (window.location.pathname === '/settings') {
-      UserController.putAvatar(formData);
-    } else if (store.state.activeChat) {
-      formData.append('chatId', String(store.state.activeChat.id));
-      ChatsController.putAvatarToChat(formData);
+    const title = transformObject(getInputsData());
+    if (isAllValid(title)) {
+      ChatsController.postChat(title);
+      closeModal();
     }
   }
 

@@ -1,57 +1,62 @@
 import template from './main.tmpl';
 import Block from '../../utils/core/Block';
 import Button from '../../component/button/button';
+import router from '../../router/router';
+import Routes from '../../main';
 
-interface MainProps {
-  title: string;
-}
-export default class Main extends Block<MainProps> {
-  constructor(props: MainProps) {
-    super(props, 'div');
+export default class Main extends Block {
+  constructor() {
+    super({});
   }
 
   init() {
     this.children.button_1 = new Button({
       text: 'Авторизация',
-      path: '/auth',
-      // events: {
-      //   click: () => window.location.href="/auth",
-      // },
+      events: {
+        click: () => {
+          router.go(Routes.Auth);
+        },
+      },
     });
     this.children.button_2 = new Button({
       text: 'Регистрация',
-      path: '/registration',
-      // events: {
-      //   click: () => window.location.href="/registration",
-      // },
+      events: {
+        click: () => {
+          router.go(Routes.Register);
+        },
+      },
     });
     this.children.button_3 = new Button({
       text: 'Профиль',
-      path: '/profile',
-      // events: {
-      //   click: () => window.location.href="/profile",
-      // },
+      events: {
+        click: () => {
+          router.go(Routes.Profile);
+        },
+      },
     });
     this.children.button_4 = new Button({
       text: 'Лента переписки',
-      path: '/chat',
-      // events: {
-      //   click: () => window.location.href="/chat",
-      // },
+      events: {
+        click: () => {
+          router.go(Routes.Chat);
+        },
+      },
     });
     this.children.button_5 = new Button({
       text: 'Error404',
-      path: '*',
-      // events: {
-      //   click: () => window.location.href="*",
-      // },
+      events: {
+        click: () => {
+          router.go(Routes.Error404);
+        },
+      },
     });
     this.children.button_6 = new Button({
       text: 'Error500',
-      path: '/internal-server-error',
-      // events: {
-      //   click: () => window.location.href="/internal-server-error",
-      // },
+      events: {
+        click: () => {
+          router.go(Routes.Error500);
+        },
+      },
     });
 
     this.children.button_1.element?.classList.add('button');
@@ -63,6 +68,6 @@ export default class Main extends Block<MainProps> {
   }
 
   render() {
-    return this.compile(template, this.props);
+    return this.compile(template, { title: 'Навигация' });
   }
 }

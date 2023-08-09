@@ -14,6 +14,8 @@ const formTemplate = `
     <section class="form-group__button">
       {{{button_1}}}
       {{{button_2}}}
+      {{{button_3}}}
+      {{{button_4}}} 
     </section>
  </form>
 </div>

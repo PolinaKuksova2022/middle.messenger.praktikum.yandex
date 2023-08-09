@@ -2,48 +2,84 @@ import Block from '../../utils/core/Block';
 import Button from '../../component/button/button';
 import template from './chats.tmpl';
 import Dialogue from '../../component/dialogue/dialogue';
-import Message from '../../component/message/message';
+import ActiveChat from '../../component/activeChat/activeChat';
+import router from '../../router/router';
+import store, { State, withStore } from '../../utils/core/Store';
+import ChatsController from '../../controllers/ChatsController';
+import { toggleChatModal } from '../../utils/toggleModal';
+import isEqual from '../../utils/isEqual';
+import { IChat } from '../../api/chats-api';
+import Routes from '../../main';
 
-interface ChatsProps {
-  title: string;
-}
-export default class Chats extends Block<ChatsProps> {
-  constructor(props: ChatsProps) {
-    super(props, 'div');
+class BaseChats extends Block {
+  init() {
+    this.children.button_1 = new Button({
+      text: 'Профиль >',
+      events: {
+        click: () => {
+          router.go(Routes.Profile);
+          store.set('activeChat', undefined);
+        },
+      },
+    });
+    this.children.button_2 = new Button({
+      text: 'Создать чат',
+      events: {
+        click: () => {
+          toggleChatModal();
+          store.set('activeChat', undefined);
+        },
+      },
+    });
+
+    this.children.activeChat = new ActiveChat({});
+
+    this.children.button_1.element?.classList.add(...['button', 'chats-btn']);
+    this.children.button_2.element?.classList.add('button');
+    this.children.activeChat.element?.classList.add('active-chat');
   }
 
-  init() {
-    this.children.button = new Button({
-      text: 'Профиль >',
-      path: '/profile',
-    });
+  componentDidUpdate(oldProps: any, newProps: any): boolean {
+    if (!isEqual(oldProps, newProps) && this.props.chats && this.props.chats.length > 0) {
+      this.renderChats();
+    }
 
-    this.children.dialogue_1 = new Dialogue({
-      author: 'Андрей',
-      content: 'Изображение',
-      time: '10:49',
-      count: '2',
-      avatar: '',
-    });
-    this.children.dialogue_2 = new Dialogue({
-      author: 'Вадим',
-      content: 'Круто',
-      time: 'пт',
-      count: '3',
-      avatar: '',
-    });
-    this.children.message = new Message({
-      author: 'Вадим',
-      avatar: '',
-    });
+    return !isEqual(oldProps, newProps);
+  }
 
-    this.children.button.element?.classList.add(...['button', 'chats-btn']);
-    this.children.dialogue_1.element?.classList.add('dialogue');
-    this.children.dialogue_2.element?.classList.add('dialogue');
-    this.children.message.element?.classList.add('message');
+  renderChats() {
+    this.children.chatList = this.props.chats.map(
+      (chat: IChat) =>
+        new Dialogue({
+          events: {
+            click: () => {
+              ChatsController.fetchChatUsers(chat.id);
+              store.set('activeChat', chat);
+            },
+          },
+          id: +chat.id,
+          name: chat.title,
+          classTitle: 'dialogue__author',
+          author: '',
+          avatarImg: chat.avatar,
+        })
+    );
   }
 
   render() {
+    ChatsController.fetchChats();
+
+    if (this.props.chats && this.props.chats.length > 0) {
+      this.renderChats();
+    }
     return this.compile(template, this.props);
   }
 }
+
+function mapStateToProps(state: State) {
+  return { chats: state.chats, activeChat: state.activeChat };
+}
+
+const Chats = withStore(mapStateToProps)(BaseChats);
+
+export default Chats;
