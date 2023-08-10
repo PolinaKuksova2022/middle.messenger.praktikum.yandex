@@ -1,4 +1,4 @@
-import set from '../index';
+import set from '../setAndMerge';
 import { IUser } from '../../api/auth-api';
 import EventBus from './EventBus';
 import Block from './Block';
