@@ -12,15 +12,11 @@
     "preview": "vite preview",
     "stylelint": "stylelint '**/*{.css,.scss}'",
     "stylelint:fix": "stylelint '**/*{.css,.scss}' --fix",
-    "test": "mocha --require ts-node/register --require ./mochaSetup.cjs './src/**/*.test.ts'"
+    "test": "mocha --require ts-node/register --require ./mochaSetup.cjs './src/**/*.test.ts'",
+    "prepare": "husky install"
   },
   "engines": {
     "node": "v19.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm-run-all test lint"
-    }
   },
   "devDependencies": {
     "@types/chai": "^4.3.5",
