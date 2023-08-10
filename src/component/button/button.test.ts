@@ -1,14 +1,21 @@
+import { expect } from 'chai';
 import Button from './button';
+import sinon from 'sinon';
 
 describe('button test', () => {
-  it('button work', () => {
+  it('Should btn clickable', () => {
+    const callback = sinon.stub();
+
     const button = new Button({
       text: 'default',
       events: {
-        click: () => console.log('1'),
+        click: callback,
       },
       id: '1',
     });
-    console.log(`btn `, button);
+    
+    (button.element as HTMLElement).click();
+
+    expect(callback.calledOnce).to.eq(true);
   });
 });
