@@ -17,6 +17,11 @@
   "engines": {
     "node": "v19.0.0"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm-run-all test lint:all stylelint:all"
+    }
+  },
   "devDependencies": {
     "@types/chai": "^4.3.5",
     "@types/jsdom": "^21.1.1",
@@ -28,6 +33,7 @@
     "engine-version": "^1.0.2",
     "eslint": "^8.43.0",
     "eslint-config-airbnb": "^19.0.4",
+    "husky": "^8.0.3",
     "jsdom": "^22.1.0",
     "mocha": "^10.2.0",
     "sass": "^1.62.1",
