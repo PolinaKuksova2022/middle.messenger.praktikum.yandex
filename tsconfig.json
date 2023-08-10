@@ -3,10 +3,10 @@
     "files": true
   },
   "compilerOptions": {
-    "target": "es2022",
+    "target": "es2016",
     "useDefineForClassFields": true,
     "module": "commonjs",
-    "lib": ["ES2020", "es6", "dom", "DOM.Iterable"],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "moduleResolution": "Node",
     "strict": true,
     "allowImportingTsExtensions": true,
