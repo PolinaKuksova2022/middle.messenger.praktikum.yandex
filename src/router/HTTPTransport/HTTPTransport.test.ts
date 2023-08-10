@@ -9,7 +9,8 @@ describe('HTTPTransport test', () => {
   beforeEach(() => {
     xhr = sinon.useFakeXMLHttpRequest();
 
-    //@ts-expect-error
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     global.XMLHttpRequest = xhr;
 
     xhr.onCreate = (req) => {

@@ -10,6 +10,4 @@ describe('Router test', () => {
 
     expect(window.history.length).to.eq(6);
   });
-
-
 });

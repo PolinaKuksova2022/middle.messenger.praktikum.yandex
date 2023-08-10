@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import set from '.';
 
-
 describe('set function test', () => {
   it('Should return object argument if passed object is not an real object', () => {
     const notAnObject = null;
@@ -10,18 +9,18 @@ describe('set function test', () => {
   });
 
   it('Should throw an error if path param is not a string', () => {
-
     const path = 123;
     const obj = {};
 
-    //@ts-expect-error
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const fn = () => set(obj, path, 123);
 
     expect(fn).to.throw(Error);
   });
 
   it('Should set value by path', () => {
-    const obj = { a: 123, b: { a: 345 }};
+    const obj = { a: 123, b: { a: 345 } };
     const path = 'b.a';
     const value = 123;
 
@@ -31,7 +30,7 @@ describe('set function test', () => {
   });
 
   it('Should mutate original object', () => {
-    const obj = { a: 123, b: { a: 345 }};
+    const obj = { a: 123, b: { a: 345 } };
     const path = 'b.a';
     const value = 123;
 

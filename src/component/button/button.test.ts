@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import Button from './button';
 import sinon from 'sinon';
+import Button from './button';
 
 describe('button test', () => {
   it('Should btn clickable', () => {
@@ -13,7 +13,7 @@ describe('button test', () => {
       },
       id: '1',
     });
-    
+
     (button.element as HTMLElement).click();
 
     expect(callback.calledOnce).to.eq(true);
