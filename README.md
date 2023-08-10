@@ -1,10 +1,10 @@
 # Проект Messenger от Яндекс Практикум
 
-- [главная страница](https://messengerpk.netlify.app)
-- [авторизация](https://messengerpk.netlify.app/auth)  (только для НЕ зарегистрированных пользователей)
-- [регистрация](https://messengerpk.netlify.app/registration) (только для НЕ зарегистрированных пользователей)
-- [профиль пользователя](https://messengerpk.netlify.app/profile)  (только для зарегистрированных пользователей)
-- [чат](https://messengerpk.netlify.app/chat)  (только для зарегистрированных пользователей)
+- [главная страница](https://messengerpk.netlify.app/main)
+- [авторизация](https://messengerpk.netlify.app)  (только для НЕ зарегистрированных пользователей)
+- [регистрация](https://messengerpk.netlify.app/sign-up) (только для НЕ зарегистрированных пользователей)
+- [профиль пользователя](https://messengerpk.netlify.app/settings)  (только для зарегистрированных пользователей)
+- [чат](https://messengerpk.netlify.app/messenger)  (только для зарегистрированных пользователей)
 - [404](https://messengerpk.netlify.app/*)
 - [505](https://messengerpk.netlify.app/internal-server-error)
 
