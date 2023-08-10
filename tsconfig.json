@@ -1,8 +1,11 @@
 {
+  "ts-node": {
+    "files": true
+  },
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "module": "ESNext",
+    "module": "commonjs",
     "lib": ["ESNext", "DOM"],
     "moduleResolution": "Node",
     "strict": true,
