@@ -1,4 +1,4 @@
-# Проект Messenger от Яндекс Практикум
+# Проект Messenger
 
 - [главная страница](https://messengerpk.netlify.app/main)
 - [авторизация](https://messengerpk.netlify.app)  (только для НЕ зарегистрированных пользователей)
