@@ -42,7 +42,7 @@ export class AuthAPI extends API {
     return this.http.post('/logout');
   }
 
-  getUser() {
+  getUser(): Promise<IUser | any> {
     return this.http.get('/user');
   }
 }

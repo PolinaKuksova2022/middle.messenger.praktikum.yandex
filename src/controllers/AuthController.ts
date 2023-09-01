@@ -1,7 +1,14 @@
-import { AuthAPI, ILoginData, IRegistrationData } from '../api/auth-api';
+import { AuthAPI, ILoginData, IRegistrationData, IUser } from '../api/auth-api';
 import Routes from '../main';
 import router from '../router/router';
 import store from '../utils/core/Store';
+
+type Response = {
+  success: boolean;
+  user?: IUser | null;
+  users?: IUser[] | null;
+  error: unknown | null;
+};
 
 class AuthController {
   private api = new AuthAPI();
@@ -10,13 +17,24 @@ class AuthController {
     try {
       await this.api.signin(data);
 
-      await this.fetchUser();
+      const user = await this.fetchUser();
 
       router.go(Routes.Profile);
 
       alert('Вход выполнен');
+
+      return {
+        success: true,
+        user: user.user,
+        error: null,
+      };
     } catch (error) {
       console.log(error);
+      return {
+        success: false,
+        user: null,
+        error,
+      };
     }
   }
 
@@ -24,11 +42,25 @@ class AuthController {
     try {
       await this.api.signup(data);
 
+      alert('Регистрация прошла');
+
+      const user = await this.fetchUser();
+
       router.go(Routes.Profile);
 
-      alert('Регистрация прошла');
+      return {
+        success: true,
+        user: user.user,
+        error: null,
+      };
     } catch (error) {
       console.log(error);
+
+      return {
+        success: false,
+        user: null,
+        error,
+      };
     }
   }
 
@@ -46,13 +78,24 @@ class AuthController {
     }
   }
 
-  async fetchUser() {
+  async fetchUser(): Promise<Response> {
     try {
       const user = await this.api.getUser();
 
       store.set('user', user);
+
+      return {
+        success: true,
+        user,
+        error: null,
+      };
     } catch (error) {
       console.log(error);
+      return {
+        success: false,
+        user: null,
+        error,
+      };
     }
   }
 }

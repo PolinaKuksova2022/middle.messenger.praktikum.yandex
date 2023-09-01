@@ -1,5 +1,5 @@
 import { IUser } from '../../api/auth-api';
-import GroupUsers from '../../groupUsers/gropUsers';
+import GroupUsers from '../groupUsers/gropUsers';
 import Block from '../../utils/core/Block';
 import store, { State, withStore } from '../../utils/core/Store';
 import isEqual from '../../utils/isEqual';

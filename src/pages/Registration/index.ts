@@ -130,10 +130,13 @@ export default class Registration extends Block {
     this.children.group_7.element?.classList.add('input-group');
   }
 
-  onSubmit() {
+  async onSubmit() {
     const data = getInputsData();
     if (isAllValid(data)) {
-      AuthController.signup(data);
+      const response = await AuthController.signup(data);
+      if (!response.success) {
+        alert((response.error as Record<string, string>).reason);
+      }
     }
   }
 

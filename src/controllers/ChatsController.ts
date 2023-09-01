@@ -15,7 +15,7 @@ class ChatsController {
       if (Object.keys(chats!).length > 0) {
         const socketList: Record<string, any>[] = [];
 
-        const chatFetching = Object.values(chats!).map(async (i) => {
+        const chatFetching = Object.values(chats!).map(async (i: any) => {
           const chatToken = await this.fetchChatToken(i.id);
 
           socketList.push({
