@@ -59,11 +59,14 @@ export default class Auth extends Block {
     this.children.group_2.element?.classList.add('input-group');
   }
 
-  onSubmit() {
+  async onSubmit() {
     const data = getInputsData();
 
     if (isAllValid(data)) {
-      AuthController.signin(data);
+      const response = await AuthController.signin(data);
+      if (!response.success) {
+        alert((response.error as Record<string, string>).reason);
+      }
     }
   }
 
