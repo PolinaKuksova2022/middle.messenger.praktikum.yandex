@@ -24,7 +24,8 @@ export default class Dialogue extends Block<DialogueProps> {
       events: {
         click: () => togglePhoto(),
       },
-      src: `https://ya-praktikum.tech/api/v2/resources${this.props.avatarImg}`,
+      src:
+        this.props.avatarImg && `https://ya-praktikum.tech/api/v2/resources${this.props.avatarImg}`,
       className: 'avatar__img dialogue__img',
     });
   }

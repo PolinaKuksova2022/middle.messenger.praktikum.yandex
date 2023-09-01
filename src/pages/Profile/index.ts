@@ -6,7 +6,7 @@ import { inputIn, inputOut } from '../../utils/validate/inputValid';
 import editData from '../../utils/editData';
 import { togglePassword, togglePhoto } from '../../utils/toggleModal';
 import AuthController from '../../controllers/AuthController';
-import store, { State, withStore } from '../../utils/core/Store';
+import { State, withStore } from '../../utils/core/Store';
 import router from '../../router/router';
 import Routes from '../../main';
 import Avatar from '../../component/Avatar/Avatar';
@@ -150,7 +150,6 @@ class BaseProfile extends Block {
 
   render() {
     if (this.props) {
-      console.log(store.state.user);
       if (this.props.avatar) {
         (this.children.avatar as Block).setProps({
           src: `https://ya-praktikum.tech/api/v2/resources${this.props.avatar}`,

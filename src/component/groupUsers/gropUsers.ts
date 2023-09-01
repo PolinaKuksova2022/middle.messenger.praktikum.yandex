@@ -1,4 +1,4 @@
-import Block from '../utils/core/Block';
+import Block from '../../utils/core/Block';
 
 export interface AvatarProps {
   src: string;

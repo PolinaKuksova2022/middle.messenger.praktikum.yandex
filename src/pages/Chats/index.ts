@@ -53,8 +53,10 @@ class BaseChats extends Block {
         new Dialogue({
           events: {
             click: () => {
-              ChatsController.fetchChatUsers(chat.id);
+              store.set('activeChat', undefined);
+
               store.set('activeChat', chat);
+              ChatsController.fetchChatUsers(chat.id);
             },
           },
           id: +chat.id,
@@ -68,7 +70,6 @@ class BaseChats extends Block {
 
   render() {
     ChatsController.fetchChats();
-
     if (this.props.chats && this.props.chats.length > 0) {
       this.renderChats();
     }

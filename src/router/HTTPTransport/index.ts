@@ -16,6 +16,8 @@ function queryStringify(data: XMLHttpRequestBodyInit) {
     .join('&')}`;
 }
 
+type HTTPMethod<Response = void> = (url: string, data?: unknown) => Promise<Response>;
+
 export default class HTTPTransport {
   static API_URL = 'https://ya-praktikum.tech/api/v2';
 
@@ -25,21 +27,21 @@ export default class HTTPTransport {
     this.endpoint = `${HTTPTransport.API_URL}${endpoint}`;
   }
 
-  public get<Response>(url = '/'): Promise<Response> {
-    return this.request<Response>(this.endpoint + url);
-  }
+  get: HTTPMethod = (url = '/') => {
+    return this.request(this.endpoint + url);
+  };
 
-  public post<Response = void>(url: string, data?: unknown): Promise<Response> {
-    return this.request<Response>(this.endpoint + url, { data, method: METHOD.POST });
-  }
+  public post: HTTPMethod = (url, data) => {
+    return this.request(this.endpoint + url, { data, method: METHOD.POST });
+  };
 
-  public put<Response = void>(url: string, data: unknown): Promise<Response> {
-    return this.request<Response>(this.endpoint + url, { data, method: METHOD.PUT });
-  }
+  public put: HTTPMethod = (url: string, data) => {
+    return this.request(this.endpoint + url, { data, method: METHOD.PUT });
+  };
 
-  public delete<Response>(url: string, data?: unknown): Promise<Response> {
-    return this.request<Response>(this.endpoint + url, { data, method: METHOD.DELETE });
-  }
+  public delete: HTTPMethod = (url: string, data?) => {
+    return this.request(this.endpoint + url, { data, method: METHOD.DELETE });
+  };
 
   private request<Response>(
     url: string,
